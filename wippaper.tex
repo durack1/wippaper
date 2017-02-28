@@ -17,53 +17,41 @@
 \title{Requirements for a global data infrastructure in support of CMIP6}
 % \pllabel{SC1-1}
 
-\Author[1,4]{V.}{Balaji}
-\Author[2]{E.}{Maisonnave}
-\Author[3,4]{N.}{Zadeh}
-\Author[5,6]{B. N.}{Lawrence}
-\Author[7]{J.}{Biercamp}
-\Author[8]{U.}{Fladrich}
-\Author[9,10]{G.}{Aloisio}
-\Author[4]{R.}{Benson}
-\Author[11]{A.}{Caubel}
-\Author[3,4]{J.}{Durachta}
-\Author[12]{M.-A.}{Foujols}
-\Author[6]{G.}{Lister}
-\Author[9]{S.}{Mocavero}
-\Author[3,4]{S.}{Underwood}
-\Author[3,4]{G.}{Wright}
+\Author[1,2]{V.}{Balaji}
+\Author[3]{Karl}{Taylor}
+\Author[4]{Martin}{Juckes}
+\Author[5]{Luca}{Cinquini}
+\Author[6]{Cecelia}{DeLuca}
+\Author[7]{S\'ebastien}{Denvil}
+\Author[8]{Mark}{Elkington}
+\Author[7]{Francesca}{Guglielmo}
+\Author[7]{Eric}{Guilyardi}
+\Author[9]{Slava}{Kharin}
+\Author[10]{Michael}{Lautenschlager}
+\Author[11,4]{Bryan}{Lawrence}
+\Author[1,2]{Sergey}{Nikonov}
+\Author[12,2]{Aparna}{Radhakrishnan}
+\Author[3]{Dean}{Williams}
 
-% \Author[10]{Richard}{Loft}
 
 \affil[1]{Princeton University, Cooperative Institute of Climate
   Science, Princeton NJ, USA}
-\affil[2]{Centre Europ\'een de Recherche Avanc\'ee en Calcul
-  Scientifique (CERFACS), Toulouse, France}
-\affil[3]{Engility Inc., Dover NJ, USA}
-\affil[4]{NOAA/Geophysical Fluid Dynamics Laboratory, Princeton NJ, USA}
-\affil[5]{National Centre for Atmopheric Science and University of
+\affil[2]{NOAA/Geophysical Fluid Dynamics Laboratory, Princeton NJ,
+  USA}
+\affil[3]{PCMDI}
+\affil[4]{Science and Technology Facilities Council, Abingdon, UK}
+\affil[5]{NASA/JPL}
+\affil[6]{NOAA/ESRL}
+\affil[7]{Institut Pierre-Simon Laplace, CNRS/UPMC, Paris, France}
+\affil[8]{UKMO}
+\affil[9]{CCCma}
+\affil[10]{Deutsches KlimaRechenZentrum GmbH, Hamburg, Germany}
+\affil[11]{National Centre for Atmospheric Science and University of
   Reading, UK}
-\affil[6]{Science and Technology Facilities Council, Abingdon, UK}
-\affil[7]{Deutsches Klimarechenzentrum GmbH, Hamburg, Germany}
-\affil[8]{Swedish Meteorological and Hydrological Institute,
-  Norrk\"oping, Sweden}
-\affil[9]{Centro Euro-Mediterraneo sui Cambiamenti Climatici (CMCC)
-Foundation, Lecce, Italy}
-\affil[10]{University of Salento, Lecce, Italy}
-\affil[11]{Laboratoire des Sciences du Climat et de l’Environnement
-  LSCE/IPSL, CEA-CNRS-UVSQ, Université Paris-Saclay, 91191
-  Gif-sur-Yvette Cedex, France}
-\affil[12]{Institut Pierre-Simon Laplace, CNRS/UPMC, Paris, France}
+\affil[12]{Engility Inc., Dover NJ, USA}
 % \affil[10]{NCAR}
 
 \correspondence{V. Balaji (\texttt{balaji@princeton.edu})}
-
-% \author{V. Balaji\thanks{Corresponding author: Princeton University,
-%     201 Forrestal Road, Princeton NJ 08540, USA.
-%     Email:  \texttt{balaji@princeton.edu}}
-%   \and Rusty Benson\thanks{NOAA/GFDL}
-%   \and Bruce Wyman\footnotemark[2]
-%   \and Isaac Held\footnotemark[2]}
 
 \received{}
 \pubdiscuss{} %% only important for two-stage journals
@@ -83,8 +71,66 @@ Foundation, Lecce, Italy}
 }
 % \pagebreak
 
-\section{Introduction}
+\introduction
 \label{sec:intro}
+
+Edwards vast machine
+
+Charney and WCRP
+
+CMIP history of data volumes, complexity
+
+Formation of WIP
+
+\section{Principles underlying the WIP requirements}
+\label{sec:principles}
+
+scientific reproducibility and provenance
+
+fair credit for contributions
+
+analysis focus in CMIP6 cite Vero and Gleckler papers
+
+machine-readable experiment designs
+
+quality control and documentation
+
+push vs pull design (pull design for errata, licensing)
+
+separation of roles: requirements, implementation and operations
+
+\section{Data request}
+\label{sec:dreq}
+
+short bit on DREQ, refer to Juckes paper, emphasize machine-readable design.
+
+DRS and global attributes
+
+CVs, github
+
+netCDF4 and compression
+
+data volumes
+
+\section{Licensing}
+\label{sec:licensing}
+
+\section{Citation}
+\label{sec:citation}
+
+QC, PIDs, DOIs
+
+granularity of citation, PIDlist
+
+ESDOC
+
+\section{Replication and versioning}
+\label{sec:replication}
+
+errata
+
+\conclusions
+\label{sec:summary}
 
 
 \begin{acknowledgements}
@@ -104,10 +150,6 @@ Foundation, Lecce, Italy}
 
   B.N. Lawrence acknowledges additional support from the UK Natural
   Environment Research Council.
-
-  We thank Lucas Harris and Ron Stouffer of NOAA/GFDL, as well as
-  Claire Levy of IPSL and an anonymous reviewer, for insightful and
-  thorough reviews of this article, down to the last comma.
 \end{acknowledgements}
 
 \bibliographystyle{copernicus}
