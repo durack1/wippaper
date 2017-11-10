@@ -436,97 +436,118 @@ The recommendations are summarized in the sections below.
 \section{The CMIP6 data framework}
 \label{sec:dreq}
 
-The CMIP6 data framework has evolved considerably from
-CMIP5, and follows the principles of scientific reproducibility
-(Item~\ref{repro} in \secref{principles}), and the recognition that
-the complexity of the experimental design (Item~\ref{cmplx}) required
-far greater degrees of automation and embedding in workflows. This
-requires the storage of all elements in the specification in
-structured text formats (XML and JSON, for example), and under
-rigorous version control. \emph{Machine-readable} specification of as
-many aspects of the model output configuration as possible is a WIP
-design goal.
+The CMIP6 data framework has evolved considerably from CMIP5, and
+follows the principles of scientific reproducibility (Item~\ref{repro}
+in \secref{principles}), and the recognition that the complexity of
+the experimental design (Item~\ref{cmplx}) required far greater
+degrees of automation and embedding in workflows. This requires the
+storage of all elements in the specification in structured text
+formats (XML and JSON, for example), and under rigorous version
+control. \emph{Machine-readable} specification of as many aspects of
+the model output configuration as possible is a WIP design goal.
 
-The data request spans several elements discussed in sub-sections below.
+The data request spans several elements discussed in sub-sections
+below.
 
 \subsection{Model inputs}
 \label{sec:data-inputs}
+
 Datasets used by the model for configuration of model inputs
-  \citep[\texttt{input4MIPs}, see][]{ref:duracketal2017} as well as
-  observations for comparison with models \citep[\texttt{obs4MIPs},
-  see][]{ref:teixeiraetal2014} are both now organized in the same way
-  as CMIP model output itself. The datasets follow the versioning
-  methodologies recommended by the WIP.
+\citep[\texttt{input4MIPs}, see][]{ref:duracketal2017} as well as
+observations for comparison with models \citep[\texttt{obs4MIPs},
+see][]{ref:teixeiraetal2014} are both now organized in the same way as
+CMIP model output itself. The datasets follow the versioning
+methodologies recommended by the WIP.
 
 \subsection{CMIP6 Data Request}
 \label{sec:data-request}
+
 The data request itself \pipref{juckesetal2015} is now available
-  through the \href{https://goo.gl/iNBQ9m}{DRQ} tool and underlying
-  database. The DRQ combines definitions of variables and their output format withr
- specifications of the objectives they support and the experiments that they are required for.
- The entire request is encoded in an XML database with rigorous type constraints. 
- Important elements of the request, such as units, cell methods (expressing the sub-grid processing implicit in the variable definition),
- and time slices for required output are defined as controlled vocabularies within the request to ensure consistency of usage.
- The request is designed to enable flexibility, allowing modelling centres to make informed decisions about the variables they should 
-submit to the CMIP6 archive from each experiment. 
+through the \href{https://goo.gl/iNBQ9m}{DRQ} tool and underlying
+database. The DRQ combines definitions of variables and their output
+format withr specifications of the objectives they support and the
+experiments that they are required for. The entire request is encoded
+in an XML database with rigorous type constraints. Important elements
+of the request, such as units, cell methods (expressing the sub-grid
+processing implicit in the variable definition), and time slices for
+required output are defined as controlled vocabularies within the
+request to ensure consistency of usage. The request is designed to
+enable flexibility, allowing modelling centres to make informed
+decisions about the variables they should submit to the CMIP6 archive
+from each experiment.
 
 
 The key elements of a variables definition are the:
 \begin{enumerate}
- \item specification of the parameter to be calculated in terms of a CF standard name and units, 
-  \item an output frequency,
-  \item a structural specification which includes specification of dimensions and of sub-grid processing.
+\item specification of the parameter to be calculated in terms of a CF
+  standard name and units,
+\item an output frequency,
+\item a structural specification which includes specification of
+  dimensions and of sub-grid processing.
 \end{enumerate}
 
-In order to faciliate the cross linking between the 2100 variables with 196 experiments the request data base allows MIPs to aggregate variables and experiments into groups. The link between variables and experiments is then made through the following chain:
+In order to faciliate the cross linking between the 2100 variables
+with 196 experiments the request data base allows MIPs to aggregate
+variables and experiments into groups. The link between variables and
+experiments is then made through the following chain:
+
 \begin{enumerate}
-  \item A variable group, aggregating variables with priorities specific to the MIP defining the group;
-  \item A request link associates a variable group with an objective and a set of request items;
-  \item Request items which associate a particular time slice with a request link and a set of experiments.
+\item A variable group, aggregating variables with priorities specific
+  to the MIP defining the group;
+\item A request link associates a variable group with an objective and
+  a set of request items;
+\item Request items which associate a particular time slice with a
+  request link and a set of experiments.
 \end{enumerate}
-This formulation
-  takes into account the complex requests across MIP boundaries, as
-  when a particular MIP requests that some variable also be saved from
-  an experiment proposed by a different MIP, or a DECK experiment.
 
-The data request supports a broad range of users, and has been provided with a range of different access points.
+This formulation takes into account the complex requests across MIP
+boundaries, as when a particular MIP requests that some variable also
+be saved from an experiment proposed by a different MIP, or a DECK
+experiment.
+
+The data request supports a broad range of users, and has been
+provided with a range of different access points.
+
 \begin{enumerate}
-  \item The XML database provides the reference document;
-  \item Web pages provide a direct representation of the data base content;
-  \item Excel workbooks provide selected overviews for specific MIPs and experiments;
-  \item A python library provides an interface to the database with some build in support functions;
-  \item A command line tool based on the python library allows quick access to simple queries.
-\end{enumerate} 
+\item The XML database provides the reference document;
+\item Web pages provide a direct representation of the data base
+  content;
+\item Excel workbooks provide selected overviews for specific MIPs and
+  experiments;
+\item A python library provides an interface to the database with some
+  build in support functions;
+\item A command line tool based on the python library allows quick
+  access to simple queries.
+\end{enumerate}
 
 
-The ability to have a
-  machine-readable database of the data request, with a simple
-  python API, has been an extraordinary resource for the centres that
-  have taken advantage of it: for instance, being able to directly
-  interface the request with their own workflows to ensure that the
-  correct variables were being saved depending on what MIPs they were
-  planning to run. In addition, it has given us a new-found ability to
-  simulate and predict the data volume from a future request, a
-  feature exploited below in \secref{dvol}. 
+The ability to have a machine-readable database of the data request,
+with a simple python API, has been an extraordinary resource for the
+centres that have taken advantage of it: for instance, being able to
+directly interface the request with their own workflows to ensure that
+the correct variables were being saved depending on what MIPs they
+were planning to run. In addition, it has given us a new-found ability
+to simulate and predict the data volume from a future request, a
+feature exploited below in \secref{dvol}.
 
-\subsection{data Reference Syntax}
+\subsection{Data Reference Syntax}
 \label{sec:data-drs}
-The organization of the data output follows the Data Reference
-  Syntax (DRS) first used in CMIP5, and now in somewhat modified form
-  in CMIP6. The DRS depends on pre-defined vocabularies
-  (\emph{controlled vocabularies}, or CVs) for various terms:
-  including the names of institutions, models, experiments, time
-  frequencies, etc. The CVs themselves are now a version-controlled
-  set of structured text documents, and the WIP has taken steps to
-  ensure that there is a single authoritative source for any CV, on
-  which all elements in the toolchain will rely. The CVs also appear
-  in file headers themselves, as global netCDF attributes. These
-  aspects are covered in detail in the
-  \href{https://goo.gl/cMiPE7}{CMIP6 Global Attributes, DRS,
-    Filenames, Directory Structure, and CVs} position paper. A new
-  element in the DRS is the ability to store both native-grid and
-  regridded data from the same variable (see discussion below in
-  \secref{dvol} on the potentially critical role of regridded output).
+
+The organization of the data output follows the Data Reference Syntax
+(DRS) first used in CMIP5, and now in somewhat modified form in CMIP6.
+The DRS depends on pre-defined vocabularies (\emph{controlled
+  vocabularies}, or CVs) for various terms: including the names of
+institutions, models, experiments, time frequencies, etc. The CVs
+themselves are now a version-controlled set of structured text
+documents, and the WIP has taken steps to ensure that there is a
+single authoritative source for any CV, on which all elements in the
+toolchain will rely. The CVs also appear in file headers themselves,
+as global netCDF attributes. These aspects are covered in detail in
+the \href{https://goo.gl/cMiPE7}{CMIP6 Global Attributes, DRS,
+  Filenames, Directory Structure, and CVs} position paper. A new
+element in the DRS is the ability to store both native-grid and
+regridded data from the same variable (see discussion below in
+\secref{dvol} on the potentially critical role of regridded output).
 
 
 \subsection{CMIP6 data volumes}
