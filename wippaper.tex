@@ -105,13 +105,13 @@
   dataset-centric rather than system-centric, making the
   infrastructure less prone to systemic failure.
 
-  With these over-arching principles and requirements, the the WIP has
+  With these over-arching principles and requirements, the WIP has
   produced a set of position papers, which are summarized here. They
   provide specifications for the delivery of CMIP6, and include the
   data request itself; an estimate of future data volumes;
   consideration of replication and versioning; licensing, a system of
   assigning persistent identifiers for dataset tracking; data quality
-  assurance; and, citation and long-term archival.
+  assurance; and citation and long-term archival.
  
   The paper concludes with a consideration of aspects of the future
   evolution of the global data infrastructure that follow from the
@@ -127,7 +127,7 @@
 CMIP6 \pipref{eyringetal2016a}, the latest Coupled Model
 Intercomparison Project (CMIP), can trace its genealogy back to the
 Charney Report \pipref{charneyetal1979}. That seminal report on the
-links between CO$_2$ and climate, produced findings that have stood
+links between CO$_2$ and climate produced findings that have stood
 the test of time \pipref{bonyetal2013}, and it is often noted that
 their uncertainty bounds on equilibrium climate sensitivity have not
 fundamentally changed, despite the enormous increase in resources
@@ -242,7 +242,7 @@ surrounding data versioning, retraction and errata are addressed.
 infrastructure, looking beyond CMIP6, and towards a unified view of
 the ``vast machine'' for weather and climate computation and data.
 
-\section{Principles underlying the WIP requirements}
+\section{Principles underlying the infrastructure requirements}
 \label{sec:principles}
 
 In the pioneering days of CMIP, the community of participants was
@@ -264,7 +264,7 @@ Panel on Climate Change (IPCC) assessment activity. However, the
 explosive growth in the scope of CMIP, especially between CMIP3 and
 CMIP5, represented a tipping point in infrastructure. It became
 evident that fundamental changes would be needed to address the
-evolving scientific and operational requirements, which are summarized
+evolving scientific and operational requirements, which is summarized
 here:
 
 \begin{enumerate}
@@ -304,7 +304,7 @@ here:
      for the operational aspects of the federation itself, such as
      coordinated upgrades etc.
    \end{itemize} Although there is now a clear separation of concerns
-   into requirements, implementation, and operations; close links are
+   into requirements, implementation, and operations, close links are
    maintained by cross-membership between the key bodies, including
    the WIP itself, the CMIP Panel, the ESGF Executive Committee, and
    the CDNOT.
@@ -317,10 +317,10 @@ here:
   \item The centre of gravity of the community of data analysts is no
     longer the specialists in Earth system science -- who also design
     and run the experiments and produce the model output -- but has
-    moved to data \emph{consumers} from allied fields studying the
+    moved toward data \emph{consumers} from allied fields studying the
     impacts of climate change on health, agriculture, natural
     resources, human migration, and similar issues
-    \pipref{mossetal2010}. This \emph{scientific scalability} issue
+    \pipref{mossetal2010} or developing and providing climate services. This \emph{scientific scalability} issue
     (the data during its lifetime will be consumed by a community much
     larger, both in sheer numbers, as well as in breadth of interest
     and perspective than the Earth system modeling community itself)
@@ -362,7 +362,7 @@ here:
     most likely estimate of climate response. This ``model democracy''
     \pipref{knutti2010} has been called into question and there is now
     a considerable literature exploring the potential of weighting
-    models by quality'\pipref{knuttietal2017}. The development of
+    models by quality \pipref{knuttietal2017}. The development of
     standard metrics would aid this kind of research.
   \item To that end, there is now a requirement to enable through the
     ESGF a framework for accommodating quasi-operational evaluation
@@ -394,7 +394,7 @@ here:
     centres in computing which is both burdensome and poorly
     understood by those requesting, designing and using CMIP
     experiments. To that end, the ``Computational Performance'' MIP
-    project \pipref{balajietal2017} has been established to begin to
+    project (CPMIP) \pipref{balajietal2017} has been established to begin to
     document these costs for CMIP6.
   \end{itemize}
 \item\label{cmplx} Experimental specifications have become ever more
@@ -490,7 +490,7 @@ methodologies recommended by the WIP.
 The data request itself \pipref{juckesetal2015} is now available
 through the \href{https://goo.gl/iNBQ9m}{DRQ} tool and underlying
 database. The DRQ combines definitions of variables and their output
-format withr specifications of the objectives they support and the
+format with specifications of the objectives they support and the
 experiments that they are required for. The entire request is encoded
 in an XML database with rigorous type constraints. Important elements
 of the request, such as units, cell methods (expressing the sub-grid
@@ -511,7 +511,7 @@ The data request spans several elements.
   dimensions and of sub-grid processing.
 \end{enumerate}
 
-In order to faciliate the cross linking between the 2100 variables
+In order to facilitate the cross linking between the 2100 variables
 with 196 experiments the request data base allows MIPs to aggregate
 variables and experiments into groups. The link between variables and
 experiments is then made through the following chain:
@@ -519,9 +519,9 @@ experiments is then made through the following chain:
 \begin{enumerate}
 \item A variable group, aggregating variables with priorities specific
   to the MIP defining the group;
-\item A request link associates a variable group with an objective and
+\item A request link associating a variable group with an objective and
   a set of request items;
-\item Request items which associate a particular time slice with a
+\item Request items associating a particular time slice with a
   request link and a set of experiments.
 \end{enumerate}
 
@@ -560,8 +560,8 @@ feature exploited below in \secref{dvol}.
 
 The organization of the data output follows the Data Reference Syntax
 (DRS) first used in CMIP5, and now in somewhat modified form in CMIP6.
-The DRS depends on pre-defined vocabularies (\emph{controlled
-  vocabularies}, or CVs) for various terms: including the names of
+The DRS depends on pre-defined \emph{controlled
+  vocabularies}, or CVs for various terms: including the names of
 institutions, models, experiments, time frequencies, etc. The CVs
 themselves are now a version-controlled set of structured text
 documents, and the WIP has taken steps to ensure that there is a
@@ -754,7 +754,7 @@ after the fact, how widely used the native grid data may be
 \emph{vis-\`a-vis} the regridded subset, and allow us to recalibrate
 the replicas, as usage data becomes available. We note also that the
 providers of at least one of the standard metrics packages
-\citep[ESMValTool,][]{ref:eyringetal2016a} has expressed a preference
+\citep[ESMValTool,][]{ref:eyringetal2016a} have expressed a preference
 of standard grid data for their analysis, as regridding from disparate
 grids increases the complexity of their already overburdened
 infrastructure.
@@ -944,7 +944,7 @@ generated at higher levels of aggregation, the \emph{model} and
 These levels are dynamic as far as the PID infrastructure is
 concerned: new elements can be added to
 the aggregation without modifying the PID. For the model data aggregation, 
-for example, the PID will apply to an evolving number of simulations as new
+for example, the same PID will indicate an evolving number of simulations as new
 experiments are performed with the model.  The PIDs will become static at
 a later date, when the aggregation is deemed stable, and transferred
 to long-term archival. This PID architecture is shown in
@@ -1057,7 +1057,7 @@ documentation of provenance. This is described in the next section.
 \label{sec:doc}
 
 As noted earlier in \secref{dreq}, for data to become a first-class
-scientific resource, the methods of its production must be documented
+scientific resource, the methods of their production must be documented
 to the fullest extent possible. In particular for CMIP6, this includes
 documenting the models and experiments. While of course this is done
 through the peer-reviewed literature, we note the need for structured
@@ -1157,11 +1157,11 @@ goals:
 \item Ensuring continuity of data access in the event of individual node
   failures;
 \item Network load-balancing and performance;
-\item Reducing the manual workload related to replication.
+\item Reducing the manual workload related to replication;
 \item Building a reliable replication mechanism that can be used not
   only within the federation, but by the secondary repositories
   created by user groups (see discussion in \secref{licensing} around
-  \figref{dark}.
+  \figref{dark}).
 \end{itemize}
 
 In conjunction with the ESGF and the International Climate Networking
@@ -1221,7 +1221,7 @@ there as data begin to arrive.
 The WIP position on versioning is based on the principle
 (\secref{principles}) of scientific reproducibility. Recognizing that
 errors may be found after datasets have been distributed, the WIP
-insists that datasets that may have been used downstream be continue
+insists that erroneous datasets that may have been used downstream continue
 to be publicly available, but marked as superseded. This will allow
 users to trace the provenance of published results, even if those
 point to retracted data; and further allow the possibility of \emph{a
@@ -1341,7 +1341,7 @@ beginning to think about the future.
   analysis directly performed on datasets using their PIDs. Data
   analytics at large scale is increasingly moving toward machine
   learning and other directly data-driven methods of analysis, which
-  will also be dependent on data with provenance. We believe our
+  will also be dependent on data with provenance tracking. We believe our
   community needs to pay increasing heed to the status of their data
   and software.
 \end{itemize}
