@@ -36,16 +36,19 @@
 \Author[3]{Karl E.}{Taylor}
 \Author[4]{Martin}{Juckes}
 \Author[5]{Michael}{Lautenschlager}
-\Author[6]{Luca}{Cinquini}
-\Author[7]{Cecelia}{DeLuca}
-\Author[8]{S\'ebastien}{Denvil}
-\Author[9]{Mark}{Elkington}
-\Author[8]{Francesca}{Guglielmo}
-\Author[8]{Eric}{Guilyardi}
-\Author[10]{Slava}{Kharin}
+\Author[6,2]{Chris}{Blanton}
+\Author[7]{Luca}{Cinquini}
+\Author[8]{Cecelia}{DeLuca}
+\Author[9]{S\'ebastien}{Denvil}
+\Author[3]{Paul}{Durack}
+\Author[10]{Mark}{Elkington}
+\Author[9]{Francesca}{Guglielmo}
+\Author[9,11]{Eric}{Guilyardi}
+\Author[11]{David}{Hassell}
+\Author[12]{Slava}{Kharin}
 \Author[11,4]{Bryan N.}{Lawrence}
 \Author[1,2]{Sergey}{Nikonov}
-\Author[12,2]{Aparna}{Radhakrishnan}
+\Author[6,2]{Aparna}{Radhakrishnan}
 \Author[3]{Dean}{Williams}
 
 
@@ -56,14 +59,14 @@
 \affil[3]{PCMDI, Lawrence Livermore National Laboratory, Livermore, CA, USA}
 \affil[4]{Science and Technology Facilities Council, Abingdon, UK}
 \affil[5]{Deutsches KlimaRechenZentrum GmbH, Hamburg, Germany}
-\affil[6]{NASA/JPL}
-\affil[7]{NOAA/ESRL}
-\affil[8]{Institut Pierre-Simon Laplace, CNRS/UPMC, Paris, France}
-\affil[9]{UKMO}
-\affil[10]{CCCma}
+\affil[6]{Engility Inc., Dover NJ, USA}
+\affil[7]{NASA/JPL}
+\affil[8]{NOAA/ESRL}
+\affil[9]{Institut Pierre-Simon Laplace, CNRS/UPMC, Paris, France}
+\affil[10]{UKMO}
 \affil[11]{National Centre for Atmospheric Science and University of
   Reading, UK}
-\affil[12]{Engility Inc., Dover NJ, USA}
+\affil[12]{CCCma}
 % \affil[10]{NCAR}
 
 \correspondence{V. Balaji (\texttt{balaji@princeton.edu})}
@@ -560,19 +563,45 @@ feature exploited below in \secref{dvol}.
 
 The organization of the data output follows the Data Reference Syntax
 (DRS) first used in CMIP5, and now in somewhat modified form in CMIP6.
-The DRS depends on pre-defined \emph{controlled
-  vocabularies}, or CVs for various terms: including the names of
-institutions, models, experiments, time frequencies, etc. The CVs
-themselves are now a version-controlled set of structured text
-documents, and the WIP has taken steps to ensure that there is a
-single authoritative source for any CV, on which all elements in the
-toolchain will rely. The CVs also appear in file headers themselves,
-as global netCDF attributes. These aspects are covered in detail in
-the \href{https://goo.gl/cMiPE7}{CMIP6 Global Attributes, DRS,
-  Filenames, Directory Structure, and CVs} position paper. A new
-element in the DRS is the ability to store both native-grid and
-regridded data from the same variable (see discussion below in
-\secref{dvol} on the potentially critical role of regridded output).
+The DRS depends on pre-defined \emph{controlled vocabularies}, or CVs
+for various terms: including the names of institutions, models,
+experiments, time frequencies, etc. The CVs themselves are now a
+version-controlled set of structured text documents, and the WIP has
+taken steps to ensure that there is a
+\href{https://goo.gl/HGafnJ}{single authoritative source for any CV},
+on which all elements in the toolchain will rely. The CVs also appear
+in file headers themselves, as global netCDF attributes. These aspects
+are covered in detail in the \href{https://goo.gl/cMiPE7}{CMIP6 Global
+  Attributes, DRS, Filenames, Directory Structure, and CVs} position
+paper. A new element in the DRS is the ability to store both
+native-grid and regridded data from the same variable (see discussion
+below in \secref{dvol} on the potentially critical role of regridded
+output). Regridding, in particular, remains a contentious topic, and
+owing to a lack of consensus, the WIP recommendations on regridding
+remain in flux. The \href{https://goo.gl/wVtm5t}{CMIP6 Output Grid
+  Guidance document} outlines a number of possible recommendations,
+including the provision of ``weights'' to a target grid. Many of the
+considerations around regridding, particularly for ocean data in
+CMIP6, are discussed at length in \bibref{griffiesetal2016}. A similar
+lack of consensus has made the WIP drop a recommendation of a common
+\emph{calendar} for particular experiments: a wide variety of
+calendars are in use -- Gregorian, Julian, 365-day, and equal-month
+(360-day) all remain popular options -- and the onus of converting
+data across the MME to a common one for analysis remains upon the
+end-user.
+
+As outlined below in \secref{replica}, both ESGF data nodes and the
+creators of secondary repositories are given considerable leeway in
+choosing data subsets for replication, based on their own interests.
+The tracking mechanisms outlined in \secref{pid} below will allow us
+to ascertain, after the fact, how widely used the native grid data may
+be \emph{vis-\`a-vis} the regridded subset, and allow us to
+recalibrate the replicas, as usage data becomes available. We note
+also that the providers of at least one of the standard metrics
+packages \citep[ESMValTool,][]{ref:eyringetal2016a} have expressed a
+preference of standard grid data for their analysis, as regridding
+from disparate grids increases the complexity of their already
+overburdened infrastructure.
 
 
 \subsection{CMIP6 data volumes}
@@ -664,14 +693,11 @@ growth in data volumes.
   the compressed data, but also every time the data are re-inflated.
   There is also subtle interplay with precision: for instance
   temperatures usually seen in climate models appear to deflate better
-  when expressed in Kelvin, rather than Celsius 
-  % Paul should be a co-author, so this reference can probably be removed:
-  (Paul Durack, personal
-  communication), but that is due to the fact that the leading order
-  bits are always the same, and thus the data is actually less
-  precise. Deflation is also enhanced by reorganizing (``shuffling'')
-  the data internally into chunks that have spatial and temporal
-  coherence.
+  when expressed in Kelvin, rather than Celsius, but that is due to
+  the fact that the leading order bits are always the same, and thus
+  the data is actually less precise. Deflation is also enhanced by
+  reorganizing (``shuffling'') the data internally into chunks that
+  have spatial and temporal coherence.
 
   Some in the community have also proposed more aggressive
   \emph{lossy} compression methods \pipref{bakeretal2016}, but the
@@ -703,7 +729,7 @@ indicate the experiments that will be performed, and the data
 one intends to save (using DRQ's \emph{priority} attribute). The WIP
 carried out a survey of modeling centres in 2016, asking them for
 their expected model resolutions, and intentions of participating in
-various experiments. We thus have an unprecedented capability now to
+various experiments. We thus have a new capability now to
 %  "unprecedented" is incorrect.
 % In CMIP5 we had a sophisticated capability of estimating data volume
 %  We polled the groups to determine which experiments they planned
@@ -715,7 +741,9 @@ various experiments. We thus have an unprecedented capability now to
 % The modeling groups had access to this information.
 simulate data volumes from a future experiment.
 \href{https://goo.gl/Ezz5v3}{dreqDataVol.py}, a tool for this purpose
-built atop DRQ, is available from the WIP website.
+built atop DRQ, is available from the WIP website. While similar
+analyses were undertaken at PCMDI for CMIP5, this tool puts this
+capability in the hands of the modeling centres themselves.
 
 Based on those results, we initially have forecast a data volume of
 18~PB for CMIP6. This assumes an overall 50\% compression rate, which
@@ -745,19 +773,7 @@ storage of combined data from all models. The WIP believes
 this target is achievable based on compression and the use of standard
 grids. Both of these (the use of netCDF4 compression and regridding)
 remain merely recommendations, and the centres are free to choose
-whether or not to compress and regrid. But it is likely that
-lower-priority data not so processed will only be available from the
-originating data node, and not in the multi-model repositories created
-by replication as explained in \secref{replica}. The tracking
-mechanisms outlined in \secref{pid} below will allow us to ascertain,
-after the fact, how widely used the native grid data may be
-\emph{vis-\`a-vis} the regridded subset, and allow us to recalibrate
-the replicas, as usage data becomes available. We note also that the
-providers of at least one of the standard metrics packages
-\citep[ESMValTool,][]{ref:eyringetal2016a} have expressed a preference
-of standard grid data for their analysis, as regridding from disparate
-grids increases the complexity of their already overburdened
-infrastructure.
+whether or not to compress and regrid.
 
 \section{Licensing}
 \label{sec:licensing}
@@ -1146,12 +1162,28 @@ assured in Stage~M3 of \figref{qa}.
 The WIP's replication strategy is covered in the
 \href{https://goo.gl/jqWjQ5}{CMIP6 Replication and Versioning}
 position paper. The recommendations therein are based on the following
-goals:
+\emph{primary} goal:
 
 \begin{itemize}
 \item Ensuring at least one copy of a dataset is present at large and
   stable ESGF nodes with a mission of long-term maintenance and
-  curation of data;
+  curation of data. The total data storage resources planned across
+  the Tier~1 nodes in the CMIP6 era is adequate to support this
+  requirement; though some data will likely be held on accessible tape
+  storage rather than spinning disk.
+\end{itemize}
+
+In addition, we have articulated a number of secondary goals:
+
+\begin{itemize}
+\item Enhancing data accessibility across the ESGF (e.g. Australian
+  data easily accessible to the European continent despite the long
+  distance);
+\item Enabling each Tier 1 data node that funds and supports their
+  data storage resource to enact specific policies to support their
+  local objectives;
+\item Ensuring that the most widely requested data is the most
+  accessible across the ESGF federation;
 \item Enabling large-scale data analysis across the federation (see
   Item~\ref{analysis} in \secref{principles});
 \item Ensuring continuity of data access in the event of individual node
@@ -1193,26 +1225,63 @@ protocol for automatic replication, shown in \figref{replica}.
   \label{fig:replica}
 \end{figure*}
 
-The replication team will maintain and run a set of monitoring and
-notification tools assuring that replicas are up-to-date. The CDNOT is
-tasked with ensuring the deployment and function of replica nodes.
+Given the nature of some of these secondary goals it will not be
+appropriate to establish a fixed plan describing which data will have
+multiple replicants, and where each replicant will be stored. The plan
+will need to be flexible to accommodate changing data use profiles,
+and resource availability. The WIP consider the CDNOT group to be the
+appropriate organisation to coordinate the replication activities of
+the CMIP6 data nodes such that the primary goal is achieved and an
+effective compromise for the secondary goals is established. The
+International Climate Network Working Group (ICNWG), formed under the
+Earth System Grid Federation (ESGF), helps set up and optimize network
+infrastructures for ESGF climate data sites located around the world.
+For example prioritising the most widely requested data for
+replication can best be done based on operational experience and will
+of course change over time. To ensure that the replication strategy is
+responding to user need and data node capabilities, the replication
+team will maintain and run a set of monitoring and notification tools
+assuring that replicas are up-to-date. The CDNOT is tasked with
+ensuring the deployment and function of replica nodes.
 
 A key issue that emerged from the discussions with node managers is
 that the replication target has to be of sustainable size. The WIP has
 concluded from the discussions that a replication target about 2~PB in
 size is the practical (technical and financial) limit for CMIP6.
 
+Based on experience in CMIP5, it is expected that a number of
+``special interest'' secondary repositories will hold selected subsets
+of CMIP6 data outside of the ESGF federation. This will have the
+effect of widening data accessibility geographically, and by user
+community, with obvious benefit to the CMIP6 programme. The WIP
+encourages the support of these secondary repositories where it
+does not undermine CMIP6 data management and integrity objectives.
 
-% I'm not convinced that the WIP should make the decision on which
-% data to replicate.  I would leave that to the individual nodes.
-Given that the projected size of the complete CMIP6 archive is several
-times larger (see \secref{dvol}), it is a task for the WIP, in
-consultation with the scientific community, to define a
-\emph{high-value subset} of the complete CMIP6 archive, to be defined
-within the limit of 2~PB. Strategies to achieve this target were
-discussed above in \secref{dvol}. We will continue to refine the
-approach to replication following some of the directions outlined
-there as data begin to arrive.
+In CMIP5 a significant issue for users of some third-party archives
+was that their replicated data was taken as a one-time snapshot (see
+discussion above in Item~\ref{snap} in \secref{principles}), and not
+updated as new versions of the data were submitted to the source ESGF
+node. Tools have been developed by a number of organisations to
+maintain locally synchronised archives of CMIP5 data and third party
+providers should be encouraged to make use of these types of tools to
+keep the local archives up to date.
+
+In summary, the WIP requirements for replication are limited to
+ensuring:
+
+\begin{itemize}
+\item that there are at least two instances of each submitted dataset
+  stored at separate Tier 1 nodes within a reasonably short time
+  period following submission;
+\item that replication of subsequent versions of submitted datasets
+  are also replicated across Tier 1 node (see versioning discussion
+  below in \secref{version});
+\item that creators of secondary repositories take advantage of the
+  replication toolchain described here, to maintain replicas that can
+  be kept up to date, rather than one-time snapshots
+\item that the CDNOT is the recognized body to manage the operational
+  replication strategy for CMIP6.
+\end{itemize}
 
 \section{Versioning}
 \label{sec:version}
@@ -1419,10 +1488,10 @@ available. They are autonomous projects and therefore not listed here.
   Commerce. The statements, findings, conclusions, and recommendations
   are those of the authors and do not necessarily reflect the views of
   Princeton University, the National Oceanic and Atmospheric
-  Administration, or the U.S. Department of Commerce. He is grateful
-  to the Institut Pierre et Simon Laplace (LABEX-LIPSL) for support in
-  2015 during which drafts of this paper were written.
+  Administration, or the U.S. Department of Commerce.
 
+  Colleen McHugh aided with the analysis of data volumes.
+  
   The research leading to these results has received funding from the
   European Union Seventh Framework program under the IS-ENES2 project
   (grant agreement No. 312979).
