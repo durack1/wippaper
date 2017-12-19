@@ -38,17 +38,18 @@
 \Author[5]{Michael}{Lautenschlager}
 \Author[6,2]{Chris}{Blanton}
 \Author[7]{Luca}{Cinquini}
-\Author[8]{Cecelia}{DeLuca}
-\Author[9]{S\'ebastien}{Denvil}
+\Author[8]{S\'ebastien}{Denvil}
 \Author[3]{Paul}{Durack}
-\Author[10]{Mark}{Elkington}
-\Author[9]{Francesca}{Guglielmo}
-\Author[9,11]{Eric}{Guilyardi}
-\Author[11]{David}{Hassell}
-\Author[12]{Slava}{Kharin}
-\Author[11,4]{Bryan N.}{Lawrence}
+\Author[9]{Mark}{Elkington}
+\Author[8]{Francesca}{Guglielmo}
+\Author[8,10]{Eric}{Guilyardi}
+\Author[10]{David}{Hassell}
+\Author[11]{Slava}{Kharin}
+\Author[5]{Stefan}{Kindermann}
+\Author[10,4]{Bryan N.}{Lawrence}
 \Author[1,2]{Sergey}{Nikonov}
 \Author[6,2]{Aparna}{Radhakrishnan}
+\Author[5]{Martina}{Stockhause}
 \Author[3]{Dean}{Williams}
 
 
@@ -59,14 +60,13 @@
 \affil[3]{PCMDI, Lawrence Livermore National Laboratory, Livermore, CA, USA}
 \affil[4]{Science and Technology Facilities Council, Abingdon, UK}
 \affil[5]{Deutsches KlimaRechenZentrum GmbH, Hamburg, Germany}
-\affil[6]{Engility Inc., Dover NJ, USA}
+\affil[6]{Engility Inc., NJ, USA}
 \affil[7]{NASA/JPL}
-\affil[8]{NOAA/ESRL}
-\affil[9]{Institut Pierre-Simon Laplace, CNRS/UPMC, Paris, France}
-\affil[10]{UKMO}
-\affil[11]{National Centre for Atmospheric Science and University of
+\affil[8]{Institut Pierre-Simon Laplace, CNRS/UPMC, Paris, France}
+\affil[9]{UKMO}
+\affil[10]{National Centre for Atmospheric Science and University of
   Reading, UK}
-\affil[12]{CCCma}
+\affil[11]{CCCma}
 % \affil[10]{NCAR}
 
 \correspondence{V. Balaji (\texttt{balaji@princeton.edu})}
@@ -515,7 +515,7 @@ The data request spans several elements.
 \end{enumerate}
 
 In order to facilitate the cross linking between the 2100 variables
-with 196 experiments the request data base allows MIPs to aggregate
+with 196 experiments the request database allows MIPs to aggregate
 variables and experiments into groups. The link between variables and
 experiments is then made through the following chain:
 
@@ -538,7 +538,7 @@ provided with a range of different access points.
 
 \begin{enumerate}
 \item The XML database provides the reference document;
-\item Web pages provide a direct representation of the data base
+\item Web pages provide a direct representation of the database
   content;
 \item Excel workbooks provide selected overviews for specific MIPs and
   experiments;
@@ -569,26 +569,26 @@ experiments, time frequencies, etc. The CVs themselves are now a
 version-controlled set of structured text documents, and the WIP has
 taken steps to ensure that there is a
 \href{https://goo.gl/HGafnJ}{single authoritative source for any CV},
-on which all elements in the toolchain will rely. The CVs also appear
-in file headers themselves, as global netCDF attributes. These aspects
-are covered in detail in the \href{https://goo.gl/cMiPE7}{CMIP6 Global
-  Attributes, DRS, Filenames, Directory Structure, and CVs} position
-paper. A new element in the DRS is the ability to store both
-native-grid and regridded data from the same variable (see discussion
-below in \secref{dvol} on the potentially critical role of regridded
-output). Regridding, in particular, remains a contentious topic, and
-owing to a lack of consensus, the WIP recommendations on regridding
-remain in flux. The \href{https://goo.gl/wVtm5t}{CMIP6 Output Grid
-  Guidance document} outlines a number of possible recommendations,
-including the provision of ``weights'' to a target grid. Many of the
-considerations around regridding, particularly for ocean data in
-CMIP6, are discussed at length in \bibref{griffiesetal2016}. A similar
-lack of consensus has made the WIP drop a recommendation of a common
-\emph{calendar} for particular experiments: a wide variety of
-calendars are in use -- Gregorian, Julian, 365-day, and equal-month
-(360-day) all remain popular options -- and the onus of converting
-data across the MME to a common one for analysis remains upon the
-end-user.
+on which all elements in the toolchain will rely. Elements from the
+CVs also appear in file headers themselves, as global netCDF
+attributes. These aspects are covered in detail in the
+\href{https://goo.gl/cMiPE7}{CMIP6 Global Attributes, DRS, Filenames,
+  Directory Structure, and CVs} position paper. A new element in the
+DRS is the ability to store both native-grid and regridded data from
+the same variable (see discussion below in \secref{dvol} on the
+potentially critical role of regridded output). Regridding, in
+particular, remains a contentious topic, and owing to a lack of
+consensus, the WIP recommendations on regridding remain in flux. The
+\href{https://goo.gl/wVtm5t}{CMIP6 Output Grid Guidance document}
+outlines a number of possible recommendations, including the provision
+of ``weights'' to a target grid. Many of the considerations around
+regridding, particularly for ocean data in CMIP6, are discussed at
+length in \bibref{griffiesetal2016}. A similar lack of consensus has
+made the WIP drop a recommendation of a common \emph{calendar} for
+particular experiments: a wide variety of calendars are in use --
+Gregorian, Julian, 365-day, and equal-month (360-day) all remain
+popular options -- and the onus of converting data across the MME to a
+common one for analysis remains upon the end-user.
 
 As outlined below in \secref{replica}, both ESGF data nodes and the
 creators of secondary repositories are given considerable leeway in
@@ -677,9 +677,9 @@ growth in data volumes.
   performed on the ERA-40 grid ($2^\circ\times 2.5^\circ$) (verify).
   We recommend that for most purposes atmospheric data on the ERA-40
   grid would suffice, with of course exceptions for experiments like
-  HighResMIP. A similar recommendation for ocean data (the World Ocean
-  Atlas $1^\circ\times 1^\circ$ grid) is made for ocean data, with
-  extended discussion of the benefits and losses due to regridding
+  HighResMIP. A similar recommendation is made for ocean data (the
+  World Ocean Atlas $1^\circ\times 1^\circ$ grid), with extended
+  discussion of the benefits and losses due to regridding
   \citep[see][]{ref:griffiesetal2014,ref:griffiesetal2016}.
 \item The second is the issue of data compression. netCDF4, which is
   the WIP's recommended data format for CMIP6 data, includes options
@@ -941,7 +941,7 @@ unique \emph{persistent identifiers} (PIDs)
 
 The PID infrastructure is described in the
 \href{https://goo.gl/dQAEDy}{CMIP6 Persistent Identifiers
-  Implementation Plan} position paper. There are 3 stages:
+  Implementation Plan} position paper. There are two stages:
 
 \begin{itemize}
 \item generation of PIDs at the level of individual files, using a
@@ -1247,7 +1247,9 @@ ensuring the deployment and function of replica nodes.
 A key issue that emerged from the discussions with node managers is
 that the replication target has to be of sustainable size. The WIP has
 concluded from the discussions that a replication target about 2~PB in
-size is the practical (technical and financial) limit for CMIP6.
+size is the practical (technical and financial) limit for CMIP6 online
+(disk) storage. Replication beyond this may involve offline storage
+(tape) for disaster recovery.
 
 Based on experience in CMIP5, it is expected that a number of
 ``special interest'' secondary repositories will hold selected subsets
@@ -1270,9 +1272,9 @@ In summary, the WIP requirements for replication are limited to
 ensuring:
 
 \begin{itemize}
-\item that there are at least two instances of each submitted dataset
-  stored at separate Tier 1 nodes within a reasonably short time
-  period following submission;
+\item that there is at least one instance of each submitted dataset
+  stored at a Tier 1 node (in addition to its primary residence)
+  within a reasonably short time period following submission;
 \item that replication of subsequent versions of submitted datasets
   are also replicated across Tier 1 node (see versioning discussion
   below in \secref{version});
