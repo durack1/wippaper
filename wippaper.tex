@@ -1,6 +1,7 @@
 % \documentclass[12pt,twocolumn]{article}
 % Copernicus stuff
 \documentclass[gmd,manuscript]{copernicus}
+%\documentclass[gmd,manuscript]{../171128_Copernicus_LaTeX_Package/copernicus} %durack
 
 % page/line labeling and referencing
 % from http://goo.gl/HvS9BK
@@ -39,7 +40,7 @@
 \Author[6,2]{Chris}{Blanton}
 \Author[7]{Luca}{Cinquini}
 \Author[8]{S\'ebastien}{Denvil}
-\Author[3]{Paul}{Durack}
+\Author[3]{Paul J.}{Durack}
 \Author[9]{Mark}{Elkington}
 \Author[8]{Francesca}{Guglielmo}
 \Author[8,10]{Eric}{Guilyardi}
@@ -85,27 +86,28 @@
 \maketitle
 
 % \pagebreak
-\abstract{ The WGCM Infrastructure Panel (WIP) was formed in 2014 in
-  response to the explosive growth in size and complexity of coupled model intercomparison projects (CMIPs)
-  between CMIP3 (2005-06) and CMIP5 (2011-12). This article presents
-  the WIP recommendations as to the nature of the global data
-  infrastructure needed to support CMIP design and future growth and
-  evolution.  Developed in close coordination with those who build and run 
-  the existing infrastructure (the Earth System Grid Federation),  the
-  recommendations are based on several principles beginning with
-  the need to separate requirements, implementation, and operations. 
-  Other important principles include the consideration of
-  data as a commodity in an ecosystem of users; the importance
-  of provenance; the need for automation; and the obligation to measure
-  costs and benefits. 
+\abstract{
+  The WGCM Infrastructure Panel (WIP) was formed in 2014 in 
+  response to the explosive growth in size and complexity of coupled 
+  model intercomparison projects (CMIPs) between CMIP3 (2005-06) and 
+  CMIP5 (2011-12). This article presents the WIP recommendations for
+  the global data infrastructure needed to support CMIP design, 
+  future growth and evolution. Developed in close coordination with 
+  those who build and run the existing infrastructure (the Earth 
+  System Grid Federation), the recommendations are based on several 
+  principles beginning with the need to separate requirements, 
+  implementation, and operations. Other important principles include 
+  the consideration of data as a commodity in an ecosystem of users; 
+  the importance of provenance; the need for automation; and the 
+  obligation to measure costs and benefits. 
   
   This paper concentrates on requirements, recognising the diversity
-  of the communities involved (modellers, analysts, software
-  developers, and downstream users). Such requirements include the
-  need for scientific reproducibility and accountability alongside the
-  need to record and track data usage for the purpose of assigning
-  credit. One key element is to require as much as possible to be
-  dataset-centric rather than system-centric, making the
+  of communities involved (modellers, analysts, software developers, 
+  and downstream users). Such requirements include the need for 
+  scientific reproducibility and accountability alongside the need 
+  to record and track data usage for the purpose of assigning
+  credit. One key element is to generate a dataset-centric rather 
+  than system-centric focus, with an aim to making the 
   infrastructure less prone to systemic failure.
 
   With these over-arching principles and requirements, the WIP has
@@ -114,13 +116,12 @@
   data request itself; an estimate of future data volumes;
   consideration of replication and versioning; licensing, a system of
   assigning persistent identifiers for dataset tracking; data quality
-  assurance; and citation and long-term archival.
+  assurance; and, citation and long-term archival.
  
-  The paper concludes with a consideration of aspects of the future
-  evolution of the global data infrastructure that follow from the
-  blurring of boundaries between climate and weather, as well as the
-  changing nature of published scientific results in the digital age.
-
+  The paper concludes with a future consideration of the global data 
+  infrastructure evolution that follow from the blurring of boundaries 
+  between climate and weather, and the changing nature of published 
+  scientific results in the digital age.
 }
 % \pagebreak
 
@@ -129,12 +130,13 @@
 
 CMIP6 \pipref{eyringetal2016a}, the latest Coupled Model
 Intercomparison Project (CMIP), can trace its genealogy back to the
-Charney Report \pipref{charneyetal1979}. That seminal report on the
-links between CO$_2$ and climate produced findings that have stood
-the test of time \pipref{bonyetal2013}, and it is often noted that
-their uncertainty bounds on equilibrium climate sensitivity have not
-fundamentally changed, despite the enormous increase in resources
-devoted to the problem in the decades since.
+Charney Report \pipref{charneyetal1979}. This seminal report was the 
+first to highlight links between CO$_2$ and climate, and produced 
+findings that have stood the test of time \pipref{bonyetal2013}. It 
+is often noted that the range and uncertainty bounds on equilibrium 
+climate sensitivity generated in this report have not fundamentally 
+changed, despite the enormous increase in resources devoted to 
+analysing the problem in decades since.
 
 Beyond its prescient findings on climate sensitivity, the Charney
 Report also gave rise to a methodology for the treatment of
@@ -147,26 +149,27 @@ Syukuro Manabe's group at NOAA's Geophysical Fluid Dynamics
 Laboratory, and the other from James Hansen's group at NASA's Goddard
 Institute for Space Studies. Then as now, these groups marshaled vast
 state-of-the-art computing and data resources to run very challenging
-simulations of the Earth system. The Report's results were based an
+simulations of the Earth system. The Report's results were based on an
 ensemble of 3 runs from Manabe, labeled M1-M3, and two from Hansen,
 labeled H1-H2.
 
 By the time of the IPCC First Assessment Report (FAR) in 1990, the
-process had been formalized. By then, there were 5 models
+process had been formalized. At this stage, there were 5 models
 participating in the exercise, and some of what has now been
 formalised as the ``Diagnosis, Evaluation, and Characterization of
 Klima'' (DECK) experiments\footnote{klima is German for ?climate?} had
 been standardized (a pre-industrial control, 1\% per year CO$_2$
-increase to doubling, etc) . The ``scenarios'' had emerged as well,
-for a total of 5 different experimental protocols. To fast-forward to
-today, CMIP6 expects around 65 models from 34 modeling centers
-\citep[in 14 countries, in stark contrast to the US monopoly
+increase to doubling, etc). The ``scenarios'' had emerged as well,
+for a total of 5 different experimental protocols. Fast-forwarding to
+today, CMIP6 expects more than 75 models from around 35 modelling 
+centres \citep[in 14 countries, a stark contrast to the US monopoly
 in][]{ref:charneyetal1979} to participate in the DECK and historical
 experiments \citep[Table~2 of][]{ref:eyringetal2016a}, and some subset
 of these to participate in one or more the 21 MIPs endorsed by the
 CMIP Panel \citep[Table~3 of][]{ref:eyringetal2016a}. The MIPs
-themselves contain a large hierarchy of experiments, numbering in the
-hundreds.
+themselves contain a large hierarchy of experiments, with 248 
+uniquely identified and considerably expanding upon previous 
+iterations in CMIP5.
 
 Alongside the experiments themselves, is the data request which
 defines, for each CMIP experiment, what output each model should
@@ -185,9 +188,11 @@ The simulation output is now a primary scientific resource for
 researchers the world over, rivaling the volume of 
 observed weather and climate data from the global array of
 sensors and satellites \pipref{overpecketal2011}. Climate science,
-and climate simulation in particular, has now become one of the
-primary elements in the ``vast machine'' \pipref{edwards2010}
+and climate observed and simulated data in particular, has now become 
+one of the primary elements in the ``vast machine'' \pipref{edwards2010}
 that is used to run the global climate and weather enterprise. 
+% It could be worthwhile to quantify (in $USD) the impact, as forecasting
+% in particular has yielded considerable social and economic gains
 
 Managing and sharing this huge amount of data is an enterprise in its
 own right --- and the solution established for CMIP5 was the global
@@ -196,7 +201,7 @@ larger gateways currently participating in the ESGF are shown in in
 \figref{esgf}, which also lists (some of) the many projects these
 nodes support. With multiple agencies and institutions, and many
 uncoordinated and possibly conflicting requirements, the ESGF itself
-is a complex and delicate artifact to manage.
+is a complex and delicate component to manage.
 
 \begin{figure*}
   \begin{center}
@@ -212,7 +217,7 @@ The sheer size and complexity of this infrastructure emerged as a
 matter for great concern at the end of CMIP5, when the growth in data
 volume relative to CMIP3 (from 40~TB to 2~PB, a 50-fold increase in 6
 years) suggested the community was on an unsustainable path. These
-concerns led the 2014 recommendation of the WGCM to form an
+concerns led to the 2014 recommendation of the WGCM to form an
 \emph{infrastructure panel} (based upon \href{https://goo.gl/FHqbNN},
 a proposal at the 2013 annual meeting). The WGCM Infrastructure Panel
 (WIP) was tasked with examining the global computational and data
@@ -230,9 +235,9 @@ alongside the recommendations which have arisen. In
 \secref{principles}, the principles and scientific rationale
 underlying the requirements for global data infrastructure are
 articulated. In \secref{dreq} the CMIP6 Data Request is covered:
-standards and conventions, requirements for modeling centres to
+standards and conventions, requirements for modelling centres to
 process a complex data request, and projections of data volume in
-CMIP6, all based on trends in modeling. In \secref{licensing}, recent
+CMIP6, all based on trends in modelling. In \secref{licensing}, recent
 evolution in how data are archived is reviewed, alongside a licensing
 strategy consistent with current practice and scientific principle. In
 \secref{cite} issues surrounding data as a first-class resource are
@@ -250,24 +255,24 @@ the ``vast machine'' for weather and climate computation and data.
 
 In the pioneering days of CMIP, the community of participants was
 small and well-knit, and all the issues involved in generating
-datasets for common analysis from different modeling groups could be
+datasets for common analysis from different modelling groups could be
 settled by mutual agreement (Ron Stouffer, personal communication).
 Analysis was performed by the same community that performed the
 simulations. The Program for Climate Model Diagnostics and
 Intercomparison (PCMDI), established in 1989, had championed the idea
 of more systematic analysis of models, and in close cooperation with
-the the climate modeling centers, PCMDI assumed responsibility for
+the climate modelling centres, PCMDI assumed responsibility for
 much of the day-to-day coordination of CMIP. Until CMIP3, the hosting
-of datasets from different modeling groups could be managed at a
+of datasets from different modelling groups could be managed at a
 single archival site; PCMDI alone hosted the entire 40~TB archive.
 
 From its earliest phases, CMIP grew in importance, and its results
 provided a major pillar supporting the periodic Intergovernmental
 Panel on Climate Change (IPCC) assessment activity. However, the
 explosive growth in the scope of CMIP, especially between CMIP3 and
-CMIP5, represented a tipping point in infrastructure. It became
-evident that fundamental changes would be needed to address the
-evolving scientific and operational requirements, which is summarized
+CMIP5, represented a tipping point in the supporting infrastructure. 
+It became evident that fundamental changes would be needed to address 
+the evolving scientific and operational requirements, which is summarized
 here:
 
 \begin{enumerate}
@@ -276,21 +281,20 @@ here:
   infrastructure itself needs to be formally examined as an element in
   the design of globally coordinated scientific experiments.
 
-  
   \begin{itemize}
   \item The WIP was formed in response to this observation, with
     membership drawn from experts in various aspects of the
-    infrastructure. Representatives of modeling centres,
+    infrastructure. Representatives of modelling centres,
     infrastructure developers, and stakeholders in the scientific
-    content and output are all members.
+    content and output comprise the panel membership.
   \item One of the WIP's first acts was to separate the process of
     infrastructure development into three phases: \emph{requirements},
     \emph{implementation}, and \emph{operations}, all informed by the
-    builders of workflows at the modeling centres themselves.
+    builders of workflows at the modelling centres themselves.
     
     \begin{itemize}
     \item The WIP itself, in consort with the CMIP Panel, takes
-      responsibility for articulating the requirements for the
+      responsibility to articulate requirements for the
       infrastructure.
     \item The implementation is in the hands of the infrastructure
       developers, principally ESGF for the federated archive
@@ -301,9 +305,9 @@ here:
    \item At the WIP's request, the CMIP6 Data Node Operations Team
      (CDNOT) was formed in 2016. It is charged with making sure that
      all the infrastructure elements necessary for the proper conduct
-     of the CMIP6 experiment are not only part of the software as
+     of the CMIP6 experiments are not only part of the software as
      designed, but are actually deployed and demonstrably working at
-     the sites charges with hosting CMIP6 data. It is also responsible
+     the sites charged with hosting CMIP6 data. It is also responsible
      for the operational aspects of the federation itself, such as
      coordinated upgrades etc.
    \end{itemize} Although there is now a clear separation of concerns
@@ -313,24 +317,27 @@ here:
    the CDNOT.
  \end{itemize}
 \item\label{broad} With the basic fact of anthropogenic climate change
-  now well established, a substantial body of work has begun to emerge
+  now well established, 
+  % A ref would be useful here - the AR5 technical summary for policy makers?
+  a substantial body of work has begun to emerge
   to examine climate impacts. This has brought many new user
   communities into play.
   \begin{itemize}
-  \item The centre of gravity of the community of data analysts is no
-    longer the specialists in Earth system science -- who also design
+  \item The centre of gravity for the community of data analysts is no
+    longer just specialists in Earth system science -- who also design
     and run the experiments and produce the model output -- but has
     moved toward data \emph{consumers} from allied fields studying the
     impacts of climate change on health, agriculture, natural
     resources, human migration, and similar issues
-    \pipref{mossetal2010} or developing and providing climate services. This \emph{scientific scalability} issue
+    \pipref{mossetal2010} and in addition, those developing and providing 
+    climate services. This \emph{scientific scalability} issue
     (the data during its lifetime will be consumed by a community much
-    larger, both in sheer numbers, as well as in breadth of interest
-    and perspective than the Earth system modeling community itself)
+    larger, both in sheer numbers, and also in breadth of interest
+    and perspective than the Earth system modelling community itself)
     requires explicit recognition.
-  \item Accordingly, the WIP has promulgated the requirement that the
+  \item Accordingly, the WIP has promulgated the requirement that 
     infrastructure should ensure maximum transparency and usability
-    for user (consumer) communities at some distance from the modeling
+    for user (consumer) communities at some distance from the modelling
     (producer) communities.
   \end{itemize}
 \item\label{repro} While CMIP and the IPCC are formally independent,
@@ -348,10 +355,9 @@ here:
   \item The WIP to promote the importance in the CMIP context of
     achieving reproducibility. Given the use of multi-model ensembles
     for both consensus estimates and uncertainty bounds on climate
-    projections, it is important to document as precisely as possible
-    the details and differences among model configurations and
-    analysis methods, to deliver both the requisite provenance and the
-    routes to reproduction.
+    projections, it is important to precisely document the details and 
+    differences among model configurations and analysis methods, to 
+    deliver both the requisite provenance and the routes to reproduction.
   \end{itemize}
 \item\label{analysis} With the expectation that CMIP DECK experiment
   results should be routinely contributed to CMIP, opportunities now
@@ -373,7 +379,7 @@ here:
     evaluation tasks. This would provide data consumers with an
     increasingly (over time) systematic characterization of models
     (the WIP recognised that this may not be achievable at the
-    beginning of CMIP6) .
+    beginning of CMIP6).
   \end{itemize}
 \item As the experimental design of CMIP has grown in complexity,
   costs both in time and money have become a matter of great concern,
@@ -385,20 +391,20 @@ here:
 
   \begin{itemize}
   \item To quantify the scientific impact of CMIP, measures are needed
-    to \emph{track} the use of of model output and its value to
-    consumers.
-  \item As well as usage, credit is important. Current practice is at
-    best a collective citation to CMIP itself, rather than those who
-    produced the data. Accordingly, the WIP has defined and is
-    encouraging use of a mechanism to identify and \emph{cite} data
-    provided by each modelling centre.
+    to \emph{track} the use of model output and its value to consumers.
+  \item In addition to usage quantification, credit and citation of 
+    data used is important. Current practice is at best a collective 
+    citation to CMIP itself, rather than those who produced the data. 
+    Accordingly, the WIP has defined and is encouraging use of a 
+    mechanism to identify and \emph{cite} data provided by each 
+    modelling centre.
   \item Alongside the intellectual contribution to model development,
     which can be recognized by citation, there is a material cost to
     centres in computing which is both burdensome and poorly
     understood by those requesting, designing and using CMIP
     experiments. To that end, the ``Computational Performance'' MIP
-    project (CPMIP) \pipref{balajietal2017} has been established to begin to
-    document these costs for CMIP6.
+    project (CPMIP) \pipref{balajietal2017} has been established to 
+    begin documentation of these costs for CMIP6.
   \end{itemize}
 \item\label{cmplx} Experimental specifications have become ever more
   complex, making it difficult to verify that experiment
@@ -411,8 +417,8 @@ here:
    \pipref{juckesetal2015}, and crossover requirements between the
    endorsed MIPs and the DECK \pipref{eyringetal2016a} . Moreover,
    these protocols inevitably evolve over time, as errors are
-   discovered or enhancements proposed, and centres needed to be able
-   to adapt their workflows accordingly.
+   discovered or enhancements proposed, and centres needed to be 
+   adaptable in their workflows accordingly.
  \item The WIP therefore recognized a requirement to encode the
    protocols to be directly ingested by workflows, in other words,
    \emph{machine-readable experiment design}. The requirement spans
@@ -429,7 +435,7 @@ here:
   in the way users interact with the archive, which impacts management
   of information about users and complicates communications with them.
   \begin{itemize}
-  \item In particular, a growing number of users of the data no longer
+  \item In particular, a growing number of data users no longer
     register or interact directly with the ESGF. Rather they rely on
     secondary repositories, often ``snapshots'' of the state of some
     portion of the ESGF archive created by others at a particular time
@@ -483,8 +489,9 @@ below.
 Datasets used by the model for configuration of model inputs
 \citep[\texttt{input4MIPs}, see][]{ref:duracketal2017} as well as
 observations for comparison with models \citep[\texttt{obs4MIPs},
-see][]{ref:teixeiraetal2014} are both now organized in the same way as
-CMIP model output itself. The datasets follow the versioning
+see][]{ref:teixeiraetal2014} are both now organized in the same way, 
+and share many of the naming and metadata conventions as the
+CMIP model output itself. The datasets follow versioning
 methodologies recommended by the WIP.
 
 \subsection{CMIP6 Data Request}
@@ -492,6 +499,7 @@ methodologies recommended by the WIP.
 
 The data request itself \pipref{juckesetal2015} is now available
 through the \href{https://goo.gl/iNBQ9m}{DRQ} tool and underlying
+% Martin refs to this as "dreq", with the software "dreqPy"
 database. The DRQ combines definitions of variables and their output
 format with specifications of the objectives they support and the
 experiments that they are required for. The entire request is encoded
@@ -515,7 +523,7 @@ The data request spans several elements.
 \end{enumerate}
 
 In order to facilitate the cross linking between the 2100 variables
-with 196 experiments the request database allows MIPs to aggregate
+with 248 experiments the request data base allows MIPs to aggregate
 variables and experiments into groups. The link between variables and
 experiments is then made through the following chain:
 
@@ -548,7 +556,6 @@ provided with a range of different access points.
   access to simple queries.
 \end{enumerate}
 
-
 The ability to have a machine-readable database of the data request,
 with a simple python API, has been an extraordinary resource for the
 centres that have taken advantage of it: for instance, being able to
@@ -561,34 +568,34 @@ feature exploited below in \secref{dvol}.
 \subsection{Data Reference Syntax}
 \label{sec:data-drs}
 
-The organization of the data output follows the Data Reference Syntax
-(DRS) first used in CMIP5, and now in somewhat modified form in CMIP6.
-The DRS depends on pre-defined \emph{controlled vocabularies}, or CVs
-for various terms: including the names of institutions, models,
-experiments, time frequencies, etc. The CVs themselves are now a
-version-controlled set of structured text documents, and the WIP has
-taken steps to ensure that there is a
+The organization of the data output follows the \href{http://goo.gl/v1drZl}{Data 
+Reference Syntax (DRS)} first used in CMIP5, and now in somewhat 
+modified form in CMIP6. The DRS depends on pre-defined 
+\emph{controlled vocabularies}, or CVs for various terms: including 
+the names of institutions, models, experiments, time frequencies, etc. 
+The CVs themselves are now a version-controlled set of structured text 
+documents, and the WIP has taken steps to ensure that there is a
 \href{https://goo.gl/HGafnJ}{single authoritative source for any CV},
-on which all elements in the toolchain will rely. Elements from the
-CVs also appear in file headers themselves, as global netCDF
-attributes. These aspects are covered in detail in the
-\href{https://goo.gl/cMiPE7}{CMIP6 Global Attributes, DRS, Filenames,
-  Directory Structure, and CVs} position paper. A new element in the
-DRS is the ability to store both native-grid and regridded data from
-the same variable (see discussion below in \secref{dvol} on the
-potentially critical role of regridded output). Regridding, in
-particular, remains a contentious topic, and owing to a lack of
-consensus, the WIP recommendations on regridding remain in flux. The
-\href{https://goo.gl/wVtm5t}{CMIP6 Output Grid Guidance document}
-outlines a number of possible recommendations, including the provision
-of ``weights'' to a target grid. Many of the considerations around
-regridding, particularly for ocean data in CMIP6, are discussed at
-length in \bibref{griffiesetal2016}. A similar lack of consensus has
-made the WIP drop a recommendation of a common \emph{calendar} for
-particular experiments: a wide variety of calendars are in use --
-Gregorian, Julian, 365-day, and equal-month (360-day) all remain
-popular options -- and the onus of converting data across the MME to a
-common one for analysis remains upon the end-user.
+on which all elements in the toolchain will rely. The CVs also appear
+in file headers themselves, as global netCDF attributes. These aspects
+are covered in detail in the \href{https://goo.gl/cMiPE7}{CMIP6 Global 
+Attributes, DRS, Filenames, Directory Structure, and CVs} position
+paper. A new element in the DRS is the ability to store both
+native-grid and regridded data from the same variable (see discussion
+below in \secref{dvol} on the potentially critical role of regridded
+output). Regridding, in particular, remains a contentious topic, and
+owing to a lack of consensus, the WIP recommendations on regridding
+remain in flux. The \href{https://goo.gl/wVtm5t}{CMIP6 Output Grid 
+Guidance document} outlines a number of possible recommendations,
+including the provision of ``weights'' to a target grid. Many of the
+considerations around regridding, particularly for ocean data in
+CMIP6, are discussed at length in \bibref{griffiesetal2016}. A similar
+lack of consensus has made the WIP drop a recommendation of a common
+\emph{calendar} for particular experiments: a wide variety of
+calendars are in use -- Gregorian, Julian, 365-day, and equal-month
+(360-day) all remain popular options -- and the onus of converting
+data across the MME to a common one for analysis remains upon the
+end-user.
 
 As outlined below in \secref{replica}, both ESGF data nodes and the
 creators of secondary repositories are given considerable leeway in
@@ -602,7 +609,6 @@ packages \citep[ESMValTool,][]{ref:eyringetal2016a} have expressed a
 preference of standard grid data for their analysis, as regridding
 from disparate grids increases the complexity of their already
 overburdened infrastructure.
-
 
 \subsection{CMIP6 data volumes}
 \label{sec:dvol}
@@ -644,7 +650,7 @@ experimental protocol and data request. We consider these separately:
   The data request complexity is related to that of the science: the
   number of processes being studied, and the physical variables
   required for the study. In CPMIP \pipref{balajietal2017}, we have
-  attempted a rigorous definition of this sort of complexity, measured
+  attempted a rigorous definition of this complexity, measured
   by the number of physical variables simulated by the model. This, we
   argue, grows not smoothly like resolution, but in very distinct
   generational phase transitions, such as the one from
@@ -653,14 +659,15 @@ experimental protocol and data request. We consider these separately:
   and biological species being modeled, as shown in
   \bibref{balajietal2017}.
 
-  The second component of complexity is the experimental protocol.
+  The second component of complexity is the experimental protocol, and 
+  the number of experiments themselves when comparing CMIP5 and CMIP6.
   With the new structure of CMIP6, with a DECK and 21 endorsed MIPs,
   this would appear to have grown tremendously. We propose as a
-  measure of experimental complexity, the \emph{total number of
-    simulated years (SYs)} to conform to a given protocol. Note that
-  this too is gated by $C$: modeling centres usually make tradeoffs
+  measure of experimental complexity, the \emph{total number of 
+  simulated years (SYs)} conforming to a given protocol. Note that
+  this too is gated by $C$: modelling centres usually make tradeoffs
   between experimental complexity and resolution in deciding their
-  level of participation in CMIP6, discussed in detail in
+  level of participation in CMIP6, discussed in 
   \bibref{balajietal2017}.
 \end{description}
 
@@ -708,8 +715,8 @@ growth in data volumes.
 
   Given all these choices, we undertook a systematic study of the
   behaviour of typical model output files under lossless compression,
-  the results of which are \href{https://goo.gl/qkdDnn}{publicly
-    available}. The study indicates that standard \texttt{zlib}
+  the results of which are \href{https://goo.gl/qkdDnn}{publicly 
+  available}. The study indicates that standard \texttt{zlib}
   compression in the netCDF4 library with the settings of
   \texttt{deflate=2} (relatively modest, and computationally
   inexpensive), and \texttt{shuffle} (which ensures better
@@ -727,9 +734,15 @@ The \href{https://goo.gl/iNBQ9m}{DRQ} alluded to above in
 considerations. The tool allows one to input a model's resolution,
 indicate the experiments that will be performed, and the data
 one intends to save (using DRQ's \emph{priority} attribute). The WIP
-carried out a survey of modeling centres in 2016, asking them for
+carried out a survey of modelling centres in 2016, asking them for
 their expected model resolutions, and intentions of participating in
-various experiments. We thus have a new capability now to
+various experiments. 
+% We are actually capturing this information in the registered content
+% for the model source_id entries - see http://rawgit.com/WCRP-CMIP/CMIP6_CVs/master/src/CMIP6_source_id.html
+% The json entry contains resolutions for each active model realm
+% https://github.com/WCRP-CMIP/CMIP6_CVs/blob/master/CMIP6_source_id.json
+
+We thus have a new capability now to
 %  "unprecedented" is incorrect.
 % In CMIP5 we had a sophisticated capability of estimating data volume
 %  We polled the groups to determine which experiments they planned
@@ -743,7 +756,7 @@ simulate data volumes from a future experiment.
 \href{https://goo.gl/Ezz5v3}{dreqDataVol.py}, a tool for this purpose
 built atop DRQ, is available from the WIP website. While similar
 analyses were undertaken at PCMDI for CMIP5, this tool puts this
-capability in the hands of the modeling centres themselves.
+capability in the hands of the modelling centres themselves.
 
 Based on those results, we initially have forecast a data volume of
 18~PB for CMIP6. This assumes an overall 50\% compression rate, which
@@ -756,12 +769,11 @@ CMIP3 and CMIP5 was also due to these same causes, but with a much
 larger change. Many models of the CMIP5 era added atmospheric chemistry
 and aerosol-cloud feedbacks, sometimes with $\mathcal{O}(100)$
 species. CMIP5 also marked the first time in CMIP that ESMs were used to
-simulate changes in the carbon cycle and modeling groups performed
-many more simulations than in CMIP3. There is no
-comparable jump between CMIP5 and CMIP6. CMIP6's innovative
-DECK/endorsed-MIP structure should thus be seen as an extension and an
-attempt to impose a rational order on CMIP5, rather than a qualitative
-leap.
+simulate changes in the carbon cycle and modelling groups performed
+many more simulations than in CMIP3. There is no comparable jump 
+between CMIP5 and CMIP6. CMIP6's innovative DECK/endorsed-MIP structure 
+should thus be seen as an extension and an attempt to impose a rational 
+order on CMIP5, rather than a qualitative leap.
 
 Furthermore, we calculate that the reporting output on a lower
 resolution standard grid (rather than the native model grid) could
@@ -781,6 +793,7 @@ whether or not to compress and regrid.
 The WIP's recommended licensing policy is based on an examination of
 data usage patterns in CMIP5. First, while the licensing policy called
 for registration and acceptance of terms of use, a large fraction,
+% https://pcmdi.llnl.gov/CMIP6/TermsOfUse is live - if you want to ref it
 perhaps a majority of users, actually obtained their data not directly
 from ESGF, but from other copies, such as the ``snapshots'' alluded to
 above in Item~\ref{snap}, \secref{principles}. 
@@ -794,8 +807,12 @@ position paper refers to these as ``dark'' repositories and ``dark''
 users, invisible to the ESGF system. While this appears to subvert the
 licensing and registration policy put in place for CMIP5, this should
 not even be seen as a ``bootleg'' process: it is in fact the most
-efficient use of limited network bandwidth at the user sites.
-
+efficient use of limited network bandwidth at the user sites. However, 
+this also removes the ability for users of these ``dark'' repositories 
+to benefit from the augmented provenance provided by infrastructure 
+updates, such as being notified of data retractions or replacements 
+in the case that contributed datasets are found to be erroneous and 
+replaced.
 
 \begin{figure*}
   \begin{center}
@@ -809,8 +826,8 @@ efficient use of limited network bandwidth at the user sites.
 \end{figure*}
 
 The WIP therefore recommends a licensing policy that inverts this and
-removes the impossible task of license enforcement from the
-distribution system, and embraces the ``dark'' repositories and users.
+removes the impossible task of license enforcement from the distribution 
+system, and embraces the ``dark'' repositories and users.
 To quote the WIP position paper:
 
 \begin{quote}
@@ -826,7 +843,7 @@ archival and analysis capabilities (e.g., NCAR's
 and offload some of the network provisioning requirements from ESGF
 nodes themselves.
 
-Modeling centres are offered two choices of \emph{Creative Commons
+Modelling centres are offered two choices of \emph{Creative Commons
 }licenses: most freely available data will be covered by the
 \href{https://goo.gl/CY5m2v}{Creative Commons Attribution ``Share
   Alike'' 4.0 International License}; for centres with more
@@ -847,8 +864,8 @@ serves the purpose of facilitating scientific reproducibility and
 traceability, as well as documenting the utility of datasets.
 
 These principles outlined above also are well-aligned with the
-\href{https://goo.gl/Pzb7F6}{Joint Declaration of Data Citation
-  Principles} formulated by the Force11 (The Future of Research
+\href{https://goo.gl/Pzb7F6}{Joint Declaration of Data Citation 
+Principles} formulated by the Force11 (The Future of Research
 Communications and e-Scholarship) Consortium. These amount to an
 acknowledgment of the rapid evolution of digital scholarship and
 archival, and updating the rules of scholarly publication for the
@@ -865,15 +882,14 @@ The WIP therefore recommends two separate approaches to citation, at
 different levels of granularity.
 
 The recommendations, detailed in the
-\href{https://goo.gl/CZyWq1}{CMIP6 Data Citation and Long Term
-  Archival} position paper, recognize two phases to the process: an
+\href{https://goo.gl/CZyWq1}{CMIP6 Data Citation and Long Term 
+Archival} position paper, recognize two phases to the process: an
 initial phase, when the data have been released and preliminary
 community analysis is still underway (``Citation of Dynamic Data''),
 and a second stage, when most errors in the data have been identified
 and corrected. At this point the data will be transferred to long-term
 archival (LTA) and deemed appropriate for interdisciplinary
 use, such as in policy studies (``Citation of Stable Data'').
-
 
 \begin{itemize}
 \item The \emph{dynamic data citation} infrastructure relies on
@@ -897,16 +913,18 @@ unique \emph{persistent identifiers} (PIDs)
   further steps of quality control to ensure standards of
   documentation and completeness, described below in \secref{qa}.
 
-  Once these criteria have been satisfied, a \emph{document object
-    identifier} (DOI) will be assigned (``minted'', in the DOI jargon)
+  Once these criteria have been satisfied, a \emph{digital object 
+  identifier} (DOI) will be assigned (``minted'', in the DOI jargon)
   to a dataset. These will be assigned by
   \href{https://www.datacite.org/dois.html}{DataCite}, a DOI-minting
   organization that requires stringent adherence to metadata and
   documentation requirements. For CMIP6, the DDC at DKRZ in Hamburg
   has volunteered to provide the DataCite DOI service.
+  %Stockhause & Lautenschlager 2017 https://doi.org/10.5334/dsj-2017-030
+  %should be referenced here
 
   Given the formality of the process and to encourage their use in
-  providing credit to modeling groups, a DOI is not assigned to data at
+  providing credit to modelling groups, a DOI is not assigned to data at
   the same granularity as a PID. The WIP has recommended two
   aggregations suitable for DOI minting:
 
@@ -957,15 +975,13 @@ new versions of files or datasets will trigger the creation of new
 PIDs, as described in \secref{version}, below. PIDs will also be
 generated at higher levels of aggregation, the \emph{model} and
 \emph{simulation} data aggregations described above in \secref{cite}.
-These levels are dynamic as far as the PID infrastructure is
-concerned: new elements can be added to
-the aggregation without modifying the PID. For the model data aggregation, 
-for example, the same PID will indicate an evolving number of simulations as new
-experiments are performed with the model.  The PIDs will become static at
-a later date, when the aggregation is deemed stable, and transferred
-to long-term archival. This PID architecture is shown in
-\figref{pidarch}.
-
+These levels are dynamic as far as the PID infrastructure is concerned: 
+new elements can be added to the aggregation without modifying the PID. 
+For the model data aggregation, for example, the same PID will indicate 
+an evolving number of simulations as new experiments are performed with 
+the model. The PIDs will become static at a later date, when the 
+aggregation is deemed stable, and transferred to long-term archival. 
+This PID architecture is shown in \figref{pidarch}.
 
 \begin{figure*}
   \begin{center}
@@ -1013,23 +1029,21 @@ encompasses the entire data lifecycle, as shown in \figref{qa}. At all
 stages, we keep in mind the issues of scientific reproducibility and
 provenance capture. Further, as noted in Item~\ref{broad} in
 \secref{principles}, the QA procedures must expand the circle of trust
-to communities unconnected with the Earth system modeling community
+to communities unconnected with the Earth system modelling community
 itself.
-
 
 \begin{figure*}
   \begin{center}
     \includegraphics[width=175mm]{images/WIP-QA.png}
   \end{center}
   \caption{Schematic of the phases of quality assurance, with earlier
-    stages in the hands of modeling centres (left), and more formal
+    stages in the hands of modelling centres (left), and more formal
     long-term data curation stages at right. Quality assurance is
     applied both to the data (D, above) as well as the metadata (M)
     describing the data. Figure courtesy Martina Stockhause, drawn
     from the WIP's Quality Assurance position paper.}
   \label{fig:qa}
 \end{figure*}
-
 
 QA covers ensuring the scientific content of the data, scientific
 descriptions of the data, and consistent practices allowing reliable
@@ -1042,13 +1056,13 @@ from different groups and institutions during further stages of the
 toolchain. These requirements are directly embedded in the ESGF
 publishing process and in tools such as
 \href{https://cmor.llnl.gov/}{CMOR} (and its validation component,
-\href{https://goo.gl/ApvMJx}{PrePARE}). These
-checks (the D1 and M1 phases of QA) ensure that the data conform to
-the CMIP6 Data Request, conform to all naming conventions and CVs, and
-follow the DRS for storage access patterns. As noted above in
-\secref{dreq}, many modeling centres have chosen to embed these steps
-directly in their own workflows to ensure conformance as the models
-are being run and their output processed.
+\href{https://goo.gl/ApvMJx}{PrePARE}). These checks (the D1 and M1 
+phases of QA) ensure that the data conform to the CMIP6 Data Request, 
+conform to all naming conventions and CVs, and follow the DRS for 
+storage access patterns. As noted above in \secref{dreq}, many 
+modelling centres have chosen to embed these steps directly in their 
+own workflows to ensure conformance as the models are being run and 
+their output processed.
 
 At this point, as noted in \figref{qa} control is ceded to the ESGF
 system, where designated QA nodes perform further QA checks. A
@@ -1063,11 +1077,11 @@ systems, following procedures outlined in the
 As described in \secref{cite}, the data are still under scientific
 scrutiny by analysts beyond the data producers, in what can be thought
 of as a period of community-wide scientific ``quality assurance''.
-During this period, modeling centers may correct errors and provide new
+During this period, modelling centres may correct errors and provide new
 versions of datasets. In the final stage, the data pass into long-term
 archival, described as the ``bibliometric'' phase in \figref{qa}. Just
 prior to LTA, the system will verify minimum standards of
-documentation of provenance. This is described in the next section.
+provenance documentation. This is described in the next section.
 
 \subsection{Documentation of provenance}
 \label{sec:doc}
@@ -1079,7 +1093,6 @@ documenting the models and experiments. While of course this is done
 through the peer-reviewed literature, we note the need for structured
 documentation in machine-readable form for various aspects of search,
 discovery and tracking of datasets.
-
 
 \begin{figure*}
   \begin{center}
@@ -1101,7 +1114,7 @@ structured text documents, already available from ES-DOC. ES-DOC has
 constructed CVs for the description of the CMIP6 standard model
 realms, including a set of short tables (\emph{specialisations}, in
 ES-DOC terminology) for each realm. The WIP, and the CMIP Panel, have
-strongly recommended that the modeling groups produce the
+strongly recommended that the modelling groups produce the
 specialisations as coterminously as possible with the model
 construction and documentation in the peer-reviewed literature, to
 ensure consistency. ES-DOC provides a variety of user interfaces to
@@ -1113,7 +1126,7 @@ the documentation can be produced in a manner familiar to anyone who
 works with version-controlled code.
 
 A critical element in the ESDOC process is the documentation of
-\emph{conformances}: steps undertaken by the modeling centres to
+\emph{conformances}: steps undertaken by the modelling centres to
 ensure that the simulation was conducted as called for by the
 experiment design. It is here that we rigorously document which input
 datasets were used in a simulation \citep[e.g the version of each of
@@ -1127,7 +1140,7 @@ CMIPs \citep[viz. the well-known Figure~1 of][]{ref:eyringetal2016a}.
 The conformances will be essential in studies across model
 generations. The method of capturing the conformance documentation is
 a two-stage process that has been designed to limit the amount of work
-required by a modeling centre. The first stage is to capture the many
+required by a modelling centre. The first stage is to capture the many
 conformances that will be common to all simulations, thereby removing
 a lot of duplicated effort. ESDOC will then automatically copy these
 common conformances to the correct simulations. This is followed by a
@@ -1151,7 +1164,9 @@ principle of the WIP's approach (Item~\ref{snap} in
 \secref{principles}), a user will be able to access the documentation
 directly from datasets. This is done in CMIP6 by embedding a global
 attribute \texttt{further\_info\_URL} in file headers pointing to the
-associated CIM document, which will serve as the landing page for
+associated CIM 
+% Can CIM be expanded "Climate Information Model"?
+document, which will serve as the landing page for
 documentation from which further exploration (by humans or software)
 will take place. The existence and functioning of the landing page is
 assured in Stage~M3 of \figref{qa}.
@@ -1215,13 +1230,12 @@ are published (or retracted, see \secref{version} below). Therefore,
 the WIP recommends that designated \emph{replica nodes} maintain a
 protocol for automatic replication, shown in \figref{replica}.
 
-
 \begin{figure*}
   \begin{center}
     \includegraphics[width=120mm]{images/WIP-replication.png}
   \end{center}
-  \caption{CMIP6 replication from data nodes to replica centers and
-    between replica centers coordinated by a CMIP6 replication team.}
+  \caption{CMIP6 replication from data nodes to replica centres and
+    between replica centres coordinated by a CMIP6 replication team.}
   \label{fig:replica}
 \end{figure*}
 
@@ -1288,22 +1302,21 @@ ensuring:
 \section{Versioning}
 \label{sec:version}
 
-
 The WIP position on versioning is based on the principle
 (\secref{principles}) of scientific reproducibility. Recognizing that
 errors may be found after datasets have been distributed, the WIP
 insists that erroneous datasets that may have been used downstream continue
 to be publicly available, but marked as superseded. This will allow
 users to trace the provenance of published results, even if those
-point to retracted data; and further allow the possibility of \emph{a
-  posteriori} correction of such results.
+point to retracted data; and further allow the possibility of 
+\emph{a posteriori} correction of such results.
 
 The WIP requires a consistent versioning methodology across all the
 ESGF data nodes. We note that inconsistent or informal versioning
 practices at individual nodes would likely be invisible to the ESGF
-infrastructure (e.g., yielding 
-files that look like replicas, but with inconsistent data and
-checksums), which would inhibit traceability across versions.
+infrastructure (e.g., yielding files that look like replicas, but with 
+inconsistent data and checksums), which would inhibit traceability 
+across versions.
 
 In close consultation with the ESGF implementation teams, the WIP has
 made the following recommendations, described in greater depth in the
@@ -1326,10 +1339,8 @@ position paper. Broadly, they amount to the following:
   participating data nodes.
 \end{itemize}
 
-
 \subsection{Errata}
 \label{sec:errata}
-
 
 It is worth highlighting in particular the new recommendations
 regarding errata. Until CMIP5, we have relied on the ESGF system to
@@ -1353,13 +1364,13 @@ paper.
 The WIP was formed in response to the explosive growth of CMIP between
 CMIP3 and CMIP5, and charged with studying and making recommendations
 about the global data infrastructure needed to support CMIP6 and the
-future evolution of such intercomparison projects.
-Our findings reflect the fact that CMIP is no longer
-a cottage industry, and a more formal approach is needed. The resulting
-recommendations stop well short of any sort of global governance of
-this ``vast machine'', but list many areas where, with a relatively
-light touch, beneficial order and control result. We
-emphasize here again some of the key aspects of the design:
+future evolution of such intercomparison projects. Our findings reflect 
+the fact that CMIP is no longer a cottage industry, and a more formal 
+approach is needed. The resulting recommendations stop well short of 
+any sort of global governance of this ``vast machine'', but list many 
+areas where, with a relatively light touch, beneficial order and 
+control result. We emphasize here again some of the key aspects of 
+the design:
 
 \begin{itemize}
 \item The design is now dataset-centric rather than system-centric:
@@ -1388,7 +1399,6 @@ emphasize here again some of the key aspects of the design:
  % ???? previous sentence doesn't make sense to me.
 \end{itemize}
 
-
 Certainly not all issues are resolved, and the validation of some of
 our findings will have to await the outcome of CMIP6. Nevertheless, we
 believe the discussion in this article provides a sound basis for
@@ -1398,7 +1408,7 @@ beginning to think about the future.
 \item There is an increasing blurring of the boundary between weather
   and climate as time and space scales merge \pipref{hoskins2013}.
   This will increasingly entrain new communities into our data
-  ecosystems, each with their own modeling and analysis practices,
+  ecosystems, each with their own modelling and analysis practices,
   standards and conventions, and other issues. We would recommend a
   closer engagement between these communities in planning the future
   of global data infrastructure.
@@ -1502,9 +1512,9 @@ available. They are autonomous projects and therefore not listed here.
   Environment Research Council.
   
   K.E. Taylor and P.J. Durack are supported by the Regional and Global
-  Climate Modeling Program of the United States Department of Energy's
+  Model Analysis Program of the United States Department of Energy's
   Office of Science, and their work was performed under the auspices
-  of the Lawrence Livermore National Laboratory's Contract
+  of Lawrence Livermore National Laboratory's Contract
   DE-AC52-07NA27344.
 \end{acknowledgements}
 
