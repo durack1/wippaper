@@ -86,20 +86,21 @@
 \maketitle
 
 % \pagebreak
-\abstract{
-  The WGCM Infrastructure Panel (WIP) was formed in 2014 in 
-  response to the explosive growth in size and complexity of Coupled 
-  Model Intercomparison Projects (CMIPs) between CMIP3 (2005-06) and 
-  CMIP5 (2011-12). This article presents the WIP recommendations for
-  the global data infrastructure needed to support CMIP design, 
-  future growth and evolution. Developed in close coordination with 
-  those who build and run the existing infrastructure (the Earth 
-  System Grid Federation), the recommendations are based on several 
-  principles beginning with the need to separate requirements, 
-  implementation, and operations. Other important principles include 
-  the consideration of data as a commodity in an ecosystem of users; 
-  the importance of provenance; the need for automation; and the 
-  obligation to measure costs and benefits. 
+\abstract{The World Climate Research Programme (WCRP)'s Working Group
+  on Climate Modeling (WGCM) Infrastructure Panel (WIP) was formed in
+  2014 in response to the explosive growth in size and complexity of
+  Coupled Model Intercomparison Projects (CMIPs) between CMIP3
+  (2005-06) and CMIP5 (2011-12). This article presents the WIP
+  recommendations for the global data infrastructure needed to support
+  CMIP design, future growth and evolution. Developed in close
+  coordination with those who build and run the existing
+  infrastructure (the Earth System Grid Federation), the
+  recommendations are based on several principles beginning with the
+  need to separate requirements, implementation, and operations. Other
+  important principles include the consideration of data as a
+  commodity in an ecosystem of users; the importance of provenance;
+  the need for automation; and the obligation to measure costs and
+  benefits.
   
   This paper concentrates on requirements, recognising the diversity
   of communities involved (modelers, analysts, software developers, 
@@ -196,11 +197,14 @@ run the global climate and weather enterprise.
 Managing and sharing this huge amount of data is an enterprise in its
 own right -- and the solution established for CMIP5 was the global
 ``Earth System Grid Federation'' (ESGF, \pipref{williamsetal2015}).
-The larger gateways currently participating in the ESGF are shown in
-in \figref{esgf}, which also lists (some of) the many projects these
-nodes support. With multiple agencies and institutions, and many
-uncoordinated and possibly conflicting requirements, the ESGF itself
-is a complex and delicate component to manage.
+ESGF was identified by the WCRP Joint Scientific Committee in 2013 as
+the recommended infrastructure for data archiving and dissemination
+for the Programme. The larger gateways currently participating in the
+ESGF are shown in in \figref{esgf}, which also lists (some of) the
+many projects these nodes support. With multiple agencies and
+institutions, and many uncoordinated and possibly conflicting
+requirements, the ESGF itself is a complex and delicate component to
+manage.
 
 \begin{figure*}
   \begin{center}
@@ -1413,9 +1417,17 @@ beginning to think about the future.
   and climate as time and space scales merge \pipref{hoskins2013}.
   This will increasingly entrain new communities into our data
   ecosystems, each with their own modeling and analysis practices,
-  standards and conventions, and other issues. We would recommend a
-  closer engagement between these communities in planning the future
-  of global data infrastructure.
+  standards and conventions, and other issues. The establishment of
+  the WIP was a crucial step in enhancing the capabilities, standards,
+  protocols and policies around the CMIP enterprise. Earlier
+  discussions on the scope of the WIP also suggested a broader scope
+  for the panel on the longer-term, to coordinate not only the CMIP
+  data aspects (including for example, the CORDEX project, which also
+  relies upon ESGF for data dissemination, see \figref{esgf}) but also
+  the climate prediction (seasonal to decadal) issues and
+  corresponding observational and reanalysis aspects.We would
+  recommend a closer engagement between these communities in planning
+  the future of global data infrastructure.
 \item As we have noted, the nature of publication is changing
   \citep[see e.g][]{ref:davidetal2016}. In the future, datasets and
   software with provenance information will be first-class entities of
@@ -1502,6 +1514,14 @@ the ESGF, ESDOC, DREQ software stacks are open source and freely
 available. They are autonomous projects and therefore not listed here.
 
 \begin{acknowledgements}
+  We thank Michel Rixen, Stephen Griffies, and John Krasting for their
+  close reading and comments on early drafts of this manuscript.
+  Colleen McHugh aided with the analysis of data volumes.
+  
+  The research leading to these results has received funding from the
+  European Union Seventh Framework program under the IS-ENES2 project
+  (grant agreement No. 312979).
+
   V. Balaji is supported by the Cooperative Institute for Climate
   Science, Princeton University, Award NA08OAR4320752 from the
   National Oceanic and Atmospheric Administration, U.S. Department of
@@ -1509,12 +1529,6 @@ available. They are autonomous projects and therefore not listed here.
   are those of the authors and do not necessarily reflect the views of
   Princeton University, the National Oceanic and Atmospheric
   Administration, or the U.S. Department of Commerce.
-
-  Colleen McHugh aided with the analysis of data volumes.
-  
-  The research leading to these results has received funding from the
-  European Union Seventh Framework program under the IS-ENES2 project
-  (grant agreement No. 312979).
 
   B.N. Lawrence acknowledges additional support from the UK Natural
   Environment Research Council.
