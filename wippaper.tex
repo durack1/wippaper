@@ -909,8 +909,13 @@ inquiry and reproduction of results.
 
 Given the complexity of the CMIP6 data request, we expect a total
 dataset count of $\mathcal{O}(10^6)$, as shown above in \secref{dvol}.
-The WIP therefore recommends two separate approaches to citation, at
-different levels of granularity.
+The WIP therefore recommends an approach to citation that addresses both
+formally giving credit to data authors and providing authors with a means
+to exactly reference the data they used. While the former mechanism fully
+qualifies for citation by ensuring that adequate citation metadata are
+available and data are long-term archived, the data referencing mechanism
+does not offer such full citation capabilities, but instead is able to 
+refer at a much finer level of granularity to the exact data used.
 
 The recommendations, detailed in the
 \href{https://goo.gl/BFn9Hq}{CMIP6 Data Citation and Long Term
@@ -922,21 +927,32 @@ and corrected. At this point the data will be transferred to long-term
 archival (LTA) and deemed appropriate for interdisciplinary use, such
 as in policy studies (``Citation of Stable Data'').
 
+In the following, two types of \emph{persistent identifiers} (PIDs) are
+distinguished: DOIs, which come with additional policies (used for
+long-term archived data only, mandatory citation metadata), and Handles,
+which do not convey particular policies (and are therefore not citable).
+Technically, both rely on the same system, the global Handle System. The
+specific use and how they complement each other is described in the
+following:
+
 \begin{itemize}
-\item The \emph{dynamic data citation} infrastructure relies on unique
-  \emph{persistent identifiers} (PIDs) assigned at the level of an
-  \emph{atomic dataset} (a complete timeseries of one variable from
-  one experiment and one model). The infrastructure for creating and
-  using PIDs is described below in \secref{pid}. New dataset versions
-  (see \secref{version}, below), and datasets for the same variable
-  from different models, or different experiments, will all receive
-  unique PIDs.
+\item The \emph{dynamic data referencing} infrastructure relies on unique
+  Handles assigned at the level of an \emph{atomic dataset} (a complete
+  timeseries of one variable from one experiment and one model). The
+  infrastructure for creating and using Handles is described below in
+  secref{pid}. New dataset versions (see \secref{version}, below), and
+  datasets for the same variable from different models, or different
+  experiments, will all receive unique Handles.
 
   The WIP strongly recommends that PIDs be used to document all the
   datasets used in any study. However, given that the datasets assigned
-  PIDs may evolve as errors are found and corrections made, the PIDs
-  do not meet the standards for long-term curation, quality, and 
-  accessibility and can not be considered first-class citable entities.
+  Handles may evolve as errors are found and corrections made, the Handles
+  cannot and should not meet the standards for long-term curation,
+  quality, and accessibility and can not be considered first-class
+  citable entities. Their application in CMIP6 is to enable 
+  fine-granular data referencing unrestricted by formal citation
+  policies, which cannot be done using DOIs alone.
+  
 \item The \emph{stable data citation} infrastructure requires some
   additional steps to meet formal requirements for citable data. First, we
   ensure that there has been sufficient community examination of the
@@ -955,7 +971,7 @@ as in policy studies (``Citation of Stable Data'').
 
   Given the formality of the process and to encourage their use in
   providing credit to modeling groups, a DOI is not assigned to data at
-  the same granularity as a PID. The WIP has recommended two
+  the same granularity as a Handle. The WIP has recommended two
   aggregations suitable for DOI minting:
 
   \begin{itemize}
@@ -984,34 +1000,44 @@ as in policy studies (``Citation of Stable Data'').
       Science Data}}.
 \end{itemize}
 
-\subsection{The PID infrastructure}
+\subsection{The CMIP6 Handle services}
 \label{sec:pid}
 
-The PID infrastructure is described in the
+The CMIP6 Handle service infrastructure is described in the
 \href{https://goo.gl/miUREw}{CMIP6 Persistent Identifiers
-  Implementation Plan} position paper. There are two stages:
+  Implementation Plan} position paper. There are two stages, which are
+  both enabled through the use of the global Handle registry:
 
 \begin{itemize}
-\item generation of PIDs at the level of individual files, using a
-  \emph{handle registry} mechanism.
-\item generation of PIDs at a coarser granularity of an atomic
-  dataset, aggregating all files associated with a single variable
-  from a single model running a single experiment, referred to as an
-  \emph{atomic dataset} in ESGF terminology.
+\item generation of Handles at the level of individual files. Handles
+are embedded in the CMIP6 file netcdf headers and registered as part of
+the ESGF data distribution process.
+\item generation and registration of Handles at a coarser granularity
+  of an atomic dataset, aggregating all files associated with a single
+  variable from a single model running a single experiment, referred to
+  as an \emph{atomic dataset} in ESGF terminology.
 \end{itemize}
 
-The PIDs assigned at these two levels of the PID hierarchy are unique:
-new versions of files or datasets will trigger the creation of new
-PIDs, as described in \secref{version}, below. PIDs will also be
-generated at higher levels of aggregation, the \emph{model} and
-\emph{simulation} data aggregations described above in \secref{cite}.
-These levels are dynamic as far as the PID infrastructure is concerned: 
-new elements can be added to the aggregation without modifying the PID. 
-For the model data aggregation, for example, the same PID will indicate 
-an evolving number of simulations as new experiments are performed with 
-the model. The PIDs will become static at a later date, when the 
-aggregation is deemed stable, and transferred to long-term archival. 
-This PID architecture is shown in \figref{pidarch}.
+The Handles assigned at these two levels of the PID hierarchy identify
+static entities: new versions of files or datasets will trigger the
+creation of new PIDs, as described in \secref{version}, below. In
+contrast, the model and simulation granularities are covered by the DOI
+mechanisms described above in \secref{cite}. These levels are dynamic
+as far as the PID infrastructure is concerned: new elements can be
+added to the aggregation without modifying the PID. For the model data
+aggregation, for example, the same PID will indicate an evolving number
+of simulations as new experiments are performed with the model. This
+PID architecture is shown in \figref{pidarch}.
+
+But since the entities referred to by DOIs are dynamic, citation
+requires authors to indicate a version reference. While this fulfills
+the requirement to give credit, exact referencing of all datasets used
+is still not possible as the granularity is too coarse. Indicating all
+datasets used would result in impractically huge lists. To remedy this
+and close the gap, the PID services offer authors to request individual
+Handles for entire \emph{data carts}. These are not citable, but make
+the process of exact referencing much easier.
+
 
 \begin{figure*}
   \begin{center}
@@ -1032,14 +1058,20 @@ material alongside peer-reviewed CMIP6 publications, as a mechanism of
 tracking dataset use and provenance.
 
 The document further describes methods for generating and registering
-PIDs within the system, using the asynchronous messaging system
+Handles within the system, using the asynchronous messaging system
 RabbitMQ. This system, designed in collaboration with ESGF developers,
 and shown in \figref{pidflow}, guarantees, for example, that PIDs have
 been correctly generated in accordance with the guidelines regarding
 versioning. This system is thus an extension of the
 \texttt{tracking-id} used in CMIP5, but with more rigorous checking
 and quality control to ensure that new PIDs are generated when data
-are modified.
+are modified. The dataset and file Handles are also associated with
+basic metadata, called PID Kernel information
+\cite{yu-weigel-plale-2018}, which facilitate basic provenance
+recording. Datasets and files point to each other to bind the
+granularities together. In addition, dataset kernel information refers
+to previous and later versions, errata information and replicas,
+explained in more detail in the position paper.
 
 \begin{figure*}
   \begin{center}
@@ -1362,8 +1394,9 @@ position paper:
 \item the PID infrastructure of \secref{cite} is the basis of creating
   versions of datasets. PIDs are permanently associated with a
   dataset, and new versions will get a new PID. When new versions are
-  published, there will be two-way links created within the PID
-  framework so that one may query a PID for prior or subsequent versions.
+  published, there will be two-way links created within the PID kernel
+  information so that one may query a PID for prior or subsequent
+  versions.
 \item we recommend the unit of versioning be an \emph{atomic dataset}:
   a complete timeseries of one variable from one experiment and one
   model. The implication is that other variables need not be
