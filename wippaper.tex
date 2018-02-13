@@ -51,6 +51,7 @@
 \Author[1,2]{Sergey}{Nikonov}
 \Author[6,2]{Aparna}{Radhakrishnan}
 \Author[5]{Martina}{Stockhause}
+\Author[5]{Tobias}{Weigel}
 \Author[3]{Dean}{Williams}
 
 
@@ -499,7 +500,7 @@ database. The DREQ combines definitions of variables and their output
 format with specifications of the objectives they support and the
 experiments that they are required for. The entire request is encoded
 in an XML database with rigorous type constraints. Important elements
-of the request, such as units, cell methods (expressing the sub-grid
+of the request, such as units, cell methods (expressing the subgrid
 processing implicit in the variable definition), and time slices for
 required output, are defined as controlled vocabularies within the
 request to ensure consistency of usage. The request is designed to
@@ -514,7 +515,7 @@ The data request spans several elements.
   standard name and units,
 \item an output frequency,
 \item a structural specification which includes specification of
-  dimensions and of sub-grid processing.
+  dimensions and of subgrid processing.
 \end{enumerate}
 
 In order to facilitate the cross linking between the 2100 variables
@@ -591,39 +592,11 @@ throughout the CMIP6 infrastructure. These aspects are covered in
 detail in the \href{https://goo.gl/mSe4rf}{CMIP6 Global Attributes,
   DRS, Filenames, Directory Structure, and CVs} position paper. A new
 element in the DRS indicates whether data has been stored on a native
-grid or has been regridded.
-%  the rest of this subsectio seems not to fit in the section. can it be moved or removed?
-% how does it related to data reference syntax?
-(see discussion below in \secref{dvol} on the potentially critical
-role of regridded output). Regridding, in particular, remains a
-contentious topic, and owing to a lack of consensus, the WIP
-recommendations on regridding remain in flux. The
-\href{https://goo.gl/wVtm5t}{CMIP6 Output Grid Guidance document}
-outlines a number of possible recommendations, including the provision
-of ``weights'' to a target grid. Many of the considerations around
-regridding, particularly for ocean data in CMIP6, are discussed at
-length in \bibref{griffiesetal2016}. A similar lack of consensus has
-made the WIP drop a recommendation of a common \emph{calendar} for
-particular experiments: a wide variety of calendars are in use --
-Gregorian, Julian, 365-day, and equal-month (360-day) all remain
-popular options -- and the onus of converting data across the
-multi-model ensemble (MME) to a common one for analysis remains upon
-the end-user.
-
-As outlined below in \secref{replica}, both ESGF data nodes and the
-creators of secondary repositories are given considerable leeway in
-choosing data subsets for replication, based on their own interests.
-The tracking mechanisms outlined in \secref{pid} below will allow us
-to ascertain, after the fact, how widely used the native grid data may
-% "regridded subset" is referred to below for the first time.  The reader
-% won't know what this is about without further explanation.
-be \emph{vis-\`a-vis} the regridded subset, and allow us to
-recalibrate the replicas, as usage data becomes available. We note
-also that the providers of at least one of the standard metrics
-packages \citep[ESMValTool,][]{ref:eyringetal2016a} have expressed a
-preference of standard grid data for their analysis, as regridding
-from disparate grids increases the complexity of their already
-overburdened infrastructure.
+grid or has been regridded (see discussion below in \secref{dvol} on
+the potentially critical role of regridded output). This element of
+the DRS will allow us to track the usage of the \emph{regridded
+  subset} of data, and assess the relative popularity of native-grid
+vs. standard-grid output.
 
 \subsection{CMIP6 data volumes}
 \label{sec:dvol}
@@ -706,12 +679,38 @@ growth in data volumes.
   performed on relatively coarse grids. We recommend that for most
   purposes atmospheric data on the ERA-40 grid
   ($2^\circ\times 2.5^\circ$) would suffice, with of course exceptions
-  % could reference in line below https://doi.org/10.5194/gmd-9-4185-2016
   for experiments like those called for by HighResMIP
   \pipref{haarsmaetal2016}. A similar recommendation is made for ocean
   data (the World Ocean Atlas $1^\circ\times 1^\circ$ grid), with
   extended discussion of the benefits and losses due to regridding
   \citep[see][]{ref:griffiesetal2014,ref:griffiesetal2016}.
+  Regridding remains a contentious topic, and owing to
+  a lack of consensus, the WIP recommendations on regridding remain in
+  flux. The \href{https://goo.gl/wVtm5t}{CMIP6 Output Grid Guidance
+    document} outlines a number of possible recommendations, including
+  the provision of ``weights'' to a target grid. Many of the
+  considerations around regridding, particularly for ocean data in
+  CMIP6, are discussed at length in \bibref{griffiesetal2016}. A
+  similar lack of consensus has made the WIP drop a recommendation of
+  a common \emph{calendar} for particular experiments: a wide variety
+  of calendars are in use -- Gregorian, Julian, 365-day, and
+  equal-month (360-day) all remain popular options -- and the onus of
+  converting data across the multi-model ensemble (MME) to a common
+  one for analysis remains upon the end-user.
+
+  As outlined below in \secref{replica}, both ESGF data nodes and the
+  creators of secondary repositories are given considerable leeway in
+  choosing data subsets for replication, based on their own interests.
+  The tracking mechanisms outlined in \secref{pid} below will allow us
+  to ascertain, after the fact, how widely used the native grid data
+  may be \emph{vis-\`a-vis} the regridded subset, and allow us to
+  recalibrate the replicas, as usage data becomes available. We note
+  also that the providers of at least one of the standard metrics
+  packages \citep[ESMValTool,][]{ref:eyringetal2016a} have expressed a
+  preference of standard grid data for their analysis, as regridding
+  from disparate grids increases the complexity of their already
+  overburdened infrastructure.
+
 \item The second is the issue of data compression. netCDF4, which is
   the WIP's required standard for CMIP6 data, includes an option
   for lossless compression or deflation \pipref{zivlempel1977} that
@@ -818,16 +817,13 @@ whether or not to compress and regrid.
 
 The WIP's recommended licensing policy is based on an examination of
 data usage patterns in CMIP5. First, while the licensing policy called
-for registration and acceptance of terms of use, a large fraction,
-% https://pcmdi.llnl.gov/CMIP6/TermsOfUse is live - if you want to ref it
+for registration and acceptance of the terms of use, a large fraction,
 perhaps a majority of users, actually obtained their data not directly
 from ESGF, but from other copies, such as the ``snapshots'' alluded to
-above in Item~\ref{snap}, \secref{principles}. 
-% I don't think there is any hard evidence that most users got data 
-% from other than ESG, so I've changed "typical" to "common".
-Those users accessing the data indirectly, as shown in \figref{dark},
-relied on user groups or their home institutions to make secondary
-repositories that could be more conveniently accessed. The WIP
+above in Item~\ref{snap}, \secref{principles}. Those users accessing
+the data indirectly, as shown in \figref{dark}, relied on user groups
+or their home institutions to make secondary repositories that could
+be more conveniently accessed. The WIP
 \href{https://goo.gl/7vHsPU}{CMIP6 Licensing and Access Control}
 position paper refers to the secondary repositories as ``dark'' and
 those obtaining CMIP data from those reposistories as ``dark users''
@@ -1157,10 +1153,9 @@ of as an ongoing period of community-wide scientific checks of the
 data. During this period, modeling centers may correct errors and
 provide new versions of datasets. In the final stage, the data pass
 into long-term archival, described as the ``bibliometric'' phase in
-\figref{qa}. Just
-% LTA needs to be defined before using here.
-prior to LTA, the system will verify minimum standards of
-provenance documentation. This is described in the next section.
+\figref{qa}. Just prior to LTA, the system will verify minimum
+standards of provenance documentation. This is described in the next
+section.
 
 \subsection{Documentation of provenance}
 \label{sec:doc}
@@ -1242,17 +1237,15 @@ results have been obtained and enabling results to be reproduced by
 others. Rigorous documentation remains our best bulwark against
 challenges to our results.
 
-In keeping with the WIP's  ``dataset-centric rather than system-centric''
-principle approach (Item~\ref{snap} in
+In keeping with the WIP's ``dataset-centric rather than
+system-centric'' principle approach (Item~\ref{snap} in
 \secref{principles}), a user will be linked to the documentation
-directly from each dataset. This is done in CMIP6 by embedding a global
-attribute \texttt{further\_info\_URL} in file headers pointing to the
-associated Common Information Model (CIM) 
-% Can CIM be expanded "Climate Information Model"?
-document, which will serve as the landing page for
-documentation from which further exploration (by humans or software)
-will take place. The existence and functioning of the landing page is
-assured in Stage~M3 of \figref{qa}.
+directly from each dataset. This is done in CMIP6 by embedding a
+global attribute \texttt{further\_info\_URL} in file headers pointing
+to the associated CIM document, which will serve as the landing page
+for documentation from which further exploration (by humans or
+software) will take place. The existence and functioning of the
+landing page is assured in Stage~M3 of \figref{qa}.
 
 \section{Replication}
 \label{sec:replica}
@@ -1297,9 +1290,8 @@ In conjunction with the ESGF and the International Climate Networking
 Working Group (ICNWG), these recommendations have been translated to a
 two-pronged strategy.
 
-The basic toolchain for replication is built on updated versions of the 
-software layers used in CMIP5 including:
-% I'm not sure I understand what's being said in the following.  Please check!
+The basic toolchain for replication is built on updated versions of
+the software layers used in CMIP5 including:
 \href{https://github.com/Prodiguer/synda}{synda} (formerly
 \texttt{synchrodata}) and Globus Online \pipref{chardetal2015}, which
 are based on underlying data transport mechanisms such as
@@ -1331,11 +1323,10 @@ coordinate the replication activities of the CMIP6 data nodes such
 that the primary goal is achieved and an effective compromise for the
 secondary goals is established.
 
-The
-International Climate Network Working Group (ICNWG), formed under the
-Earth System Grid Federation (ESGF), helps set up and optimize network
-infrastructures for ESGF climate data sites located around the world.
-For example prioritising the most widely requested data for
+The International Climate Network Working Group (ICNWG), formed under
+the Earth System Grid Federation (ESGF), helps set up and optimize
+network infrastructures for ESGF climate data sites located around the
+world. For example prioritising the most widely requested data for
 replication can best be done based on operational experience and will
 of course change over time. To ensure that the replication strategy is
 responding to user need and data node capabilities, the replication
