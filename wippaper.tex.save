@@ -9,6 +9,7 @@
 \newcommand{\plref}[1]{page~\pageref{p-#1}, line~\lineref{l-#1}}
 % answer environment for reviewer responses
 \newenvironment{answer}{\color{blue}}{}
+\usepackage{enumitem}
 
 % \hypersetup{colorlinks=true,urlcolor=blue,citecolor=red}
 \hypersetup{colorlinks=false}
@@ -1628,150 +1629,153 @@ Exeter), Kevin Paul, Joseph Hamman (National Center for Atmospheric Research), J
 Rothenberg (ClimaCell, Boston, MA), Matthew Rocklin (Anaconda Inc)...all on behalf
 of the Pangeo Project (https://pangeo-data.github.io/)
 
-We commend the WIP for the rigorous and thoughtful assessment of the
-global data infrastructure needed to support CMIP6 and beyond. This
-paper identifies many important challenges related to CMIP data
-replication, provenance, and scientific reproducibility. Absent,
-however, is a discussion of the computational challenges associated
-with the analysis of CMIP datasets and the relationship between data
-archives and computing resources. Our overall recommendation for
-revising the paper is to give more attention to this important
-question. The authors of this comment believe that enabling efficient,
-accessible, scalable computation on CMIP data should inform the design
-of the global infrastructure. Instead of encouraging users to download
-the data to their local systems, we should be encouraging users to
-bring their computing to the data. This can be achieved by working
-more closely with national computing centers and by placing CMIP data
-in cloud storage, where it is directly accessible to distributed
-computing. As recognized in the manuscript, many of the most valuable
-science results from the CMIP project come from global comparisons
-across many models, scenarios, and ensemble members. To obtain these
-results, scientists must run analysis on significant fractions of the
-multi-petabyte CMIP archives. As anyone who performs such calculations
-knows, they rarely work on the first try–interactive exploration and
-visualization of the data is a crucial part of the scientific process.
-However, the computing systems deployed for the analysis of CMIP data
-generally fall far short of producing interactive speeds; instead
-researchers wait for weeks to test new ideas (we know this from
-personal experience). Most of these computing systems are what the
-manuscript calls “dark repositories,” mirrors of CMIP data on servers
-and computing clusters owned and managed by individual research
-groups. In addition to disrupting the chain of tracking, provenance,
-and curation (as discussed in the manuscript), dark repositories are
-potentially financially wasteful, since the data is transmitted and
-duplicated over and over just for the purpose of exposing it to
-computation. Scientists must make an up-front judgement on which
-fractions they wish to mirror; they may not even use everything they
-download. In addition, such a priori decisions create an insidious
-pressure to look for "things you expect to see, in places you expect
-to see them." These dark repositories are ultimately funded by
-agencies such as the US National Science Foundation and its
-international counterparts, via equipment purchases and technical
-support staff salaries. No one really knows how many dark repositories
-there are and how much they cost in aggregate. Despite the prevalence
-of dark repositories, users are probably frustrated with their
-performance on terabyte-scale, let alone petabyte-scale calculations.
-A key technical consideration is that, on standard servers and
-workstations, most CMIP-style data analysis is heavily I/O bound
-rather than compute bound i.e. it is limited strongly by the rate at
-which data can be read from storage. Fortunately, more scalable ways
-for climate scientists to interact with large datasets are starting to
-emerge. Intelligent subsetting and lazy loading can circumvent the
-need for bulk downloads. Furthermore, when such datasets are placed on
-distributed storage attached directly to distributed computing, the
-time-to-result for a given analysis can be reduced by orders of
-magnitude, ultimately resulting in faster scientific progress. NCAR’s
-CMIP analysis platform is a good example, with CMIP data stored on
-GLADE (Globally Accessible Data Environment), a high performance
-parallel filesystem accessible from the compute nodes of the Cheyenne
-supercomputer. Users with access to this platform are much less likely
-to want to create their own dark repositories, since they enjoy the
-combination of high performance computation and comprehensive data
-access. Although storage on GLADE is expensive compared to a single
-dark repository, it’s probably cheaper than ten dark repositories in
-aggregate.
+\begin{enumerate}[label=SC1-\arabic*,leftmargin=*]
+\item We commend the WIP for the rigorous and thoughtful assessment of
+  the global data infrastructure needed to support CMIP6 and beyond.
+  This paper identifies many important challenges related to CMIP data
+  replication, provenance, and scientific reproducibility. Absent,
+  however, is a discussion of the computational challenges associated
+  with the analysis of CMIP datasets and the relationship between data
+  archives and computing resources. Our overall recommendation for
+  revising the paper is to give more attention to this important
+  question. The authors of this comment believe that enabling
+  efficient, accessible, scalable computation on CMIP data should
+  inform the design of the global infrastructure. Instead of
+  encouraging users to download the data to their local systems, we
+  should be encouraging users to bring their computing to the data.
+  This can be achieved by working more closely with national computing
+  centers and by placing CMIP data in cloud storage, where it is
+  directly accessible to distributed computing. As recognized in the
+  manuscript, many of the most valuable science results from the CMIP
+  project come from global comparisons across many models, scenarios,
+  and ensemble members. To obtain these results, scientists must run
+  analysis on significant fractions of the multi-petabyte CMIP
+  archives. As anyone who performs such calculations knows, they
+  rarely work on the first try–interactive exploration and
+  visualization of the data is a crucial part of the scientific
+  process. However, the computing systems deployed for the analysis of
+  CMIP data generally fall far short of producing interactive speeds;
+  instead researchers wait for weeks to test new ideas (we know this
+  from personal experience). Most of these computing systems are what
+  the manuscript calls “dark repositories,” mirrors of CMIP data on
+  servers and computing clusters owned and managed by individual
+  research groups. In addition to disrupting the chain of tracking,
+  provenance, and curation (as discussed in the manuscript), dark
+  repositories are potentially financially wasteful, since the data is
+  transmitted and duplicated over and over just for the purpose of
+  exposing it to computation. Scientists must make an up-front
+  judgement on which fractions they wish to mirror; they may not even
+  use everything they download. In addition, such a priori decisions
+  create an insidious pressure to look for "things you expect to see,
+  in places you expect to see them." These dark repositories are
+  ultimately funded by agencies such as the US National Science
+  Foundation and its international counterparts, via equipment
+  purchases and technical support staff salaries. No one really knows
+  how many dark repositories there are and how much they cost in
+  aggregate. Despite the prevalence of dark repositories, users are
+  probably frustrated with their performance on terabyte-scale, let
+  alone petabyte-scale calculations. A key technical consideration is
+  that, on standard servers and workstations, most CMIP-style data
+  analysis is heavily I/O bound rather than compute bound i.e. it is
+  limited strongly by the rate at which data can be read from storage.
+  Fortunately, more scalable ways for climate scientists to interact
+  with large datasets are starting to emerge. Intelligent subsetting
+  and lazy loading can circumvent the need for bulk downloads.
+  Furthermore, when such datasets are placed on distributed storage
+  attached directly to distributed computing, the time-to-result for a
+  given analysis can be reduced by orders of magnitude, ultimately
+  resulting in faster scientific progress. NCAR’s CMIP analysis
+  platform is a good example, with CMIP data stored on GLADE (Globally
+  Accessible Data Environment), a high performance parallel filesystem
+  accessible from the compute nodes of the Cheyenne supercomputer.
+  Users with access to this platform are much less likely to want to
+  create their own dark repositories, since they enjoy the combination
+  of high performance computation and comprehensive data access.
+  Although storage on GLADE is expensive compared to a single dark
+  repository, it’s probably cheaper than ten dark repositories in
+  aggregate.
 
-While traditional supercomputers can meet some of the data-analysis
-needs of CMIP users, they were not designed for this purpose and are
-probably overkill for it. We believe that an ideal data analytics
-system for these problems has the following properties:
-Printer-friendly version
+  While traditional supercomputers can meet some of the data-analysis
+  needs of CMIP users, they were not designed for this purpose and are
+  probably overkill for it. We believe that an ideal data analytics
+  system for these problems has the following properties:
 
-1. Low administrative hurdles to sign up and log in, even for new,
-junior, or industry users
+  1. Low administrative hurdles to sign up and log in, even for new,
+  junior, or industry users
 
-2. Easy web access for popular interactive environments like Jupyter
-notebooks
+  2. Easy web access for popular interactive environments like Jupyter
+  notebooks
 
-3. Easy web access on the open internet for automated web services and mobile
-apps
+  3. Easy web access on the open internet for automated web services
+  and mobile apps
 
 
-4. Dynamic and immediate allocation of interactive compute resources
-at modest sizes (hundreds rather than millions of cores) even if those
-sessions may have to grow or shrink during the allocation, depending
-on external use
+  4. Dynamic and immediate allocation of interactive compute resources
+  at modest sizes (hundreds rather than millions of cores) even if
+  those sessions may have to grow or shrink during the allocation,
+  depending on external use
 
-5. Cheap costs, sacrificing the high performance network and rich
-CPU/Memory ratio of super-computing centers, and replacing them with
-commodity networking and locally attached storage
+  5. Cheap costs, sacrificing the high performance network and rich
+  CPU/Memory ratio of super-computing centers, and replacing them with
+  commodity networking and locally attached storage
 
-6. Co-location with the relevant datasets
+  6. Co-location with the relevant datasets
 
-Data analytics clusters are growing within existing computing
-facilities today that have some (but rarely all) of the properties
-above. Cloud computing, however, is ideally suited to the storage,
-processing, and distribution of extremely large, shared datasets
-today. Both, government-sponsored cloud-style data centers, and the
-commercial cloud (e.g. Amazon Web Services, Google Cloud Platform,
-Microsoft Azure, etc.) merit consideration. Data stored in cloud
-storage is directly accessible from cloud computing instances within
-the same network, providing effectively infinite data bandwidth to
-distributed processing systems. In this paradigm, no data needs to be
-downloaded at all; if the CMIP data were already in cloud storage,
-users would pay only for the compute time they need to do their
-analysis. The cost of hosting 2PB of data on any of the commercial
-cloud providers is roughly \$500K USD per year
-(https://cloud.google.com/products/calculator/id=8ee0d849-a19b-44ab-b5461b0c0dbe775d).
-This is no small sum, but it is likely much less than the collective
-operating budget of the ESGF nodes. The overall financial cost to
-funding agencies might even turn out to be less if individual research
-groups were persuaded to abandon their dark replicas and associated
-local data storage and computation costs in favor of cloud computing.
-Furthermore, commercial cloud providers might also provide hosting for
-free, as they already do for many other scientific datasets (e.g.
-https://aws.amazon.com/public-datasets/,
-https://cloud.google.com/public-datasets/), if they think it will
-bring them customers from academia and industry. Beyond academic
-research, CMIP data hold strong commercial value in sectors such as
-insurance and energy. If CMIP datasets can be liberated from closed
-institutional infrastructure, such consumers can more easily combine
-them with co-located domain specific datasets to gain insights and
-derive economic benefits. NOAA (an agency already contributing model
-development and simulation resources to CMIP) has recently adopted
-such an approach to power their Big Data Project through Cooperative
-Research and Development Agreements and could provide an example for
-future development within the climate science community. The
-scientific payoff from co-locating CMIP data with distributed
-computing resources would be immense, both accelerating
-reproducibility and driving innovation in data analysis
-methodologies–including new machine learning and artificial
-intelligence techniques. But leveraging full advantage of distributed
-systems for analyzing climate data requires more than raw hardware; it
-also requires software which allows climate scientists to parallelize
-their calculations in a simple, efficient and transparent way,
-permitting them to focus on science rather than the details of the
-underlying computing system. A central focus of the Pangeo project is
-to develop these tools on distributed computing systems and deploy
-them on high-impact geoscience problems. The building blocks for such
-software exist, for example, in the scientific Python community in the
-form of packages such as xarray (https://xarray.pydata.org), Iris
-(http://scitools.org.uk/iris/), Dask (https://dask.pydata.org), and
-Jupyter (https://jupyter.org/), but require engagement from the
-broader climate science community to reach their full potential for
-our field. We stand ready to work with WCRP and ESGF to help our
-community transition to a cloud-based future.
-
+  Data analytics clusters are growing within existing computing
+  facilities today that have some (but rarely all) of the properties
+  above. Cloud computing, however, is ideally suited to the storage,
+  processing, and distribution of extremely large, shared datasets
+  today. Both, government-sponsored cloud-style data centers, and the
+  commercial cloud (e.g. Amazon Web Services, Google Cloud Platform,
+  Microsoft Azure, etc.) merit consideration. Data stored in cloud
+  storage is directly accessible from cloud computing instances within
+  the same network, providing effectively infinite data bandwidth to
+  distributed processing systems. In this paradigm, no data needs to
+  be downloaded at all; if the CMIP data were already in cloud
+  storage, users would pay only for the compute time they need to do
+  their analysis. The cost of hosting 2PB of data on any of the
+  commercial cloud providers is roughly \$500K USD per year
+  (https://cloud.google.com/products/calculator/id=8ee0d849-a19b-44ab-b5461b0c0dbe775d).
+  This is no small sum, but it is likely much less than the collective
+  operating budget of the ESGF nodes. The overall financial cost to
+  funding agencies might even turn out to be less if individual
+  research groups were persuaded to abandon their dark replicas and
+  associated local data storage and computation costs in favor of
+  cloud computing. Furthermore, commercial cloud providers might also
+  provide hosting for free, as they already do for many other
+  scientific datasets (e.g. https://aws.amazon.com/public-datasets/,
+  https://cloud.google.com/public-datasets/), if they think it will
+  bring them customers from academia and industry. Beyond academic
+  research, CMIP data hold strong commercial value in sectors such as
+  insurance and energy. If CMIP datasets can be liberated from closed
+  institutional infrastructure, such consumers can more easily combine
+  them with co-located domain specific datasets to gain insights and
+  derive economic benefits. NOAA (an agency already contributing model
+  development and simulation resources to CMIP) has recently adopted
+  such an approach to power their Big Data Project through Cooperative
+  Research and Development Agreements and could provide an example for
+  future development within the climate science community. The
+  scientific payoff from co-locating CMIP data with distributed
+  computing resources would be immense, both accelerating
+  reproducibility and driving innovation in data analysis
+  methodologies–including new machine learning and artificial
+  intelligence techniques. But leveraging full advantage of
+  distributed systems for analyzing climate data requires more than
+  raw hardware; it also requires software which allows climate
+  scientists to parallelize their calculations in a simple, efficient
+  and transparent way, permitting them to focus on science rather than
+  the details of the underlying computing system. A central focus of
+  the Pangeo project is to develop these tools on distributed
+  computing systems and deploy them on high-impact geoscience
+  problems. The building blocks for such software exist, for example,
+  in the scientific Python community in the form of packages such as
+  xarray (https://xarray.pydata.org), Iris
+  (http://scitools.org.uk/iris/), Dask (https://dask.pydata.org), and
+  Jupyter (https://jupyter.org/), but require engagement from the
+  broader climate science community to reach their full potential for
+  our field. We stand ready to work with WCRP and ESGF to help our
+  community transition to a cloud-based future.
+\end{enumerate}
 \pagebreak
 
 % gmd-2018-52-RC1.txt
@@ -1786,243 +1790,196 @@ Received and published: 23 April 2018
 
 Overview
 
-This paper reviews the infrastructure requirements needed to make
-CMIP6 successful. There are some attempts at charting a path towards
-the future. Overall, in spite of my numerous specific comments below,
-the paper is well presented with a few notable exceptions. My biggest
-complaint is that after reading the paper, I am not sure who the
-target audience is for this paper. This makes my job as a reviewer
-much harder, since I am guessing at the answer to that question. I
-have assumed that the audience are those who want to know something
-about how the networking/software part of CMIP works. This includes
-some of the modelers and folks in the large climate modeling
-institutions and a subset of the more comp-sci oriented users of the
-CMIP data. If other audiences are in view then my review would be very
-different. This paper is fairly technical. My second big picture issue
-is that references are needed in many, many places to either point the
-reader to supporting documentation or to find web sites that explain
-in more detail what the functions are of the various groups/position
-papers mentioned in the paper. Finally, references are also needed to
-support the statements made in the paper. My specific comments below
-highlights many of the missing references.
-
-Lastly, Section 3.4 needs rewritten. It is very confusing. There are
-lots of recommendations. In places, the language reads like these are
-a requirement. In other places, the prose basically say that the
-recommendations can be ignored. There needs to be some priority
-applied to the discussion. The readers need to know at the beginning
-of the section what is coming – requirements, recommendations, best
-practices or what. Each item discussed needs to be clearly defined in
-one of the bins – requirements, recommendations, etc. Some parts may
-be able to be deleted.
+\begin{enumerate}[label=RC1-Overview-\arabic*,leftmargin=*]
+\item This paper reviews the infrastructure requirements needed to
+  make CMIP6 successful. There are some attempts at charting a path
+  towards the future. Overall, in spite of my numerous specific
+  comments below, the paper is well presented with a few notable
+  exceptions. My biggest complaint is that after reading the paper, I
+  am not sure who the target audience is for this paper. This makes my
+  job as a reviewer much harder, since I am guessing at the answer to
+  that question. I have assumed that the audience are those who want
+  to know something about how the networking/software part of CMIP
+  works. This includes some of the modelers and folks in the large
+  climate modeling institutions and a subset of the more comp-sci
+  oriented users of the CMIP data. If other audiences are in view then
+  my review would be very different. This paper is fairly technical.
+  My second big picture issue is that references are needed in many,
+  many places to either point the reader to supporting documentation
+  or to find web sites that explain in more detail what the functions
+  are of the various groups/position papers mentioned in the paper.
+  Finally, references are also needed to support the statements made
+  in the paper. My specific comments below highlights many of the
+  missing references.
+\item Lastly, Section 3.4 needs rewritten. It is very confusing. There
+  are lots of recommendations. In places, the language reads like
+  these are a requirement. In other places, the prose basically say
+  that the recommendations can be ignored. There needs to be some
+  priority applied to the discussion. The readers need to know at the
+  beginning of the section what is coming – requirements,
+  recommendations, best practices or what. Each item discussed needs
+  to be clearly defined in one of the bins – requirements,
+  recommendations, etc. Some parts may be able to be deleted.
+\end{enumerate}
 
 Specific Comments
 
-1. Page 1, line 11 – purpose of assigning credit – This seems
-awkward/backwards to me. The tracking is so that the credit is clearly
-assigned, not the reverse.
-
-2. Page 2, line 6-8 – A references is needed for this statement.
-
-3. Page 2, line 11 – capable – Wrong word. “Available” is a better
-word. There were other climate models available around in the world at
-that time.
-
-4. Page 2, line 15 – Add “group” after Manabe.
-
-5. Page 2, line 16 – Add “group” after Hansen.
-
-6. Page 2 Line 17 – 24 – The role of AMIP is missing here in the
-formation of CMIP. I agree that the IPCC also played a role, but Larry
-Gates and AMIP was a necessary step to have CMIP formed.
-
-7. Page 2, line 23 – I believe there are now 23 MIPs.
-
-8. Page 3, line 10-17 – References for CMIP3 and 5 are missing.
-
-9. Page 5, line 4 – Reference needed for IPCC.
-
-10. Page 7, line 2 – consumers – Is “society” a better word choice
-here?
-
-11. Page 7, line 8 – Designing – I think the CMIP Panel understands
-the cost of participating in CMIP since it is mainly made up of
-modelers. It could be argued that some of the new MIP chairs in CMIP6
-do not understand. Certainly, most users do not understand. Reword.
-
-12. Page 7, line 9 – Add “data archived in” before CMIP experiments.
-
-13. Page 7, lines 7-10 – This section is vague. Expand and define
-exactly what is in view here. I assume it includes model development,
-cpu and storage costs, people time and etc. What is in view? Exactly
-what costs are in view?
-
-14. Page 7, line 19 – machine readable experiment design – This needs
-to be explained here. Page 8, line 14 has a similar problem. It needs
-noted that this is a goal of this effort.
-
-15. Page 7, line 29 – A reference and location is needed for the fact sheet.
-
-16. Page 8, line 5 – Where are these position papers found??? Are they
-peer reviewed, citations?
-
-17. Page 8, line 13 – machine readable – This needs defined. Anything
-stored in a computer is machine readable. . .by definition. More is
-needed.
-
-18. Page 10, line 19 – smaller – I think “larger” is correct. .
-.nearer to 1. The exponent is larger.
-
-19. Page 10, line 24 – Add “the first part of complexity” somewhere
-near here. The second paragraph starts with the “second component of
-complex” which is confusing given the prose in the first paragraph.
-
-20. Page 11, line 3 – WIP has recommended – This seems in conflict
-with line 11 and page 12, line 32. As I note in my general comments
-section, this section is not well written or thought out. What message
-do the authors want to convey to the readers? Rewrite.
-
-21. Page 11, lines 4-24 – Regridding – I understand the Griffies
-papers have a long discussion of the advantages and disadvantages of
-regridding, but a summary of those papers need to be presented here.
-The whole discussion of the disadvantages of regridding is missing
-here.
-
-22. Page 11, lines 4-24 – Common grid – So what are the authors
-recommendations for a common grid or regridding? If there are none,
-then delete this discussion to just a summary of the Griffies papers.
-
-23. Page 11, lines 32-33 – Again, what is the recommendation? If none,
-what is the justification for keeping the text?
-
-24. Page 12, lines 4-10 – What is the recommendation? If any, it needs
-highlighted. Has the WIP surveyed CMIP users in regard to these
-recommendations? I am worried that many users will not be able to
-handle compressed files or shuffled data files.
-
-25. Page 12, line 8 – coupled model – Define. There are many types
-coupled models in climate. I assume AOGCM and ESMs are in view.
-
-26. Page 12, line 15 – I do not see what the advantages are of a
-modeling center having this tool. Please explain. The center should
-know its model’s grid and variables to be archived. . ..
-
-27. Page 12, line 18 – Add “compressed” before “data volume”.
-
-28. Page 12, line 20 – Add “current CMIP 3 and 5” before archive size.
-
-29. Page 12, line 21 – 25 – The sentences that start with “The more
-dramatic . . ..” And end with “in years simulated” seems out of place
-and should be moved much earlier.
-
-30. Page 12, lines 26-27 – an attempt to impose rational order on
-CMIP5, rather than a qualitative leap” – What is the unit of measure
-here? Be careful to fully explain this phrase. As is it could easily
-be misused or misunderstood. If CMIP6 is just imposing order, why the
-large expenditure of resources?
-
-31. Page 12, line 32 – merely recommendations – As noted in my general
-comments, this paper needs to be much clearer what is meant by
-“recommendation”.
-
-32. Page 13, fig. 2 caption – data usage pattern – It seems to show
-data access, not usage.
-
-33. Page 13, line 4 – Add “third party” in front of “copies”. Also
-delete rest of sentence after “copies”. It is not clear what is meant
-and seems redundant with first half of sentence.
-
-34. Page 13, line 16 – More is needed here. How will a modeling center
-know when somebody is misusing its data? Is their any software
-existing or planned to help a center track its data? If so, it needs
-mentioned here. Furthermore, how can the license change in time in
-this scheme? Many centers make their data public after a period of
-time. It seems that the data files will need to be rewritten to change
-the license agreement. Is this the plan?
-
-35. Page 14, line 1 – Reference needed (location) of the . . ..4.0
-International License.
-
-36. Page 14, line 13 – Consortium – Reference, web site?
-
-37. Page 14, line 28 – Handle System – Reference.
-
-38. Page 15, line 4 – position paper – Where is this found?
-
-39. Page 15, line 11 – DataCite infrastructure – Reference and
-location.
-
-40. Page 15, line 22 – informally peer reviewed – This needs better
-defined. Unclear what this is.
-
-41. Page 15, line 27 – collections are static – How will groups
-correct errors found after the DOI is set? How will corrected data be
-made available? How will users know there are corrections?
-
-42. Page 16, figure 3 caption – PID architecture . . . - PID is not
-found in the figure. How/What things in figure gets a PID? The current
-figure caption should read “A cartoon of data generation. . ..”
-
-43. Page 16, line 5 – global Handle registry – Reference, web site
-needed.
-
-44. Page 16, line 9 – CMIP6 Handle service – Reference, web site
-location needed.
-
-45. Page 16, line 11 – Add “for all simulation times” after “a single
-experiment”. . . if correct. If not, add details.
-
-46. Page 16, line 13 – position paper – Location?
-
-47. Page 17, line 1 – Is there software to generate such a list? Seems
-like in multimodel studies such a list could be very long. Will
-journals publish a long list?
-
-48. Page 17, line 4 – RabbitMQ – Reference needed.
-
-49. Page 17, line 20 – CMOR – Reference and web site needed.
-
-50. Page 17, line 21 – PrePARE – Reference and web site needed.
-
-51. Page 18, line 4 – QA nodes – I assume this is software. As written
-seems like hardware. More is needed.
-
-52. Page 19, line 6 – realms – Define.
-
-53. Page 19, line 7 – a set of tables – More is needed or delete.
-
-54. Page 19, line 13 – version-controlled code – Add “software that
-generates versioncontrolled code”. It’s all code. . .
-
-55. Page 20, line 21 – embedding – By whom? Modeler?
-
-56. Page 20, line 26 – position paper – Location? 57. Page 20,
-Replication section – I did not see any way for 1-off data sets to be
-issued PIDs. I appreciate that this is hard to enforced but the major
-impact user distribution sites should be required to issue PIDs in
-this framework. Numerically, the impact users are the single biggest
-group using CMIP data. Many of the sites serving them, preprocess the
-model data – generating new data sets, subsets, averages and so forth.
-These new data sets should not have model PIDs, but their own.
-
-58. Page 21, line 4 – This statement implies that there are some CMIP
-data sets NOT accessible across ESGF. Is this true? More needed here.
-It is not clear what is meant.
-
-59. Page 21, line 11 – ICNWG – Reference, web site needed.
-
-60. Page 21, line 13 – synda – Reference, web site needed.
-
-61. Page 22, fig. 7 caption – CMIP6 replication team – It says CDNOT
-does this on the previous page. Correct.
-
-62. Page 22, lines 3-6 – Does this break the data chain (PID and
-etc.)? More needed.
-
-63. Page 23, Errata section – Are the replication nodes inside or
-outside of CMIP? This is not clear.
-
-64. Page 24, line 25 – our data – Change to “climate” or “CMIP” data.
+\begin{enumerate}[label=RC1-\arabic*,leftmargin=*]
+\item 1. Page 1, line 11 – purpose of assigning credit – This seems
+  awkward/backwards to me. The tracking is so that the credit is
+  clearly assigned, not the reverse.
+\item 2. Page 2, line 6-8 – A references is needed for this statement.
+\item 3. Page 2, line 11 – capable – Wrong word. “Available” is a
+  better word. There were other climate models available around in the
+  world at that time.
+\item 4. Page 2, line 15 – Add “group” after Manabe.
+\item 5. Page 2, line 16 – Add “group” after Hansen.
+\item 6. Page 2 Line 17 – 24 – The role of AMIP is missing here in the
+  formation of CMIP. I agree that the IPCC also played a role, but
+  Larry Gates and AMIP was a necessary step to have CMIP formed.
+\item 7. Page 2, line 23 – I believe there are now 23 MIPs.
+\item 8. Page 3, line 10-17 – References for CMIP3 and 5 are missing.
+\item 9. Page 5, line 4 – Reference needed for IPCC.
+\item 10. Page 7, line 2 – consumers – Is “society” a better word
+  choice here?
+\item 11. Page 7, line 8 – Designing – I think the CMIP Panel
+  understands the cost of participating in CMIP since it is mainly
+  made up of modelers. It could be argued that some of the new MIP
+  chairs in CMIP6 do not understand. Certainly, most users do not
+  understand. Reword.
+\item 12. Page 7, line 9 – Add “data archived in” before CMIP
+  experiments.
+\item 13. Page 7, lines 7-10 – This section is vague. Expand and
+  define exactly what is in view here. I assume it includes model
+  development, cpu and storage costs, people time and etc. What is in
+  view? Exactly what costs are in view?
+\item 14. Page 7, line 19 – machine readable experiment design – This
+  needs to be explained here. Page 8, line 14 has a similar problem.
+  It needs noted that this is a goal of this effort.
+\item 15. Page 7, line 29 – A reference and location is needed for the
+  fact sheet.
+\item 16. Page 8, line 5 – Where are these position papers found???
+  Are they peer reviewed, citations?
+\item 17. Page 8, line 13 – machine readable – This needs defined.
+  Anything stored in a computer is machine readable. . .by definition.
+  More is needed.
+\item 18. Page 10, line 19 – smaller – I think “larger” is correct. .
+  .nearer to 1. The exponent is larger.
+\item 19. Page 10, line 24 – Add “the first part of complexity”
+  somewhere near here. The second paragraph starts with the “second
+  component of complex” which is confusing given the prose in the
+  first paragraph.
+\item 20. Page 11, line 3 – WIP has recommended – This seems in
+  conflict with line 11 and page 12, line 32. As I note in my general
+  comments section, this section is not well written or thought out.
+  What message do the authors want to convey to the readers? Rewrite.
+\item 21. Page 11, lines 4-24 – Regridding – I understand the Griffies
+  papers have a long discussion of the advantages and disadvantages of
+  regridding, but a summary of those papers need to be presented here.
+  The whole discussion of the disadvantages of regridding is missing
+  here.
+\item 22. Page 11, lines 4-24 – Common grid – So what are the authors
+  recommendations for a common grid or regridding? If there are none,
+  then delete this discussion to just a summary of the Griffies
+  papers.
+\item 23. Page 11, lines 32-33 – Again, what is the recommendation? If
+  none, what is the justification for keeping the text?
+\item 24. Page 12, lines 4-10 – What is the recommendation? If any, it
+  needs highlighted. Has the WIP surveyed CMIP users in regard to
+  these recommendations? I am worried that many users will not be able
+  to handle compressed files or shuffled data files.
+\item 25. Page 12, line 8 – coupled model – Define. There are many
+  types coupled models in climate. I assume AOGCM and ESMs are in
+  view.
+\item 26. Page 12, line 15 – I do not see what the advantages are of a
+  modeling center having this tool. Please explain. The center should
+  know its model’s grid and variables to be archived. . ..
+\item 27. Page 12, line 18 – Add “compressed” before “data volume”.
+\item 28. Page 12, line 20 – Add “current CMIP 3 and 5” before archive
+  size.
+\item 29. Page 12, line 21 – 25 – The sentences that start with “The
+  more dramatic . . ..” And end with “in years simulated” seems out of
+  place and should be moved much earlier.
+\item 30. Page 12, lines 26-27 – an attempt to impose rational order
+  on CMIP5, rather than a qualitative leap” – What is the unit of
+  measure here? Be careful to fully explain this phrase. As is it
+  could easily be misused or misunderstood. If CMIP6 is just imposing
+  order, why the large expenditure of resources?
+\item 31. Page 12, line 32 – merely recommendations – As noted in my
+  general comments, this paper needs to be much clearer what is meant
+  by “recommendation”.
+\item 32. Page 13, fig. 2 caption – data usage pattern – It seems to
+  show data access, not usage.
+\item 33. Page 13, line 4 – Add “third party” in front of “copies”.
+  Also delete rest of sentence after “copies”. It is not clear what is
+  meant and seems redundant with first half of sentence.
+\item 34. Page 13, line 16 – More is needed here. How will a modeling
+  center know when somebody is misusing its data? Is their any
+  software existing or planned to help a center track its data? If so,
+  it needs mentioned here. Furthermore, how can the license change in
+  time in this scheme? Many centers make their data public after a
+  period of time. It seems that the data files will need to be
+  rewritten to change the license agreement. Is this the plan?
+\item 35. Page 14, line 1 – Reference needed (location) of the . .
+  ..4.0 International License.
+\item 36. Page 14, line 13 – Consortium – Reference, web site?
+\item 37. Page 14, line 28 – Handle System – Reference.
+\item 38. Page 15, line 4 – position paper – Where is this found?
+\item 39. Page 15, line 11 – DataCite infrastructure – Reference and
+  location.
+\item 40. Page 15, line 22 – informally peer reviewed – This needs
+  better defined. Unclear what this is.
+\item 41. Page 15, line 27 – collections are static – How will groups
+  correct errors found after the DOI is set? How will corrected data
+  be made available? How will users know there are corrections?
+\item 42. Page 16, figure 3 caption – PID architecture . . . - PID is
+  not found in the figure. How/What things in figure gets a PID? The
+  current figure caption should read “A cartoon of data generation. .
+  ..”
+\item 43. Page 16, line 5 – global Handle registry – Reference, web
+  site needed.
+\item 44. Page 16, line 9 – CMIP6 Handle service – Reference, web site
+  location needed.
+\item 45. Page 16, line 11 – Add “for all simulation times” after “a
+  single experiment”. . . if correct. If not, add details.
+\item 46. Page 16, line 13 – position paper – Location?
+\item 47. Page 17, line 1 – Is there software to generate such a list?
+  Seems like in multimodel studies such a list could be very long.
+  Will journals publish a long list?
+\item 48. Page 17, line 4 – RabbitMQ – Reference needed.
+\item 49. Page 17, line 20 – CMOR – Reference and web site needed.
+\item 50. Page 17, line 21 – PrePARE – Reference and web site needed.
+\item 51. Page 18, line 4 – QA nodes – I assume this is software. As
+  written seems like hardware. More is needed.
+\item 52. Page 19, line 6 – realms – Define.
+\item 53. Page 19, line 7 – a set of tables – More is needed or
+  delete.
+\item 54. Page 19, line 13 – version-controlled code – Add “software
+  that generates versioncontrolled code”. It’s all code. . .
+\item 55. Page 20, line 21 – embedding – By whom? Modeler?
+\item 56. Page 20, line 26 – position paper – Location? 57. Page 20,
+  Replication section – I did not see any way for 1-off data sets to
+  be issued PIDs. I appreciate that this is hard to enforced but the
+  major impact user distribution sites should be required to issue
+  PIDs in this framework. Numerically, the impact users are the single
+  biggest group using CMIP data. Many of the sites serving them,
+  preprocess the model data – generating new data sets, subsets,
+  averages and so forth. These new data sets should not have model
+  PIDs, but their own.
+\item 58. Page 21, line 4 – This statement implies that there are some
+  CMIP data sets NOT accessible across ESGF. Is this true? More needed
+  here. It is not clear what is meant.
+\item 59. Page 21, line 11 – ICNWG – Reference, web site needed.
+\item 60. Page 21, line 13 – synda – Reference, web site needed.
+\item 61. Page 22, fig. 7 caption – CMIP6 replication team – It says
+  CDNOT does this on the previous page. Correct.
+\item 62. Page 22, lines 3-6 – Does this break the data chain (PID and
+  etc.)? More needed.
+\item 63. Page 23, Errata section – Are the replication nodes inside
+  or outside of CMIP? This is not clear.
+\item 64. Page 24, line 25 – our data – Change to “climate” or “CMIP”
+  data.
+\end{enumerate}
 
 \pagebreak
 
@@ -2038,171 +1995,146 @@ Received and published: 23 April 2018
 
 General comments
 
-The manuscript provides an overview of WRCP’s Infrastructure Panel
-(WIP) work, discussions and recommendations regarding the evolution of
-CMIP6’ cyberinfrastructure. It discusses some of the limitations of
-the current system, projections for future requirements and the
-rationale for decisions made by the WIP. It also describes some of the
-systems that are being put in place in preparation for CMIP6, in
-particular to better support citations, errata and provenance
-information for datasets and large ensembles, as well as managing the
-increasing volume of information to be stored. The paper would benefit
-from an in-depth editorial review. It abuses bullet lists and the
-level of technical detail varies considerably across sections and
-topics. The result is that although interesting and pertinent, the
-manuscript is at times confusing and hard to decipher. I was sometimes
-left with the impression that the paper was composed by copy-pasting
-sections of various WIP reports. The big picture (data-centric system)
-only really became clear to me at the end of a second reading; many of
-its implications are scattered across and not properly merged and
-highlighted in the conclusion. Indeed, the conclusion deserves some
-love, as at the moment it consists in fairly disjointed bullet list
-items. The figures would also benefit from some attention as they
-apparently have been created independently from each other, and their
-content does not always support very well the text around them. Most
-of my suggestions below concern style, as I understand that the
-manuscript has to reflect the WIP’s finding and work, which can’t be
-modified to please reviewers. I think however that the paper should
-leave some room to discuss criticisms made here and elsewhere and
-possibly respond to those. Among these would be the relatively small
-attention given to server-side analytics (raised by another referee).
-I also wonder why the paper does not discuss user-feedback? Is this
-the responsibility of the WIP, ESGF or CDNOT? How does the WIP consult
-users, what do they think of the tools that are built and operated for
-them? The paper makes no mention of recommendation concerning the user
-interface of public facing services. Does the priority setting process
-involves non-IT scientific users? Does the WIP include representatives
-from institutions operating dark repositories? Clearly they are prime
-users of CMIP data, yet feel the need to duplicate functionalities,
-and I somehow doubt it is only a matter of bandwidth optimization.
-Other topics not addressed by the paper are software security and
-openaccess, as many of the technical issues that have frustrated users
-and complicated the life of software developers had to do with access
-tokens. I feel the paper would be stronger if it discussed the
-feedback it got from the downstream climate science community and used
-this paper as an opportunity to communicate with it. I think there is
-a need for such a communication exercice after the frustrating
-experience some have had with CMIP5 data access in the past.
+\begin{enumerate}[label=RC2-\arabic*,leftmargin=*]
+\item The manuscript provides an overview of WRCP’s Infrastructure
+  Panel (WIP) work, discussions and recommendations regarding the
+  evolution of CMIP6’ cyberinfrastructure. It discusses some of the
+  limitations of the current system, projections for future
+  requirements and the rationale for decisions made by the WIP. It
+  also describes some of the systems that are being put in place in
+  preparation for CMIP6, in particular to better support citations,
+  errata and provenance information for datasets and large ensembles,
+  as well as managing the increasing volume of information to be
+  stored. The paper would benefit from an in-depth editorial review.
+  It abuses bullet lists and the level of technical detail varies
+  considerably across sections and topics. The result is that although
+  interesting and pertinent, the manuscript is at times confusing and
+  hard to decipher. I was sometimes left with the impression that the
+  paper was composed by copy-pasting sections of various WIP reports.
+  The big picture (data-centric system) only really became clear to me
+  at the end of a second reading; many of its implications are
+  scattered across and not properly merged and highlighted in the
+  conclusion. Indeed, the conclusion deserves some love, as at the
+  moment it consists in fairly disjointed bullet list items. The
+  figures would also benefit from some attention as they apparently
+  have been created independently from each other, and their content
+  does not always support very well the text around them. Most of my
+  suggestions below concern style, as I understand that the manuscript
+  has to reflect the WIP’s finding and work, which can’t be modified
+  to please reviewers. I think however that the paper should leave
+  some room to discuss criticisms made here and elsewhere and possibly
+  respond to those. Among these would be the relatively small
+  attention given to server-side analytics (raised by another
+  referee). I also wonder why the paper does not discuss
+  user-feedback? Is this the responsibility of the WIP, ESGF or CDNOT?
+  How does the WIP consult users, what do they think of the tools that
+  are built and operated for them? The paper makes no mention of
+  recommendation concerning the user interface of public facing
+  services. Does the priority setting process involves non-IT
+  scientific users? Does the WIP include representatives from
+  institutions operating dark repositories? Clearly they are prime
+  users of CMIP data, yet feel the need to duplicate functionalities,
+  and I somehow doubt it is only a matter of bandwidth optimization.
+  Other topics not addressed by the paper are software security and
+  openaccess, as many of the technical issues that have frustrated
+  users and complicated the life of software developers had to do with
+  access tokens. I feel the paper would be stronger if it discussed
+  the feedback it got from the downstream climate science community
+  and used this paper as an opportunity to communicate with it. I
+  think there is a need for such a communication exercice after the
+  frustrating experience some have had with CMIP5 data access in the
+  past.
 
-Detailed comments
+  Detailed comments
 
-Page | Line | Comment
-
-1 7 "data as a commodity in an ecosystem of user" what does this mean
-exactly?
-
-1 11 dataset-centric: Shouldn’t the objective be for the system to be
-user-centric?
-
-2 9 prescient: maybe a bit strong
-
-2 15 3 -> three. As a general rule, spell numbers < 10
-
-2 18 5 -> five
-
-2 18 "formalized" used in last sentence and sentence is unclear. Mix
-of historical and current (DECK) denominations is confusing.
-
-3 6 in in Figure 1
-
-3 6 (some of) remove parentheses
-
-3 8 Is the ESGF a "component". It looks to me as a loosely structured
-organization, with a "soft leadership", which indeed poses a number of
-challenges in terms of planning and delivery of operational software.
-This is possibly out of scope for this paper, but consider adding a
-paragraph somewhere in the paper about how ESGF organizes to implement
-WIP recommendations and some of the challenges it faces.
-
-3 12 upon , a proposal
-
-4 Figure 1: There is a site that looks to be in James Bay. Also is it
-really necessary to include personal contact email? This is something
-that can get outdated very fast.
-
-5 6 It’s not clear to what "which are summarized here" make reference
-to, "fundamental changes" or the "evolving scientific and operational
-requirements"?
-
-5 7 The presentation is a bit awkward here, with a numbered list
-nesting a bullet list. I feel that this could all be written in text
-form. Also, the text suggests that the following items are "changes",
-but some of the opening statements are not.
-
-6 9 review sentence syntax, second clause seems incomplete. Again, the
-bullet format feels innapropriate for dense and elaborate content.
-
-6 21 The first bullet is the context, and the second the requirement.
-Please maintain some uniformity in the organization of ideas.
-
-7 11 Idem
-
-8 15 The data request concept is not properly introduced. Please
-clarify what it is and what purpose it is intended to serve before
-providing implementation details.
-
-8 16 I feel that the level of details given on Data Requests far
-exceeds that of other sections. Who are the intended users? Data
-managers or analysts? Is the level of detail really relevant to this
-paper? Frankly, I read it a couple of times and I still don’t
-understand the role it plays.
-
-11 3 If I understand correctly, the single most important factor in
-the growth of data volume between CMIP3 and 5 is the number of
-variables that are archived. Yet, this issue does not appear to be
-formally addressed by the WIP as a volume problem further down in the
-text. At the moment, my understanding is that data is saved using the
-1-file-per-variable approach. With hundreds of variables to probably
-co-vary in time and space, I’m guessing there might be compression
-benefits in storing multiple variables in the same file.
-
-11 4 The use of a numbered list here makes little sense.
-
-11 4 Please start the paragraph with the recommendation itself. Same
-suggestion applies to second recommendation.
-
-11 13 Is the reference to the name of the actual python file really
-necessary? I suggest putting links to tools and software in appendix
-B.
-
-12 20 CMIP archive size. Are you referring to CMIP5? Please clarify.
-
-2 21 Sentence is confusing : "same causes, but with a much larger
-change"
-
-13 Fig 2. Why "!" after local cache ?
-
-13 14 Is that really "embracing" the dark repository model? I believe
-embracing that model would entail something a lot more ambitious such
-as a P2P network between official and dark repos that lets ESGF
-leverage dark repo to replicate and disseminate data. This is
-discussed later with synda (as far as I understand), but would deserve
-discussion here.
-
-13 15 Review syntax.
-
-13 18 I don’t understand what this sentence means and how it relates
-to the preceding text.
-
-13 20 Idem.
-
-13 26 Please define "handles". Figure 4 Who issues the PID? The data
-producer? This is only discussed later on page 18. I think it should
-be explained earlier.
-
-20 17 Close parenthesis
-
-21 5 Item 4 in section 2 only discusses model evaluation, not general
-data analysis. Figure 7 It’s not clear what this figure adds to the
-explanation.
-
-24 24 Bullet list with no proper introduction. Please write a proper
-conclusion.
-
-25 8 Is that really the message you want to end with? I suggest ending
-with an invitation to the climate science commnuity to provide
-feedback and suggestions, and generally get involved in the WIP’s
-activities.
+  Page | Line | Comment
+\item 1 7 "data as a commodity in an ecosystem of user" what does this
+  mean exactly?
+\item 1 11 dataset-centric: Shouldn’t the objective be for the system
+  to be user-centric?
+\item 2 9 prescient: maybe a bit strong
+\item 2 15 3 -> three. As a general rule, spell numbers < 10
+\item 2 18 5 -> five
+\item 2 18 "formalized" used in last sentence and sentence is unclear.
+  Mix of historical and current (DECK) denominations is confusing.
+\item 3 6 in in Figure 1
+\item 3 6 (some of) remove parentheses
+\item 3 8 Is the ESGF a "component". It looks to me as a loosely
+  structured organization, with a "soft leadership", which indeed
+  poses a number of challenges in terms of planning and delivery of
+  operational software. This is possibly out of scope for this paper,
+  but consider adding a paragraph somewhere in the paper about how
+  ESGF organizes to implement WIP recommendations and some of the
+  challenges it faces.
+\item 3 12 upon , a proposal
+\item 4 Figure 1: There is a site that looks to be in James Bay. Also
+  is it really necessary to include personal contact email? This is
+  something that can get outdated very fast.
+\item 5 6 It’s not clear to what "which are summarized here" make
+  reference to, "fundamental changes" or the "evolving scientific and
+  operational requirements"?
+\item 5 7 The presentation is a bit awkward here, with a numbered list
+  nesting a bullet list. I feel that this could all be written in text
+  form. Also, the text suggests that the following items are
+  "changes", but some of the opening statements are not.
+\item 6 9 review sentence syntax, second clause seems incomplete.
+  Again, the bullet format feels innapropriate for dense and elaborate
+  content.
+\item 6 21 The first bullet is the context, and the second the
+  requirement. Please maintain some uniformity in the organization of
+  ideas.
+\item 7 11 Idem
+\item 8 15 The data request concept is not properly introduced. Please
+  clarify what it is and what purpose it is intended to serve before
+  providing implementation details.
+\item 8 16 I feel that the level of details given on Data Requests far
+  exceeds that of other sections. Who are the intended users? Data
+  managers or analysts? Is the level of detail really relevant to this
+  paper? Frankly, I read it a couple of times and I still don’t
+  understand the role it plays.
+\item 11 3 If I understand correctly, the single most important factor
+  in the growth of data volume between CMIP3 and 5 is the number of
+  variables that are archived. Yet, this issue does not appear to be
+  formally addressed by the WIP as a volume problem further down in
+  the text. At the moment, my understanding is that data is saved
+  using the 1-file-per-variable approach. With hundreds of variables
+  to probably co-vary in time and space, I’m guessing there might be
+  compression benefits in storing multiple variables in the same file.
+\item 11 4 The use of a numbered list here makes little sense.
+\item 11 4 Please start the paragraph with the recommendation itself.
+  Same suggestion applies to second recommendation.
+\item 11 13 Is the reference to the name of the actual python file
+  really necessary? I suggest putting links to tools and software in
+  appendix B.
+\item 12 20 CMIP archive size. Are you referring to CMIP5? Please
+  clarify.
+\item 2 21 Sentence is confusing : "same causes, but with a much
+  larger change"
+\item 13 Fig 2. Why "!" after local cache ?
+\item 13 14 Is that really "embracing" the dark repository model? I
+  believe embracing that model would entail something a lot more
+  ambitious such as a P2P network between official and dark repos that
+  lets ESGF leverage dark repo to replicate and disseminate data. This
+  is discussed later with synda (as far as I understand), but would
+  deserve discussion here.
+\item 13 15 Review syntax.
+\item 13 18 I don’t understand what this sentence means and how it
+  relates to the preceding text.
+\item 13 20 Idem.
+\item 13 26 Please define "handles". Figure 4 Who issues the PID? The
+  data producer? This is only discussed later on page 18. I think it
+  should be explained earlier.
+\item 20 17 Close parenthesis
+\item 21 5 Item 4 in section 2 only discusses model evaluation, not
+  general data analysis. Figure 7 It’s not clear what this figure adds
+  to the explanation.
+\item 24 24 Bullet list with no proper introduction. Please write a
+  proper conclusion.
+\item 25 8 Is that really the message you want to end with? I suggest
+  ending with an invitation to the climate science commnuity to
+  provide feedback and suggestions, and generally get involved in the
+  WIP’s activities.
+\end{enumerate}
 
 \pagebreak
 
@@ -2224,145 +2156,127 @@ presentation does not meet the requirements of a journal article and
 requires major revision. There are two major issues that need to be
 addressed as the paper gets rewritten:
 
-1. The paper is clearly the result of a lot of work within the WGCM
-Infrastructure Panel. Acknowledging this is important, but the paper
-completely goes overboard and as a result reads like a report to some
-steering committee, rather than a journal article. I counted no less
-than 46 (and I am sure I missed some) occurrences of statements like
-“The WIP recommends. . .,” “The WIP did. . .” or “Based on what the
-WIP thinks . . .”. This is simply not the style of a paper. I
-recommend removing all these references and telling us what the
-authors of this paper think. I realize they are the WIP, but the
-reader does not need to be told this every other paragraph. I suggest
-putting a clear statement that the suggestions of this paper are the
-result of deliberations by what is likely a temporary body in the long
-run, the WIP, and then present what are hopefully not temporary
-conclusions for the infrastructure needs. I also suggest avoiding
-repeated statements that more detail can be found in WIP reports. This
-can be said once and the reports listed in the Appendix, as is the
-case.
+\begin{enumerate}[label=RC3-\arabic*,leftmargin=*]
+\item 1. The paper is clearly the result of a lot of work within the
+  WGCM Infrastructure Panel. Acknowledging this is important, but the
+  paper completely goes overboard and as a result reads like a report
+  to some steering committee, rather than a journal article. I counted
+  no less than 46 (and I am sure I missed some) occurrences of
+  statements like “The WIP recommends. . .,” “The WIP did. . .” or
+  “Based on what the WIP thinks . . .”. This is simply not the style
+  of a paper. I recommend removing all these references and telling us
+  what the authors of this paper think. I realize they are the WIP,
+  but the reader does not need to be told this every other paragraph.
+  I suggest putting a clear statement that the suggestions of this
+  paper are the result of deliberations by what is likely a temporary
+  body in the long run, the WIP, and then present what are hopefully
+  not temporary conclusions for the infrastructure needs. I also
+  suggest avoiding repeated statements that more detail can be found
+  in WIP reports. This can be said once and the reports listed in the
+  Appendix, as is the case.
+\item 2. Perhaps the more important question I struggled with is who the
+  intended audience for this paper is, which will define its purpose
+  and then structure. If it is scientists and users, the paper needs
+  to significantly cut down on jargon (see minor comments below). If
+  it is infrastructure communities outside climate, then this should
+  be written as an example for what challenges the climate community
+  is facing and what it is doing about it, so that others can learn
+  from it. Or is it the modelling centres to instruct them on new
+  procedures and tools? In that case, a paper is unlikely needed as
+  they can be sent an email with the detailed position papers! At the
+  moment, neither community will benefit from this paper as it isn’t
+  clear what it is trying to achieve. I realize that this is harder to
+  solve than issue 1, but it is important to know this before
+  rewriting the paper begins. Once it is clear, the goal should be
+  stated in the introduction.
 
-2. Perhaps the more important question I struggled with is who the
-intended audience for this paper is, which will define its purpose and
-then structure. If it is scientists and users, the paper needs to
-significantly cut down on jargon (see minor comments below). If it is
-infrastructure communities outside climate, then this should be
-written as an example for what challenges the climate community is
-facing and what it is doing about it, so that others can learn from
-it. Or is it the modelling centres to instruct them on new procedures
-and tools? In that case, a paper is unlikely needed as they can be
-sent an email with the detailed position papers! At the moment,
-neither community will benefit from this paper as it isn’t clear what
-it is trying to achieve. I realize that this is harder to solve than
-issue 1, but it is important to know this before rewriting the paper
-begins. Once it is clear, the goal should be stated in the
-introduction.
-
-More minor but often typical issues in chronological order
-
-Page 2 Line 17 - The statement that by the FAR of the IPCC modelling
-inter comparisons were formalised is untrue. The first formal model
-inter comparison was AMIP and was reported in 1992. (Gates, W. L.,
-1992: AMIP: The Atmospheric Model Intercomparison Project. Bull. Amer.
-Meteor. Soc, 1962–1970, doi:10.1175/1520-047773.12.1962.) CMIP started
-only after that. Please correct this
-
-Page 2, Line 18 - Please cite the appropriate paper when referring to
-the DECK
-
-Page 4, Figure 1 - Most dots on this figure are in the city the node
-is located. The one in Australia is in the middle of the desert.
-Canberra is not. Please correct.
-
-Page 8, Line 17 - What is “The data request”. This needs an
-introductory sentence as only people in the know will know. Same line:
-What is the “DREQ” tool. This is an example for the frequent jargon
-with no explanation. Please be more careful as not every reader will
-already know these acronyms.
-
-Page 8, Line 28 - The sentence about the database allowing MIPs to do
-things is another example for jargon. It means nothing to someone who
-doesn’t already know all this. Please explain it better. For instance,
-highlight that different MIPs will request different variables, but
-some will be common. You can’t assume the reader to be a CMIP expert
-and if you do, why write this paper?
-
-Page 9, lines 1-3 - This list is very confusing and requires more
-context.
-
-Page 9, lines 16-20: A single paragraph does not deserve it’s own
-subsection. Please correct. The last sentence is another example for a
-sentence from a report that makes little to no sense to an independent
-reader. Please remove those as you rewrite the paper.
-
-Page 10, Line 6 - The statement on increasing data volumes overstates
-the case if its is not put into context. The Large Hadron Collider
-produces vastly larger data volumes than any set of climate models
-ever will! It is important to clarify that the challenge is that the
-data is both produced and used in a distributed network. If one place
-with all the resources needed ran all the CMIP runs from all the
-models, archiving them would be simple! Distributing them might still
-be challenign though!
-
-Page 10, lines 28-29 - What do you mean with “appear to have grown”.
-Has it or not?
-
-Page 11, line 11 - What is the “CMIP6 Output grid guidance document”?
-If you use it, you need to provide a reference/link to it.
-
-Page 11, line 16-18 - To an outsider to the climate community this
-appears insane! There is only one real calendar and it has to do with
-the Earth going around the sun in a certain unit of time. It would be
-worth commenting on the future of this, as it implies a “laziness” in
-the climate community to do something simple (I understand it is not
-that simple).
-
-Page 11, line 23-24 - Again, to an outsider this sounds strange. How
-can infrastructure that does relatively straightforward analysis be
-overburdened? Isn’t that because the way this is funded is inadequate.
-If you agree, isn’t important to point this out in this paper about
-the future?
-
-Page 11, line 25 - By now I had now idea that there were two issues.
-Please remove this first and second bit. The first issue was several
-already!
-
-Page 12, line 5 - If the results are public, please cite where and how
-the reader can access them.
-
-Page 12, line 14 - Where is the WIP website? Please add a link.
-
-Page 12, line 29-30 - Jargon. We don’t know what a Tier1 node is, let
-alone that it has a manager. Explain or remove!
-
-Page 14, line 2 - PCMDI website - please cite properly by adding the
-link.
-
-Page 14, line 20 - O(10ˆ6), 10ˆ6 what? Add units.
-
-Page 20, line 26 - A good example of overdoing the WIP(ping). The
-reader does not care where the replication strategy is covered. They
-want to know what there authors of this paper have to say about
-replication.
-
-Page 21, line 21 - Jargon. What is the CDNOT group? Please explain.
-
-Page 23, line 21 - There seems to be only one subsection, so why have it? Please
-remove the heading.
-
-Section 8 - I was disappointed by this section, as I was expecting a summary of the
-main challenges and recommendations for solutions. I feel some of the challenges
-need to be spelled out here. For instance, funding for the activities described here is
-pretty ad-hoc. This is disturbing given the attention the world pays to the data sets in
-question. Is there something here to discuss? Can the world continue to scramble its
-way through this? Thoughts? Other big issues: Doing more and more in CMIP (more
-models, more experiments, more users) cannot be sustained unless investment into
-the enterprise gets better coordinated - any role for international organisations to help
-with this? Many of the issues are discussed are the result of accepting the status quo
-in distributed climate modelling. Should we? Are there more sensible alternatives?
-
-
-Appendix A - Might be nice to add links to each of these reports (or
-the main page where they can all be found).
-
+  More minor but often typical issues in chronological ordere
+\item Page 2 Line 17 - The statement that by the FAR of the IPCC
+  modelling inter comparisons were formalised is untrue. The first
+  formal model inter comparison was AMIP and was reported in 1992.
+  (Gates, W. L., 1992: AMIP: The Atmospheric Model Intercomparison
+  Project. Bull. Amer. Meteor. Soc, 1962–1970,
+  doi:10.1175/1520-047773.12.1962.) CMIP started only after that.
+  Please correct this
+\item Page 2, Line 18 - Please cite the appropriate paper when
+  referring to the DECK
+\item Page 4, Figure 1 - Most dots on this figure are in the city the
+  node is located. The one in Australia is in the middle of the
+  desert. Canberra is not. Please correct.
+\item Page 8, Line 17 - What is “The data request”. This needs an
+  introductory sentence as only people in the know will know. Same
+  line: What is the “DREQ” tool. This is an example for the frequent
+  jargon with no explanation. Please be more careful as not every
+  reader will already know these acronyms.
+\item Page 8, Line 28 - The sentence about the database allowing MIPs
+  to do things is another example for jargon. It means nothing to
+  someone who doesn’t already know all this. Please explain it better.
+  For instance, highlight that different MIPs will request different
+  variables, but some will be common. You can’t assume the reader to
+  be a CMIP expert and if you do, why write this paper?
+\item Page 9, lines 1-3 - This list is very confusing and requires
+  more context.
+\item Page 9, lines 16-20: A single paragraph does not deserve it’s own
+  subsection. Please correct. The last sentence is another example for
+  a sentence from a report that makes little to no sense to an
+  independent reader. Please remove those as you rewrite the paper.
+\item Page 10, Line 6 - The statement on increasing data volumes
+  overstates the case if its is not put into context. The Large Hadron
+  Collider produces vastly larger data volumes than any set of climate
+  models ever will! It is important to clarify that the challenge is
+  that the data is both produced and used in a distributed network. If
+  one place with all the resources needed ran all the CMIP runs from
+  all the models, archiving them would be simple! Distributing them
+  might still be challenign though!
+\item Page 10, lines 28-29 - What do you mean with “appear to have
+  grown”. Has it or not?
+\item Page 11, line 11 - What is the “CMIP6 Output grid guidance
+  document”? If you use it, you need to provide a reference/link to
+  it.
+\item Page 11, line 16-18 - To an outsider to the climate community
+  this appears insane! There is only one real calendar and it has to
+  do with the Earth going around the sun in a certain unit of time. It
+  would be worth commenting on the future of this, as it implies a
+  “laziness” in the climate community to do something simple (I
+  understand it is not that simple).
+\item Page 11, line 23-24 - Again, to an outsider this sounds strange.
+  How can infrastructure that does relatively straightforward analysis
+  be overburdened? Isn’t that because the way this is funded is
+  inadequate. If you agree, isn’t important to point this out in this
+  paper about the future?
+\item Page 11, line 25 - By now I had now idea that there were two
+  issues. Please remove this first and second bit. The first issue was
+  several already!
+\item Page 12, line 5 - If the results are public, please cite where
+  and how the reader can access them.
+\item Page 12, line 14 - Where is the WIP website? Please add a link.
+\item Page 12, line 29-30 - Jargon. We don’t know what a Tier1 node
+  is, let alone that it has a manager. Explain or remove!
+\item Page 14, line 2 - PCMDI website - please cite properly by adding
+  the link.
+\item Page 14, line 20 - O(10ˆ6), 10ˆ6 what? Add units.
+\item Page 20, line 26 - A good example of overdoing the WIP(ping).
+  The reader does not care where the replication strategy is covered.
+  They want to know what there authors of this paper have to say about
+  replication.
+\item Page 21, line 21 - Jargon. What is the CDNOT group? Please
+  explain.
+\item Page 23, line 21 - There seems to be only one subsection, so why
+  have it? Please remove the heading.
+\item Section 8 - I was disappointed by this section, as I was
+  expecting a summary of the main challenges and recommendations for
+  solutions. I feel some of the challenges need to be spelled out
+  here. For instance, funding for the activities described here is
+  pretty ad-hoc. This is disturbing given the attention the world pays
+  to the data sets in question. Is there something here to discuss?
+  Can the world continue to scramble its way through this? Thoughts?
+  Other big issues: Doing more and more in CMIP (more models, more
+  experiments, more users) cannot be sustained unless investment into
+  the enterprise gets better coordinated - any role for international
+  organisations to help with this? Many of the issues are discussed
+  are the result of accepting the status quo in distributed climate
+  modelling. Should we? Are there more sensible alternatives?
+\item Appendix A - Might be nice to add links to each of these reports
+  (or the main page where they can all be found).
+\end{enumerate}
 \end{document}
