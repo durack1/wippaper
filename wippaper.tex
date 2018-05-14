@@ -236,10 +236,11 @@ be two-way: providing input both to the provisioning of infrastructure
 appropriate to the experimental design, and informing the scientific
 design of the technical (and financial) limits of that infrastructure.
 
-This paper is a summary of the requirements identified by the WIP in
-the first three years of activity since its formation in 2014,
-alongside the recommendations which have arisen. In
-\secref{principles}, the principles and scientific rationale
+This paper provides a summary of the requirements identified by the WIP in
+the first three years of activity since its formation in 2014, and
+the consequential recommendations - in the context of existing
+organisational and funding constraints. 
+In \secref{principles}, the principles and scientific rationale
 underlying the requirements for global data infrastructure are
 articulated. In \secref{dreq} the CMIP6 Data Request is covered:
 standards and conventions, requirements for modeling centers to
@@ -257,10 +258,17 @@ surrounding data versioning, retraction, and errata are addressed.
 infrastructure, looking beyond CMIP6 towards a unified view of
 the ``vast machine'' for weather and climate computation and data.
 
-\section{Principles underlying the infrastructure requirements}
+
+\section{Principles and Constraints}
 \label{sec:principles}
 
-In the pioneering days of CMIP, the community of participants was
+This section lays out some of the the principles and constraints
+which have resulted from the evolution of infrastructure requirements since
+the first CMIP experiment - beginning with the historical context.
+
+\subsection{Historical Context}
+
+ In the pioneering days of CMIP, the community of participants was
 small and well-knit, and all the issues involved in generating
 datasets for common analysis from different modeling groups could be
 settled by mutual agreement (Ron Stouffer, personal communication).
@@ -277,10 +285,32 @@ From its earliest phases, CMIP grew in importance, and its results
 provided a major pillar supporting the periodic Intergovernmental
 Panel on Climate Change (IPCC) assessment activity. However, the
 explosive growth in the scope of CMIP, especially between CMIP3 and
-CMIP5, represented a tipping point in the supporting infrastructure. 
-It became evident that fundamental changes would be needed to address 
-the evolving scientific and operational requirements, which are summarized
-here:
+CMIP5, represented a tipping point in the supporting infrastructure. Not
+only was it clear that no one site could manage all the data, the 
+necessary infrastructure software and operational principles could
+no longer be delivered and managed by PCMDI alone. 
+
+For CMIP5, PCMDI sought help from a number of partners under the auspices of the Global
+Organisation of Earth System Science Portals (GO-ESSP). In the main, the GO-ESSP partners
+who became the foundation members and developers of the Earth System
+Grid Federation retargetted existing research funding to develop ESGF. The primary
+heritage was the original U.S. Earth System Grid Federation project, but major
+components came from new international partners. This
+meant that many aspects of the ESGF system began from work which was
+designed in the context of different requirements, collaborations, and objectives.
+At the beginning, none of the partners had funds for operational
+support for the fledgling international federation, and even after the end of
+CMIP5 proper, the ongoing ESGF has been sustained primarily by small amounts of funding
+at a handful of the ESGF sites. Most ESGF sites have had little or no formal
+operational support. Many of the known limitations of the CMIP5 ESGF - both in terms of functionality and performance - were a direct consequence of this heritage. 
+
+With the advent of CMIP6, it was clear that fundamental changes would be needed to address 
+the evolving scientific and operational requirements. That clarity led to the establishment
+of the WIP, but it has yet to lead to any formal joint funding arrangement - the ESGF
+and the data nodes within it remain funded (if at all, many data nodes are marginal activities supported on best efforts) by national agencies with disparate timescales
+and objectives. For that reason, the WIP has been able to clarify requirements, but has needed to cast the consequences as ``recommendations''. 
+
+\subsection{Infrastructural Principles}
 
 \begin{enumerate}
 \item With greater complexity and a globally distributed data
@@ -288,11 +318,10 @@ here:
   coordinated scientific experiments, the global computational and
   data infrastructure needs to be formally examined as an integrated
   element.
-
   \begin{itemize}
-  \item The WIP was formed in response to this observation, with
-    membership drawn from experts in various aspects of the
-    infrastructure. Representatives of modeling centers,
+  \item The 
+    membership of the WIP, drawn as it is from experts in various aspects of the
+    infrastructure, is a direct consequence of this requirement for integration.  Representatives of modeling centers,
     infrastructure developers, and stakeholders in the scientific
     design of CMIP and its output comprise the panel membership.
   \item One of the WIP's first acts was to consider three phases in
