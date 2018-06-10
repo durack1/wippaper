@@ -221,20 +221,22 @@ own right -- and the solution established for CMIP5 was the global
 ``Earth System Grid Federation'' (ESGF, \citep{ref:williamsetal2015}).
 ESGF was identified by the WCRP Joint Scientific Committee in 2013 as
 the recommended infrastructure for data archiving and dissemination
-for the Programme. The larger gateways currently participating in the
-ESGF are shown in in Figure~\ref{fig:esgf}, which also lists (some of) the
-many projects these nodes support. With multiple agencies and
-institutions, and many uncoordinated and possibly conflicting
-requirements, the ESGF itself is a complex and delicate component to
-manage.
+for the Programme.
+\pllabel{RC2-12}
+A map of sites participating in the ESGF are shown in in
+Figure~\ref{fig:esgf} drawn from
+\urlref{https://portal.enes.org/data/is-enes-data-infrastructure/esgf}{IS-ENES
+  Data Portal}. The sites are diverse and responsive to many national
+and institutional missions. With multiple agencies and institutions,
+and many uncoordinated and possibly conflicting requirements, the ESGF
+itself is a complex and delicate component to manage.
 
 \begin{figure*}
   \begin{center}
     \includegraphics[width=175mm]{images/esgf-map-2017.png}
   \end{center}
   \caption{Sites participating in the Earth System Grid Federation in
-    2017. Figure courtesy Dean Williams, adapted from the ESGF
-    Brochure. }
+    May 2017. Figure courtesy IS-ENES Data Portal. }
   \label{fig:esgf}
 \end{figure*}
 
@@ -1151,9 +1153,10 @@ processed by the CMIP6 Handle service infrastructure and recorded in
 the ESGF metadata catalog. Another Handle will subsequently be
 assigned at somewhat coarser granularity to each aggregation of files
 containing the data from a single variable sampled at a single
-frequency from a single model running a single experiment. In ESGF
-terminology, this collection of files is referred to as an
-\emph{atomic dataset}.
+frequency
+\pllabel{RC1-45}
+from a single model running a single experiment. In ESGF terminology,
+this collection of files is referred to as an \emph{atomic dataset}.
 
 As described in the \urlref{https://goo.gl/miUREw}{CMIP6 Persistent
   Identifiers Implementation Plan} position paper, a Handle assigned
@@ -1161,11 +1164,11 @@ at either of these two levels of the PID hierarchy identifies a static
 entity; if any file associated with a Handle is altered in any way a
 new Handle must be created. The PID infrastructure is also central to
 the replication and versioning strategies, as described in
-Section~\ref{sec:replica} and Section~\ref{sec:version} below. Furthermore, as a
-means of recording provenance and enabling tracking of dataset usage,
-the WIP urges authors to include as supplementary material attached to
-each CMIP6-based publication a PID list (a flat list of all PIDs
-referenced).
+Section~\ref{sec:replica} and Section~\ref{sec:version} below.
+Furthermore, as a means of recording provenance and enabling tracking
+of dataset usage, the WIP urges authors to include as supplementary
+material attached to each CMIP6-based publication a PID list (a flat
+list of all PIDs referenced).
 
 \begin{figure*}
   \begin{center}
@@ -2452,6 +2455,11 @@ General comments
 \item 4 Figure 1: There is a site that looks to be in James Bay. Also
   is it really necessary to include personal contact email? This is
   something that can get outdated very fast.
+
+  \begin{answer}
+    A more appropriate figure has been substituted, see
+    Figure~\ref{fig:esgf} and \plref{RC2-12}.
+  \end{answer}
 \item 5 6 It’s not clear to what "which are summarized here" make
   reference to, "fundamental changes" or the "evolving scientific and
   operational requirements"?
