@@ -1284,18 +1284,27 @@ Figure~\ref{fig:esdoc}, and in greater detail in the WIP position paper on
 \urlref{https://goo.gl/S3vVxE}{ES-DOC}. The CMIP6 experimental design
 has been translated into structured text documents, already available
 from ES-DOC. ES-DOC has constructed CVs for the description of the
-CMIP6 standard model realms, including a set of short tables
-(\emph{specialisations}, in ES-DOC terminology) for each realm. The
-WIP, and the CMIP Panel, recommend that the modeling groups integrate
-with their model development process their provision of documentation
-to ES-DOC. This will better ensure the accuracy and consistency of the
-documentation. ES-DOC provides a variety of user interfaces to read
-and write structured documentation that conforms with the Common
-Information Model (CIM) of \cite{ref:lawrenceetal2012}. As models evolve
-or differentiate (for example, an Earth system model derived from a
-particular general circulation model), branches and new versions of
-the documentation can be produced in a manner familiar to anyone who
-works with version-controlled code.
+CMIP6 standard model realms
+\pllabel{RC1-52}
+CMIP terminology for climate subsystems, such as ``ocean'' or
+``atmosphere''), including a set of short tables
+(\emph{specialisations}, in ES-DOC terminology) for each realm.
+\pllabel{RC1-53}
+The specialisations are a succinct and structured description of the
+model physics. The WIP, and the CMIP Panel, recommend that the
+modeling groups integrate with their model development process their
+provision of documentation to ES-DOC. This will better ensure the
+accuracy and consistency of the documentation. ES-DOC provides a
+variety of user interfaces to read and write structured documentation
+that conforms with the Common Information Model (CIM) of
+\cite{ref:lawrenceetal2012}. As models evolve or differentiate (for
+example, an Earth system model derived from a particular general
+circulation model), branches and new versions of the documentation can
+be produced
+\pllabel{RC1-54}
+and it will be possible to display, annotate, and add new entries in
+the genealogy of a model in a manner familiar to anyone who works with
+version control software like \texttt{git}.
 
 A critical element in the ES-DOC process is the documentation of
 \emph{conformances}: steps undertaken by the modeling centers to
@@ -1340,12 +1349,15 @@ scientific process.
 In keeping with the WIP's ``dataset-centric rather than
 system-centric'' approach (Item~\ref{snap} in Section~\ref{sec:principles}), a
 user will be directly linked to documentation from each dataset. This
-is done in CMIP6 by embedding a global attribute
-\texttt{further\_info\_url} in file headers pointing to the associated
-CIM document, which will serve as the landing page for documentation
-from which further exploration (by humans or software) will take
-place. The existence and functioning of the landing page is assured in
-Stage M3 of Figure~\ref{fig:qa}.
+is done in CMIP6 by
+\pllabel{RC1-56}
+adding a required global attribute \texttt{further\_info\_url} in file
+headers pointing to the associated CIM document, which will serve as
+the landing page for documentation from which further exploration (by
+humans or software) will take place. The form of this URL is standard
+and can be software-generated: CMOR, for instance, will automatically
+add it. The existence and functioning of the landing page is assured
+in Stage~M3 of Figure~\ref{fig:qa}.
 
 \section{Replication}
 \label{sec:replica}
@@ -1357,11 +1369,11 @@ position paper. The recommendations therein are based on the following
 
 \begin{itemize}
 \item Ensuring at least one copy of a dataset is present at a stable
-ESGF node with a mission of long-term maintenance and curation of
-data. The total data storage resources planned across
-  the Tier~1 nodes in the CMIP6 era is adequate to support this
-  requirement, though some data will likely be held on accessible tape
-  storage rather than spinning disk.
+  ESGF node with a mission of long-term maintenance and curation of
+  data. The total data storage resources planned across the Tier~1
+  nodes in the CMIP6 era is adequate to support this requirement,
+  though some data will likely be held on accessible tape storage
+  rather than spinning disk.
 \end{itemize}
 
 In addition, we have articulated a number of secondary goals:
@@ -1370,20 +1382,23 @@ In addition, we have articulated a number of secondary goals:
 \item Enhancing data accessibility across the ESGF (e.g. Australian
   data easily accessible to the European continent despite the long
   distance);
-\item Enabling each Tier 1 data node to enact specific policies to support their
-  local objectives;
+\item Enabling each Tier 1 data node to enact specific policies to
+  support their local objectives;
 \item Ensuring that the most widely requested data is the most
-  accessible across the ESGF federation;
+  accessible across the ESGF federation
+  \pllabel{RC1-58}
+  (of course, any dataset will be available at least on its original
+  publication datanode);
 \item Enabling large-scale data analysis across the federation (see
   Item~\ref{analysis} in Section~\ref{sec:principles});
-\item Ensuring continuity of data access in the event of individual node
-  failures;
+\item Ensuring continuity of data access in the event of individual
+  node failures;
 \item Enabling network load-balancing and enhanced performance;
 \item Reducing the manual workload related to replication;
 \item Building a reliable replication mechanism that can be used not
   only within the federation, but by the secondary repositories
-  created by user groups (see discussion in Section~\ref{sec:licensing} around
-  Figure~\ref{fig:dark}).
+  created by user groups (see discussion in
+  Section~\ref{sec:licensing} around Figure~\ref{fig:dark}).
 \end{itemize}
 
 In conjunction with the ESGF and the International Climate Networking
@@ -1410,18 +1425,20 @@ protocol for automatic replication, shown in Figure~\ref{fig:replica}.
     \includegraphics[width=120mm]{images/WIP-replication.png}
   \end{center}
   \caption{CMIP6 replication from data nodes to replica centers and
-    between replica centers coordinated by a CMIP6 replication team.}
+    between replica centers coordinated by a CMIP6 replication team,
+    under the guidance of the CDNOT.}
   \label{fig:replica}
 \end{figure*}
 
 Given the nature of some of the secondary goals listed above, it would
 not be appropriate for the WIP to prescribe which data should be
 replicated by each center. Rather, the plan should be flexible to
-accommodate changing data use profiles and resource availability. The
-WIP consider the CDNOT group to be the appropriate organisation to
-coordinate the replication activities of the CMIP6 data nodes such
-that the primary goal is achieved and an effective compromise for the
-secondary goals is established.
+accommodate changing data use profiles and resource availability.
+\pllabel{RC1-61}
+A replication team under the guidance of the CDNOT will coordinate the
+replication activities of the CMIP6 data nodes such that the primary
+goal is achieved and an effective compromise for the secondary goals
+is established.
 
 The International Climate Network Working Group (ICNWG), formed under
 the Earth System Grid Federation (ESGF), helps set up and optimize
@@ -1446,8 +1463,12 @@ Based on experience in CMIP5, it is expected that a number of
 of CMIP6 data outside of the ESGF federation. This will have the
 effect of widening data accessibility geographically, and by user
 communities, with obvious benefit to the CMIP6 program. The WIP
-encourages the support of these secondary repositories where it
-does not undermine CMIP6 data management and integrity objectives.
+encourages the support of these secondary repositories where it does
+not undermine CMIP6 data management and integrity objectives.
+\pllabel{RC1-62}
+In the new dataset-centric approach, licenses and PIDs remain embedded
+and will continue to play their roles in the data toolchain even for
+these secondary repositories.
 
 In CMIP5 a significant issue for users of some third-party archives
 was that their replicated data was taken as a one-time snapshot (see
@@ -1588,20 +1609,21 @@ beginning to think about the future.
 \begin{itemize}
 \item There is an increasing blurring of the boundary between weather
   and climate as time and space scales merge \citep{ref:hoskins2013}.
-  This will increasingly entrain new communities into our data
-  ecosystems, each with their own modeling and analysis practices,
-  standards and conventions, and other issues. The establishment of
-  the WIP was a crucial step in enhancing the capabilities, standards,
-  protocols and policies around the CMIP enterprise. Earlier
-  discussions on the scope of the WIP also suggested a broader scope
-  for the panel on the longer-term, to coordinate not only the CMIP
-  data aspects (including for example, the CORDEX project
-  \citep{ref:lakeetal2017}, which also relies upon ESGF for data
-  dissemination, see Figure~\ref{fig:esgf}) but also the climate prediction
-  (seasonal to decadal) issues and corresponding observational and
-  reanalysis aspects.We would recommend a closer engagement between
-  these communities in planning the future of global data
-  infrastructure.
+  This will increasingly entrain new communities into
+  \pllabel{RC1-64}
+  climate data ecosystems, each with their own modeling and analysis
+  practices, standards and conventions, and other issues. The
+  establishment of the WIP was a crucial step in enhancing the
+  capabilities, standards, protocols and policies around the CMIP
+  enterprise. Earlier discussions on the scope of the WIP also
+  suggested a broader scope for the panel on the longer-term, to
+  coordinate not only the CMIP data aspects (including for example,
+  the CORDEX project \citep{ref:lakeetal2017}, which also relies upon
+  ESGF for data dissemination, see Figure~\ref{fig:esgf}) but also the
+  climate prediction (seasonal to decadal) issues and corresponding
+  observational and reanalysis aspects.We would recommend a closer
+  engagement between these communities in planning the future of
+  global data infrastructure.
 \item As we have noted, the nature of publication is changing
   \citep[see e.g][]{ref:davidetal2016}. In the future, datasets and
   software with provenance information will be first-class entities of
@@ -2259,23 +2281,47 @@ Specific Comments
 \item 51. Page 18, line 4 -- QA nodes -- I assume this is software. As
   written seems like hardware. More is needed.
 \item 52. Page 19, line 6 -- realms -- Define.
+
+  \begin{answer}
+    \plref{RC1-52}
+  \end{answer}
 \item 53. Page 19, line 7 -- a set of tables -- More is needed or
   delete.
+
+  \begin{answer}
+    Added, \plref{RC1-53}
+  \end{answer}
 \item 54. Page 19, line 13 -- version-controlled code -- Add “software
   that generates versioncontrolled code”. It’s all code. . .
+
+  \begin{answer}
+    Clarified, \plref{RC1-54}
+  \end{answer}
 \item 55. Page 20, line 21 -- embedding -- By whom? Modeler?
-\item 56. Page 20, line 26 -- position paper -- Location? 57. Page 20,
-  Replication section -- I did not see any way for 1-off data sets to
-  be issued PIDs. I appreciate that this is hard to enforced but the
-  major impact user distribution sites should be required to issue
-  PIDs in this framework. Numerically, the impact users are the single
-  biggest group using CMIP data. Many of the sites serving them,
-  preprocess the model data -- generating new data sets, subsets,
-  averages and so forth. These new data sets should not have model
-  PIDs, but their own.
+
+  \begin{answer}
+    Clarified, \plref{RC1-55}
+  \end{answer}
+\item 56. Page 20, line 26 -- position paper -- Location?
+
+  \begin{answer}
+    References visible now, see answer to RC1-15.
+  \end{answer}
+\item 57. Page 20, Replication section -- I did not see any way for
+  1-off data sets to be issued PIDs. I appreciate that this is hard to
+  enforced but the major impact user distribution sites should be
+  required to issue PIDs in this framework. Numerically, the impact
+  users are the single biggest group using CMIP data. Many of the
+  sites serving them, preprocess the model data -- generating new data
+  sets, subsets, averages and so forth. These new data sets should not
+  have model PIDs, but their own.
 \item 58. Page 21, line 4 -- This statement implies that there are some
   CMIP data sets NOT accessible across ESGF. Is this true? More needed
   here. It is not clear what is meant.
+
+  \begin{answer}
+    Clarified, \plref{RC1-58}
+  \end{answer}
 \item 59. Page 21, line 11 -- ICNWG -- Reference, web site needed.
 
   \begin{answer}
@@ -2288,12 +2334,33 @@ Specific Comments
   \end{answer}
 \item 61. Page 22, fig. 7 caption -- CMIP6 replication team -- It says
   CDNOT does this on the previous page. Correct.
+
+  \begin{answer}
+    Clarified in the caption to Figure~\ref{fig:replica}, also
+    \plref{RC1-61}.
+  \end{answer}
 \item 62. Page 22, lines 3-6 -- Does this break the data chain (PID and
   etc.)? More needed.
+
+  \begin{answer}
+    More explanatory text added, \plref{RC1-62}
+  \end{answer}
 \item 63. Page 23, Errata section -- Are the replication nodes inside
   or outside of CMIP? This is not clear.
+
+  \begin{answer}
+    It is not clear what text the reviewer is referring to, as there
+    is no reference to replication nodes in the Errata section.
+    Nonetheless, as a general comment, we have attempted to move away
+    from the notion of ``inside'' and ``outside'' nodes: for instance,
+    \plref{RC1-62}
+  \end{answer}
 \item 64. Page 24, line 25 -- our data -- Change to “climate” or “CMIP”
   data.
+
+  \begin{answer}
+    Corrected, \plref{RC1-64}
+  \end{answer}
 \end{enumerate}
 
 \pagebreak
