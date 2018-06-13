@@ -766,90 +766,87 @@ The WIP has recommended two further steps toward ensuring sustainable
 growth in data volumes.
 % Given the earlier arguments, it seems $C$ will limit growth of volume by itself
 %  Why are additional steps necessary?
+\pllabel{RC2-21}
+The first of these is the consideration of standard horizontal
+resolutions for saving data, as is already done for vertical and
+temporal resolution in the data request. Cross-model analyses already
+cast all data to a common grid in order to evaluate it as an ensemble,
+typically at fairly low resolution. The studies of Knutti and
+colleagues (e.g., \cite{ref:knuttietal2017}) are typically performed
+on relatively coarse grids. We recommend that for most purposes
+atmospheric data on the ERA-40 grid ($2^\circ\times 2.5^\circ$) would
+suffice, with of course exceptions for experiments like those called
+for by HighResMIP \citep{ref:haarsmaetal2016}. A similar
+recommendation is made for ocean data (the World Ocean Atlas
+$1^\circ\times 1^\circ$ grid), with extended discussion of the
+benefits and losses due to regridding
+\citep[see][]{ref:griffiesetal2014,ref:griffiesetal2016}. Regridding
+remains a contentious topic, and owing to a lack of consensus, the WIP
+recommendations on regridding remain in flux. The
+\urlref{https://goo.gl/wVtm5t}{CMIP6 Output Grid Guidance document}
+outlines a number of possible recommendations, including the provision
+of ``weights'' to a target grid. Many of the considerations around
+regridding, particularly for ocean data in CMIP6, are discussed at
+length in \cite{ref:griffiesetal2016}. A similar lack of consensus has
+made the WIP drop a recommendation of a common \emph{calendar} for
+particular experiments: a wide variety of calendars are in use --
+Gregorian, Julian, 365-day, and equal-month (360-day) all remain
+popular options -- and the onus of converting data across the
+multi-model ensemble (MME) to a common one for analysis remains upon
+the end-user.
 
-\begin{enumerate}
-\item The first of these is the consideration of standard horizontal
-  resolutions for saving data, as is already done for vertical and
-  temporal resolution in the data request. Cross-model analyses
-  already cast all data to a common grid in order to evaluate it as an
-  ensemble, typically at fairly low resolution. The studies of Knutti
-  and colleagues (e.g., \cite{ref:knuttietal2017}) are typically
-  performed on relatively coarse grids. We recommend that for most
-  purposes atmospheric data on the ERA-40 grid
-  ($2^\circ\times 2.5^\circ$) would suffice, with of course exceptions
-  for experiments like those called for by HighResMIP
-  \citep{ref:haarsmaetal2016}. A similar recommendation is made for ocean
-  data (the World Ocean Atlas $1^\circ\times 1^\circ$ grid), with
-  extended discussion of the benefits and losses due to regridding
-  \citep[see][]{ref:griffiesetal2014,ref:griffiesetal2016}.
-  Regridding remains a contentious topic, and owing to
-  a lack of consensus, the WIP recommendations on regridding remain in
-  flux. The \urlref{https://goo.gl/wVtm5t}{CMIP6 Output Grid Guidance
-    document} outlines a number of possible recommendations, including
-  the provision of ``weights'' to a target grid. Many of the
-  considerations around regridding, particularly for ocean data in
-  CMIP6, are discussed at length in \cite{ref:griffiesetal2016}. A
-  similar lack of consensus has made the WIP drop a recommendation of
-  a common \emph{calendar} for particular experiments: a wide variety
-  of calendars are in use -- Gregorian, Julian, 365-day, and
-  equal-month (360-day) all remain popular options -- and the onus of
-  converting data across the multi-model ensemble (MME) to a common
-  one for analysis remains upon the end-user.
+As outlined below in Section~\ref{sec:replica}, both ESGF data nodes
+and the creators of secondary repositories are given considerable
+leeway in choosing data subsets for replication, based on their own
+interests. The tracking mechanisms outlined in Section~\ref{sec:pid}
+below will allow us to ascertain, after the fact, how widely used the
+native grid data may be \emph{vis-\`a-vis} the regridded subset, and
+allow us to recalibrate the replicas, as usage data becomes available.
+We note also that the providers of at least one of the standard
+metrics packages \citep[ESMValTool,][]{ref:eyringetal2016a} have
+expressed a preference of standard grid data for their analysis, as
+regridding from disparate grids increases the complexity of their
+already overburdened infrastructure.
 
-  As outlined below in Section~\ref{sec:replica}, both ESGF data nodes and the
-  creators of secondary repositories are given considerable leeway in
-  choosing data subsets for replication, based on their own interests.
-  The tracking mechanisms outlined in Section~\ref{sec:pid} below will allow us
-  to ascertain, after the fact, how widely used the native grid data
-  may be \emph{vis-\`a-vis} the regridded subset, and allow us to
-  recalibrate the replicas, as usage data becomes available. We note
-  also that the providers of at least one of the standard metrics
-  packages \citep[ESMValTool,][]{ref:eyringetal2016a} have expressed a
-  preference of standard grid data for their analysis, as regridding
-  from disparate grids increases the complexity of their already
-  overburdened infrastructure.
+The second is the issue of data compression. netCDF4, which is the
+WIP's required standard for CMIP6 data, includes an option for
+lossless compression or deflation \citep{ref:zivlempel1977} that
+relies on the same technique used in standard tools such as
+\texttt{gzip}. In practice, the reduction in data volume will depend
+upon the ``entropy'' or randomness in the data, with smoother data
+being compressed more.
 
-\item The second is the issue of data compression. netCDF4, which is
-  the WIP's required standard for CMIP6 data, includes an option
-  for lossless compression or deflation \citep{ref:zivlempel1977} that
-  relies on the same technique used in standard tools such
-  as \texttt{gzip}. In practice, the reduction in data volume will
-  depend upon the ``entropy'' or randomness in the data, with
-  smoother data being compressed more.
+Deflation entails computational costs, not only during creation of the
+compressed data, but also every time the data are re-inflated. There
+is also a subtle interplay with precision: for instance temperatures
+usually seen in climate models appear to deflate better when expressed
+in Kelvin, rather than Celsius, but that is due to the fact that the
+leading order bits are always the same, and thus the data is actually
+less precise. Deflation is also enhanced by reorganizing
+(``shuffling'') the data internally into chunks that have spatial and
+temporal coherence.
 
-  Deflation entails computational costs, not only during creation of
-  the compressed data, but also every time the data are re-inflated.
-  There is also a subtle interplay with precision: for instance
-  temperatures usually seen in climate models appear to deflate better
-  when expressed in Kelvin, rather than Celsius, but that is due to
-  the fact that the leading order bits are always the same, and thus
-  the data is actually less precise. Deflation is also enhanced by
-  reorganizing (``shuffling'') the data internally into chunks that
-  have spatial and temporal coherence.
+Some in the community argue for the use of more aggressive
+\emph{lossy} compression methods \citep{ref:bakeretal2016}, but the
+WIP, after consideration, believes the loss of precision entailed by
+such methods, and the consequences for scientific results, require
+considerably more evaluation by the community before such methods can
+be accepted as common practice.
 
-  Some in the community argue for the use of more aggressive
-  \emph{lossy} compression methods \citep{ref:bakeretal2016}, but the
-  WIP, after consideration, believes the loss of precision entailed by
-  such methods, and the consequences for scientific results, require
-  considerably more evaluation by the community before such methods
-  can be accepted as common practice.
-
-  Given the options above, we undertook a systematic study of the
-  behavior of typical model output files under lossless compression,
-  the results of which are \urlref{https://goo.gl/qkdDnn}{publicly
-    available}. The study indicates that standard \texttt{zlib}
-  compression in the netCDF4 library with the settings of
-  \texttt{deflate=2} (relatively modest, and computationally
-  inexpensive), and \texttt{shuffle} (which ensures better
-  spatiotemporal homogeneity) ensures the best compromise between
-  increased computational cost and reduced data volume. For an ESM,
-  \pllabel{RC1-25}
-  we expect a total savings of about 50\%, with ocean, ice, land
-  realms getting the most savings (owing to large areas of the globe
-  that are masked), and atmospheric data the least. This 50\% estimate
-  has been verified with sample output from some models preparing for
-  CMIP6.
-\end{enumerate}
+Given the options above, we undertook a systematic study of the
+behavior of typical model output files under lossless compression, the
+results of which are \urlref{https://goo.gl/qkdDnn}{publicly
+  available}. The study indicates that standard \texttt{zlib}
+compression in the netCDF4 library with the settings of
+\texttt{deflate=2} (relatively modest, and computationally
+inexpensive), and \texttt{shuffle} (which ensures better
+spatiotemporal homogeneity) ensures the best compromise between
+increased computational cost and reduced data volume. For an ESM,
+\pllabel{RC1-25}
+we expect a total savings of about 50\%, with ocean, ice, land realms
+getting the most savings (owing to large areas of the globe that are
+masked), and atmospheric data the least. This 50\% estimate has been
+verified with sample output from some models preparing for CMIP6.
 
 The \urlref{https://goo.gl/iNBQ9m}{DREQ} alluded to above in
 Section~\ref{sec:dreq} allows us to make a systematic assessment of these
@@ -939,12 +936,16 @@ those obtaining CMIP data from those reposistories as ``dark users''
 who are invisible to the ESGF system. While this appears to subvert
 the licensing and registration policy put in place for CMIP5, this
 should not be seen as a ``bootleg'' process: it is in fact the most
-efficient use of limited network bandwidth at the user sites. However,
-this also removes the ability for users of these ``dark'' repositories
-to benefit from the augmented provenance provided by infrastructure
-updates, such as being notified of data retractions or replacements in
-the case that contributed datasets are found to be erroneous and
-replaced.
+efficient use of limited network bandwidth at the user sites.
+\pllabel{RC2-29}
+The data archive snapshots will host data and offload some of the
+network provisioning requirements from ESGF nodes themselves.
+
+We wish, however, to retain the ability for users of these ``dark''
+repositories to benefit from the augmented provenance provided by
+infrastructure updates, such as being notified of data retractions or
+replacements in the case that contributed datasets are found to be
+erroneous and replaced.
 
 \begin{figure*}
   \begin{center}
@@ -969,16 +970,16 @@ To quote the WIP position paper:
   be on the original modeling center...
 \end{quote}
 
-The data archive snapshots and emerging resources that combine
-archival and analysis capabilities (e.g., NCAR's
-\urlref{https://goo.gl/sYTxC2}{CMIP Analysis Platform}) will host data
-and offload some of the network provisioning requirements from ESGF
-nodes themselves.
-
-Modeling centers are offered two choices of \emph{Creative Commons}
-licenses: data covered by the \urlref{https://goo.gl/CY5m2v}{Creative
-  Commons Attribution ``Share Alike'' 4.0 International License} will
-be freely available; for centers with more restrictive policies, the
+\pllabel{RC2-27}
+Licenses are now embedded in the files, and all repositories, whether
+sanctioned or ``dark'', can be data sources, as seen below in the
+discussion of replication (Section~\ref{sec:replica}.
+\pllabel{RC2-30}
+In the embedded license approach, modeling centers are offered two
+choices of \emph{Creative Commons} licenses: data covered by the
+\urlref{https://goo.gl/CY5m2v}{Creative Commons Attribution ``Share
+  Alike'' 4.0 International License} will be freely available; for
+centers with more restrictive policies, the
 \urlref{https://goo.gl/KUNUKq}{Creative Commons Attribution
   ``NonCommercial Share Alike'' 4.0 International License}, which
 restricts the data to non-commercial use. Further sharing of the data
@@ -1023,14 +1024,14 @@ exchange and access of such data-data and data-literature
 interlinking.
 
 Given the complexity of the CMIP6 data request, we expect, as shown in
-Section~\ref{sec:dvol}, a total dataset count of $\mathcal{O}(10^6)$. Because
-dozens of datasets are typically used in a single scientific study, it
-is impractical to cite each dataset individually in the same way as
-individual research publications are acknowledged. The WIP therefore
-offers an option of citing data and giving credit to data providers
-that relies on a rather coarse granularity, while at the same time
-offering another option at a much finer granularity for recording the
-specific files and datasets used in a study.
+Section~\ref{sec:dvol}, a total dataset count of $\mathcal{O}(10^6)$.
+Because dozens of datasets are typically used in a single scientific
+study, it is impractical to cite each dataset individually in the same
+way as individual research publications are acknowledged. The WIP
+therefore offers an option of citing data and giving credit to data
+providers that relies on a rather coarse granularity, while at the
+same time offering another option at a much finer granularity for
+recording the specific files and datasets used in a study.
 
 In the following, two distinct types of persistent identifiers (PIDs)
 are discussed: DOIs, which can only be assigned to data that comply
@@ -1039,6 +1040,9 @@ more generic
 \pllabel{RC1-37}
 \urlref{https://www.dona.net/handle-system}{``Handles''} that have
 fewer constraints and may be more easily adapted for a particular use.
+\pllabel{RC2-31}
+The Handle system, as explained below in Section~\ref{sec:pid} allows
+unique PIDs to be assigned to datasets at the point of publication.
 Technically both types of PIDs rely on the underlying global Handle
 System to provide services (e.g., to resolve the PIDs and provide
 associated metadata, such as the location of the data itself).
@@ -1269,12 +1273,12 @@ structured documentation in machine readable form.
 
 \begin{figure*}
   \begin{center}
-    \includegraphics[width=120mm]{images/ES-DOC-process.png}
+    \includegraphics[width=120mm]{images/cmip6_workflow_infographic_v2.pdf}
   \end{center}
-  \caption{Flowchart of ES-DOC documentation process, delineating
-    sequence of events and indicating the parties responsible for
-    producing the documentation. Figure courtesy Eric Guilyardi and
-    Mark Greenslade.}
+  \caption{Elements of ES-DOC documentation. Rows indicate phases of
+    the modeling process being documented, and box colors indicate the
+    parties responsible for producing the documentation (see legend).
+    Figure courtesy Guillaume Levavasseur, IPSL}.
   \label{fig:esdoc}
 \end{figure*}
 
@@ -1341,25 +1345,25 @@ software validation \citep[see e.g][]{ref:peng2011} and structured
 documentation of complete scientific workflows that can be
 independently read and processed are both becoming more common
 \citep[see the special issue on the ``Geoscience Paper of the
-Future'', ][]{ref:davidetal2016}. We have noted earlier (see
-Item~\ref{repro} in Section~\ref{sec:principles} the special
+Future'', ][]{ref:davidetal2016}. We have noted earlier
+\pllabel{RC2-32}
+(see Item~\ref{repro} in Section~\ref{sec:principles}) the special
 importance in climate research today of documenting how results have
 been obtained and enabling results to be reproduced by others.
 Rigorous documentation remains a hardy bulwark against challenges to
 the scientific process.
 
-In keeping with the WIP's ``dataset-centric rather than
-system-centric'' approach (Item~\ref{snap} in
-Section~\ref{sec:principles}), a user will be directly linked to
-documentation from each dataset. This is done in CMIP6 by
-\pllabel{RC1-55}
-adding a required global attribute \texttt{further\_info\_url} in file
-headers pointing to the associated CIM document, which will serve as
-the landing page for documentation from which further exploration (by
-humans or software) will take place. The form of this URL is standard
-and can be software-generated: CMOR, for instance, will automatically
-add it. The existence and functioning of the landing page is assured
-in Stage~M3 of Figure~\ref{fig:qa}.
+In keeping with the ``dataset-centric rather than system-centric''
+approach (Item~\ref{snap} in Section~\ref{sec:principles}), a user
+will be directly linked to documentation from each dataset. This is
+done in CMIP6 by \pllabel{RC1-55} adding a required global attribute
+\texttt{further\_info\_url} in file headers pointing to the associated
+CIM document, which will serve as the landing page for documentation
+from which further exploration (by humans or software) will take
+place. The form of this URL is standard and can be software-generated:
+CMOR, for instance, will automatically add it. The existence and
+functioning of the landing page is assured in Stage~M3 of
+Figure~\ref{fig:qa}.
 
 \section{Replication}
 \label{sec:replica}
@@ -1524,18 +1528,18 @@ position paper:
 
 \begin{itemize}
   % should specify *which* PID is referred to in the following.
-\item the PID infrastructure of Section~\ref{sec:cite} is the basis of creating
-  versions of datasets. PIDs are permanently associated with a
-  dataset, and new versions will get a new PID. When new versions are
-  published, there will be two-way links created within the PID kernel
-  information so that one may query a PID for prior or subsequent
-  versions.
+\item the PID infrastructure of Section~\ref{sec:cite} is the basis of
+  creating versions of datasets. PIDs are permanently associated with
+  a dataset, and new versions will get a new PID. When new versions
+  are published, there will be two-way links created within the PID
+  kernel information so that one may query a PID for prior or
+  subsequent versions.
 \item we recommend the unit of versioning be an \emph{atomic dataset}:
   a complete timeseries of one variable from one experiment and one
   model. The implication is that other variables need not be
-  republished, if the error is found in a single variable. If an entire
-  experiment is retracted and republished, all variables will get a
-  consistent version number.
+  republished, if the error is found in a single variable. If an
+  entire experiment is retracted and republished, all variables will
+  get a consistent version number.
 \item the CDNOT will ensure consistent versioning practices at all
   participating data nodes.
 \end{itemize}
@@ -1563,6 +1567,12 @@ position paper.
 
 \conclusions[The future of the global data infrastructure]
 \label{sec:summary}
+
+There is an emerging trend at some centres to add resources that
+combine archival and analysis capabilities (e.g., NCAR's
+\urlref{https://goo.gl/sYTxC2}{CMIP Analysis Platform}). This too will
+relieve the pressure on data networks, as the analysis will be carried
+out close to the data.
 
 The WIP was formed in response to the explosive growth of CMIP between
 CMIP3 and CMIP5, and charged with studying and making recommendations
@@ -2531,7 +2541,7 @@ General comments
   "changes", but some of the opening statements are not.
 
   \begin{answer}
-    This was useful guidance, and the entire
+    We thank the reviewer for this useful guidance, and the entire
     Section~\ref{sec:infra-principles} has been rewritten as
     suggested, without bullets. Also, re ``changes'', \plref{RC2-14}
   \end{answer}
@@ -2571,6 +2581,10 @@ General comments
   to probably co-vary in time and space, I’m guessing there might be
   compression benefits in storing multiple variables in the same file.
 \item 11 4 The use of a numbered list here makes little sense.
+
+  \begin{answer}
+    List removed, \plref{RC2-21}
+  \end{answer}
 \item 11 4 Please start the paragraph with the recommendation itself.
   Same suggestion applies to second recommendation.
 \item 11 13 Is the reference to the name of the actual python file
@@ -2578,23 +2592,68 @@ General comments
   appendix B.
 \item 12 20 CMIP archive size. Are you referring to CMIP5? Please
   clarify.
-\item 2 21 Sentence is confusing : "same causes, but with a much
+
+  \begin{answer}
+    \plref{RC1-28}
+  \end{answer}
+\item 12 21 Sentence is confusing : "same causes, but with a much
   larger change"
+
+  \begin{answer}
+    Reworded, \plref{RC1-29b}
+  \end{answer}
 \item 13 Fig 2. Why "!" after local cache ?
-\item 13 14 Is that really "embracing" the dark repository model? I
+
+  \begin{answer}
+    Gone, see caption to Figure~\ref{fig:dark}.
+  \end{answer}
+\item 13 14 Is that really ``embracing'' the dark repository model? I
   believe embracing that model would entail something a lot more
   ambitious such as a P2P network between official and dark repos that
   lets ESGF leverage dark repo to replicate and disseminate data. This
   is discussed later with synda (as far as I understand), but would
   deserve discussion here.
+
+  \begin{answer}
+    Clarifying text, and connection to replication discussion added,
+    \plref{RC2-27}. Replication is peer-to-peer in this system but
+    based on units of atomic datasets, not packets, as in say
+    BitTorrent. This does not preclude future development of P2P
+    replication at the packet level.
+  \end{answer}
 \item 13 15 Review syntax.
+
+  \begin{answer}
+    As this is a quote from another document, it doesn't seem
+    appropriate to change the syntax. The meaning seems fairly clear
+    to us. The editors should let us know if they disagree.
+  \end{answer}
 \item 13 18 I don’t understand what this sentence means and how it
   relates to the preceding text.
+
+  \begin{answer}
+    Some of this text is indeed out of place, rewritten.
+    \plref{RC2-29}.
+  \end{answer}
 \item 13 20 Idem.
+
+  \begin{answer}
+    With the changes, we believe there is now continuity in the
+    licensing discussion, \plref{RC2-30}.
+  \end{answer}
 \item 13 26 Please define "handles". Figure 4 Who issues the PID? The
   data producer? This is only discussed later on page 18. I think it
   should be explained earlier.
+
+  \begin{answer}
+    Reference for Handles added, \plref{RC1-37}. PID issuance
+    introduced here, \plref{RC2-31}.
+  \end{answer}
 \item 20 17 Close parenthesis
+
+  \begin{answer}
+    \plref{RC2-32}
+  \end{answer}
 \item 21 5 Item 4 in section 2 only discusses model evaluation, not
   general data analysis. Figure 7 It’s not clear what this figure adds
   to the explanation.
