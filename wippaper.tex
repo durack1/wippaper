@@ -35,7 +35,6 @@
 \begin{document}
 
 \title{Requirements for a global data infrastructure in support of CMIP6}
-% \pllabel{SC1-1}
 
 \Author[1,2]{Venkatramani}{Balaji}
 \Author[3]{Karl E.}{Taylor}
@@ -376,13 +375,15 @@ clarify requirements, but has needed to cast the consequences as
     like Earth System Documentation
     \citep[\urlref{https://goo.gl/WNwKD9}{ES-DOC},][]{ref:guilyardietal2013}.
   \item In 2016 at the WIP's request, the CMIP6 Data Node
-    \emph{Operations} Team (CDNOT) was formed. It is charged with
-    ensuring that all the infrastructure elements needed by CMIP6 are
-    properly deployed and actually working as intended at the sites
-    hosting CMIP6 data. It is also responsible for the operational
-    aspects of the federation itself, including specifying what
-    versions of the toolchain are run at every site at any given time,
-    and organizing coordinated version upgrades across the federation.
+    \emph{Operations} Team (CDNOT) was formed.
+    \pllabel{RC3-22}
+    It is charged with ensuring that all the infrastructure elements
+    needed by CMIP6 are properly deployed and actually working as
+    intended at the sites hosting CMIP6 data. It is also responsible
+    for the operational aspects of the federation itself, including
+    specifying what versions of the toolchain are run at every site at
+    any given time, and organizing coordinated version upgrades across
+    the federation.
   \end{itemize}
 
   Although there is now a clear separation of concerns into
@@ -451,6 +452,18 @@ clarify requirements, but has needed to cast the consequences as
   systematic characterization of models. The WIP recognizes it may be
   some time before a fully operational system of this kind can be
   implemented, but planning must start now.
+
+  \pllabel{SC1-1}
+  In addition, there is an increased interest in climate analytics as
+  a service \citep{ref:balajietal2011,ref:schnaseetal2017}. This
+  follows the principle of placing analysis close to the data. Some centres
+  plan to add resources that combine archival and analysis
+  capabilities (e.g., NCAR's \urlref{https://goo.gl/sYTxC2}{CMIP
+    Analysis Platform}). There are also new efforts to bring climate
+  data storage and analysis to the cloud era
+  \citep[e.g][]{ref:duffyetal2015}. Platforms such as
+  \href{http://pangeo-data.org/}{Pangeo} show much promise in this
+  realm, and widespread experimentation and adoption is encouraged.
 \item As the experimental design of CMIP has grown in complexity,
   costs both in time and money have become a matter of great concern,
   particularly for those designing, carrying out, and storing
@@ -1568,12 +1581,6 @@ position paper.
 \conclusions[The future of the global data infrastructure]
 \label{sec:summary}
 
-There is an emerging trend at some centres to add resources that
-combine archival and analysis capabilities (e.g., NCAR's
-\urlref{https://goo.gl/sYTxC2}{CMIP Analysis Platform}). This too will
-relieve the pressure on data networks, as the analysis will be carried
-out close to the data.
-
 The WIP was formed in response to the explosive growth of CMIP between
 CMIP3 and CMIP5, and charged with studying and making recommendations
 about the global data infrastructure needed to support CMIP6 and the
@@ -1922,6 +1929,20 @@ of the Pangeo Project (https://pangeo-data.github.io/)
   our field. We stand ready to work with WCRP and ESGF to help our
   community transition to a cloud-based future.
 \end{enumerate}
+
+\begin{answer}
+  This is an excellent analysis of the issues involved with the
+  transition to the cloud. We have added a brief discussion of the
+  \emph{current} status of such efforts, \plref{SC1-1}. We believe
+  that while exciting, these efforts are not yet mature enough to
+  warrant being mentioned as infrastructural requirements. Indeed, it
+  is a shortcoming of our field that ``bringing analysis to the data''
+  has been long promised and not yet delivered (witness the history of
+  earlier projects such as the G8-funded ExArch project). Many
+  of use share Pangeo's vision and look forward to seeing their
+  efforts come to fruition.
+\end{answer}
+
 \pagebreak
 
 % gmd-2018-52-RC1.txt
@@ -2633,7 +2654,9 @@ General comments
 
   \begin{answer}
     Some of this text is indeed out of place, rewritten.
-    \plref{RC2-29}.
+    \plref{RC2-29}. Some of the text is displaced to a discussion of
+    the role of cloud analysis platforms in reducing data movement,
+    \plref{SC1-1}.
   \end{answer}
 \item 13 20 Idem.
 
@@ -2655,8 +2678,22 @@ General comments
     \plref{RC2-32}
   \end{answer}
 \item 21 5 Item 4 in section 2 only discusses model evaluation, not
-  general data analysis. Figure 7 It’s not clear what this figure adds
+  general data analysis.
+
+  \begin{answer}
+    This section has been generalized as suggested, \plref{SC1-1}.
+  \end{answer}
+\item Figure 7 It’s not clear what this figure adds
   to the explanation.
+
+  \begin{answer}
+    While we encourage ad-hoc replication, we wish to also underline
+    the concerted effort to make sure high-value data is not
+    repeatedly moved across geographic domains. This figure
+    illustrates the efforts to coordinate replica nodes with
+    sufficient storage, as well as the involvement of the network
+    provisioners (ICNWG). We believe the figure should stay.
+  \end{answer}
 \item 24 24 Bullet list with no proper introduction. Please write a
   proper conclusion.
 \item 25 8 Is that really the message you want to end with? I suggest
@@ -2733,9 +2770,17 @@ addressed as the paper gets rewritten:
   \end{answer}
 \item Page 2, Line 18 - Please cite the appropriate paper when
   referring to the DECK
+
+  \begin{answer}
+    Citation added, \plref{RC2-7}
+  \end{answer}
 \item Page 4, Figure 1 - Most dots on this figure are in the city the
   node is located. The one in Australia is in the middle of the
   desert. Canberra is not. Please correct.
+
+  \begin{answer}
+    See reply to RC2-12.
+  \end{answer}
 \item Page 8, Line 17 - What is “The data request”. This needs an
   introductory sentence as only people in the know will know. Same
   line: What is the “DREQ” tool. This is an example for the frequent
@@ -2786,6 +2831,10 @@ addressed as the paper gets rewritten:
   several already!
 \item Page 12, line 5 - If the results are public, please cite where
   and how the reader can access them.
+
+  \begin{answer}
+    References visible now, see answer to RC1-15.
+  \end{answer}
 \item Page 12, line 14 - Where is the WIP website? Please add a link.
 
   \begin{answer}
@@ -2800,12 +2849,20 @@ addressed as the paper gets rewritten:
     References visible now, see answer to RC1-15.
   \end{answer}
 \item Page 14, line 20 - O(10ˆ6), 10ˆ6 what? Add units.
+
+  \begin{answer}
+    It is a dataset count as stated, no units.
+  \end{answer}
 \item Page 20, line 26 - A good example of overdoing the WIP(ping).
   The reader does not care where the replication strategy is covered.
   They want to know what there authors of this paper have to say about
   replication.
 \item Page 21, line 21 - Jargon. What is the CDNOT group? Please
   explain.
+
+  \begin{answer}
+    The CDNOT was introduced above, \plref{RC3-22}.
+  \end{answer}
 \item Page 23, line 21 - There seems to be only one subsection, so why
   have it? Please remove the heading.
 \item Section 8 - I was disappointed by this section, as I was
