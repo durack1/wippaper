@@ -265,11 +265,26 @@ design of the technical (and financial) limits of that infrastructure.
 
 This paper provides a summary of the requirements identified by the
 WIP in the first three years of activity since its formation in 2014,
-and the consequential recommendations - in the context of existing
-organisational and funding constraints. In
-Section~\ref{sec:principles}, the principles and scientific rationale
-underlying the requirements for global data infrastructure are
-articulated. In Section~\ref{sec:dreq} the CMIP6 Data Request is
+and the consequential recommendations -- in the context of existing
+organisational and funding constraints.
+\pllabel{RC1-Overview-1}
+The intended audience for the paper is primarily the scientific
+community around CMIP6. In particular, we aim to show how the
+scientific design of CMIP6 as outlined in \cite{ref:eyringetal2016a}
+translates into infrastructural requirements. We hope this will be
+instructive to creators of multi-model experiments as to the resource
+implications of their experimental design, and for data providers
+(modeling centres), explain the sometimes opaque requirements imposed
+upon them as a requisite for participation. Finally, we hope this will
+be of interest to general readers of the journal from other geoscience
+fields, illuminating the particular character of global data
+infrastructure for climate data, where the community of users far
+outstrip in numbers and diversity, the Earth system modeling community
+itself.
+
+In Section~\ref{sec:principles}, the principles and scientific
+rationale underlying the requirements for global data infrastructure
+are articulated. In Section~\ref{sec:dreq} the CMIP6 Data Request is
 covered: standards and conventions, requirements for modeling centers
 to process a complex data request, and projections of data volume. In
 Section~\ref{sec:licensing}, recent evolution in how data are archived
@@ -294,6 +309,7 @@ have resulted from the evolution of infrastructure requirements since
 the first CMIP experiment - beginning with the historical context.
 
 \subsection{Historical Context}
+\label{sec:history}
 
 In the pioneering days of CMIP, the community of participants was
 small and well-knit, and all the issues involved in generating
@@ -587,75 +603,92 @@ below.
 \subsection{CMIP6 Data Request}
 \label{sec:data-request}
 
-The data request \citep{ref:juckesetal2015} is now available
-through the \urlref{https://goo.gl/iNBQ9m}{DREQ} tool, the associated
-\texttt{dreqPy} Python library, and underlying
-% Martin refs to this as "dreq", with the software "dreqPy"
-database. The DREQ combines definitions of variables and their output
-format with specifications of the objectives they support and the
-experiments that they are required for. The entire request is encoded
-in an XML database with rigorous type constraints. Important elements
-of the request, such as units, cell methods (expressing the subgrid
-processing implicit in the variable definition), and time slices for
-required output, are defined as controlled vocabularies within the
-request to ensure consistency of usage. The request is designed to
-enable flexibility, allowing modeling centers to make informed
-decisions about the variables they should submit to the CMIP6 archive
-from each experiment.
+\pllabel{RC2-18}
+The CMIP6 Data Request is one of the most complex elements of the
+CMIP6 infrastructure. It is a direct response to the complexity of the
+new design outlined in \cite{ref:eyringetal2016a}. The experimental
+design now involves 3 tiers of experiments, where an individual
+modeling group may choose which ones to perform; and variables grouped
+by scientific goals and priorities, where again centres may choose
+which sets to publish, based on resource constraints. There are also
+cross-experiment data requests, where for instance the design may
+require a variable in one experiment to be compared against the same
+variable from a different experiment. The modeling groups will then
+need to take this into account before beginning their simulations. The
+CMIP6 Data Request is a codification of the entire experimental design
+into a structured set of machine-readable documents, which can in
+principle be directly ingested in data workflows.
 
-The data request spans several elements.
+The \urlref{https://goo.gl/iNBQ9m}{CMIP6 Data Request}
+\citep{ref:juckesetal2015} combines definitions of variables and their
+output format with specifications of the objectives they support and
+the experiments that they are required for. The entire request is
+encoded in an XML database with rigorous type constraints. Important
+elements of the request, such as units, cell methods (expressing the
+subgrid processing implicit in the variable definition), and
+frequencies and time ``slices'' (subsets of the entire simulation
+period as defined in the experimental design) for required output, are
+defined as controlled vocabularies within the request to ensure
+consistency of usage. The request is designed to enable flexibility,
+allowing modeling centers to make informed decisions about the
+variables they should submit to the CMIP6 archive from each
+experiment.
 
-\begin{enumerate}
-\item specification of the parameter to be calculated in terms of a CF
-  standard name and units,
-\item an output frequency,
-\item a structural specification which includes specification of
-  dimensions and of subgrid processing.
-\end{enumerate}
+% The data request spans several elements.
+
+% \begin{enumerate}
+% \item specification of the parameter to be calculated in terms of a CF
+%   standard name and units,
+% \item an output frequency,
+% \item a structural specification which includes specification of
+%   dimensions and of subgrid processing.
+% \end{enumerate}
 
 In order to facilitate the cross linking between the 2100 variables
 from 248 experiments, the request database allows MIPs to aggregate
 variables and experiments into groups. The link between variables and
 experiments is then made through the following chain:
 
-\begin{enumerate}
+\begin{itemize}
 \item A \emph{variable group}, aggregating variables with priorities
   specific to the MIP defining the group;
 \item A \emph{request link} associating a variable group with an
   objective and a set of request items;
 \item \emph{Request} items associating a particular time slice with a
   request link and a set of experiments.
-\end{enumerate}
+\end{itemize}
 
-This formulation takes into account the complexities that arise  
-when a particular MIP requests that variables needed for
-their own experiments should also
-be saved from a DECK experiment or from  an experiment proposed 
-by a different MIP.
+This formulation takes into account the complexities that arise when a
+particular MIP requests that variables needed for their own
+experiments should also be saved from a DECK experiment or from an
+experiment proposed by a different MIP.
 
 The data request supports a broad range of users who are 
-provided with a range of different access points.
+provided with a range of different access points. These include the
+entire codification in the form of structured (XML) document, web
+pages, or spreadsheets, as well as a python API and command-line tools
+to satisfy a wide variety of usage patterns for accessing and using
+the data request.
 
-\begin{enumerate}
-\item The XML database provides the reference document;
-\item Web pages provide a direct representation of the database
-  content;
-\item Excel workbooks provide selected overviews for specific MIPs and
-  experiments;
-\item A python library provides an interface to the database with some
-  built-in support functions;
-\item A command line tool based on the python library allows quick
-  access to simple queries.
-\end{enumerate}
+% \begin{enumerate}
+% \item The XML database provides the reference document;
+% \item Web pages provide a direct representation of the database
+%   content;
+% \item Excel workbooks provide selected overviews for specific MIPs and
+%   experiments;
+% \item A python library provides an interface to the database with some
+%   built-in support functions;
+% \item A command line tool based on the python library allows quick
+%   access to simple queries.
+% \end{enumerate}
 
-The data request's machine-readable database, which is accessible
-through a simple python API, has been an extraordinary resource for
-the modeling centers. They can, for example, directly integrate the
-request specifications with their workflows to ensure that the correct
-set of variables are saved for each experiment they plan to run. In
-addition, it has given them a new-found ability to estimate the data
-volume associated with meeting a MIP's requirements, a feature
-exploited below in Section~\ref{sec:dvol}.
+The data request's machine-readable database has been an extraordinary
+resource for the modeling centers. They can, for example, directly
+integrate the request specifications with their workflows to ensure
+that the correct set of variables are saved for each experiment they
+plan to run. In addition, it has given them a new-found ability to
+estimate the data volume associated with meeting a MIP's requirements,
+a feature exploited below in Section~\ref{sec:dvol}.
 
 \subsection{Model inputs}
 \label{sec:data-inputs}
@@ -663,18 +696,22 @@ exploited below in Section~\ref{sec:dvol}.
 Datasets used by the model for configuration of model inputs
 \citep[\texttt{input4MIPs}, see][]{ref:duracketal2017} as well as
 observations for comparison with models \citep[\texttt{obs4MIPs},
-see][]{ref:teixeiraetal2014} are both now organized in the same way, 
-and share many of the naming and metadata conventions as the
-CMIP model output itself. The datasets follow versioning
-methodologies recommended by the WIP.
+see][]{ref:teixeiraetal2014} are both now organized in the same way,
+and share many of the naming and metadata conventions as the CMIP
+model output itself.
+\pllabel{RC3-9}
+The coherence of standards across model inputs, outputs, and
+observational datasets is a development that will enable the community
+to build a rich toolset across all of these datasets. The datasets
+follow versioning methodologies below in Section~\ref{sec:version}.
 
 \subsection{Data Reference Syntax}
 \label{sec:data-drs}
 
 The organization of the model output follows the
-\urlref{http://goo.gl/v1drZl}{Data Reference Syntax (DRS)} first used in
-CMIP5, and now in somewhat modified form in CMIP6. The DRS depends on
-pre-defined \emph{controlled vocabularies} (CVs) for various terms
+\urlref{http://goo.gl/v1drZl}{Data Reference Syntax (DRS)} first used
+in CMIP5, and now in somewhat modified form in CMIP6. The DRS depends
+on pre-defined \emph{controlled vocabularies} (CVs) for various terms
 including: the names of institutions, models, experiments, time
 frequencies, etc. The CVs are now recorded as a version-controlled set
 of structured text documents, and the WIP has taken steps to ensure
@@ -687,22 +724,35 @@ throughout the CMIP6 infrastructure. These aspects are covered in
 detail in the \urlref{https://goo.gl/mSe4rf}{CMIP6 Global Attributes,
   DRS, Filenames, Directory Structure, and CVs} position paper. A new
 element in the DRS indicates whether data has been stored on a native
-grid or has been regridded (see discussion below in Section~\ref{sec:dvol} on
-the potentially critical role of regridded output). This element of
-the DRS will allow us to track the usage of the \emph{regridded
-  subset} of data, and assess the relative popularity of native-grid
-vs. standard-grid output.
+grid or has been regridded (see discussion below in
+Section~\ref{sec:dvol} on the potentially critical role of regridded
+output). This element of the DRS will allow us to track the usage of
+the \emph{regridded subset} of data, and assess the relative
+popularity of native-grid vs. standard-grid output.
 
 \subsection{CMIP6 data volumes}
 \label{sec:dvol}
 
 As noted, extrapolations based on CMIP3 and CMIP5 lead to some
 alarming trends in data volume \citep[see
-e.g.,][]{ref:overpecketal2011}. The WIP has undertaken a rigorous
-approach to the estimation of future data volumes, rather than simple
-extrapolation. Contributions to increase in data volume include the
-systematic increase in model resolution and complexity of the
-experimental protocol and data request. We consider these separately:
+e.g.,][]{ref:overpecketal2011}.
+\pllabel{RC3-10}
+As seen in their Figure~2, model output such as those from CMIPs are
+beginning to rival observational data volume. As noted in the
+Introduction, a particular problem for our community is the diverse
+and very large user base for the data, many of whom are not climate
+specialists, but downstream users of climate data studying the impacts
+of climate change. This stands in contrast to other fields with large
+data holdings: data from the Large Hadron Collider
+\citep[e.g.,][]{ref:aadetal2008} for example, is primarily consumed by
+high energy physicists and not of direct interest to scientists in
+unrelated fields.
+
+The WIP has undertaken a rigorous approach to the estimation of future
+data volumes, rather than simple extrapolation. Contributions to
+increase in data volume include the systematic increase in model
+resolution and complexity of the experimental protocol and data
+request. We consider these separately:
 
 \begin{description}
 \item[Resolution] The median horizontal resolution of a CMIP model
@@ -766,13 +816,14 @@ experimental protocol and data request. We consider these separately:
   The second component of complexity is the experimental protocol, and 
   the number of experiments themselves when comparing CMIP5 and CMIP6.
   With the new structure of CMIP6, with a DECK and 23 endorsed MIPs,
-  this would appear to have grown tremendously. We propose as a
-  measure of experimental complexity, the \emph{total number of 
-  simulated years (SYs)} conforming to a given protocol. Note that
-  this too is gated by $C$: modeling centers usually make tradeoffs
-  between experimental complexity and resolution in deciding their
-  level of participation in CMIP6, discussed in 
-  \cite{ref:balajietal2017}.
+  this
+  \pllabel{RC3-11}
+  has grown tremendously. We propose as a measure of experimental
+  complexity, the \emph{total number of simulated years (SYs)}
+  conforming to a given protocol. Note that this too is gated by $C$:
+  modeling centers usually make tradeoffs between experimental
+  complexity and resolution in deciding their level of participation
+  in CMIP6, discussed in \cite{ref:balajietal2017}.
 \end{description}
 
 The WIP has recommended two further steps toward ensuring sustainable
@@ -1116,9 +1167,14 @@ version reference.
   \begin{center}
     \includegraphics[width=175mm]{images/PID-architecture.png}
   \end{center}
-  \caption{PID architecture, showing layers in the PID hierarchy. In
-    the lower layers of the hierarchy, PIDs are static once generated,
-    and new datasets generate new versions with new PIDs.}
+  \caption{Schematic PID architecture, showing layers in the PID
+    hierarchy. In the lower layers of the hierarchy, PIDs are static
+    once generated, and new datasets generate new versions with new
+    PIDs. Each file carries a PID and each collection (dataset,
+    simulation, ..) is related to a PID. Resolving the PID in the
+    Handle server guides the user to the file or the landing page
+    describing the collection. Each box in the figure will be
+    addressed uniquely by its PID.}
   \label{fig:pidarch}
 \end{figure*}
 
@@ -1138,6 +1194,11 @@ hosted by DKRZ. These dataset collections will meet the stringent
 metadata and documentation requirements of the IPCC DDC. Since these
 collections are static, no version reference is required in a
 citation.
+\pllabel{RC1-41}
+Should errors be found subsequently, they will be corrected in the
+data and published under a new DOI. The original DOI and its related
+data are still available but are signed as superseded with link to the
+corrected data.
 
 The WIP's position is that for CMIP6, the initially assigned DOIs
 (associated with evolving collections of data) must be used in
@@ -1244,40 +1305,45 @@ metadata based on common CVs, which will enable consistent treatment
 of data from different groups and institutions. These requirements are
 directly embedded in the ESGF publishing process and in tools such as
 \urlref{https://cmor.llnl.gov/}{CMOR} (and its validation component,
-\urlref{https://goo.gl/ApvMJx}{PrePARE}). These checks (the D1 and
-M1 phases of QA in Figure~\ref{fig:qa}) ensure that the data conform to the
-CMIP6 Data Request specifications, conform to all naming conventions
-and CVs, and follow the mandated structure for organization into a
-common directory structure. As noted in Section~\ref{sec:dreq}, many modeling
-centers have chosen to embed these steps directly in their workflows
-to ensure conformance with the CMIP6 as the models are being run and
-their output processed.
+\urlref{https://goo.gl/ApvMJx}{PrePARE}). These checks (the D1 and M1
+phases of QA in Figure~\ref{fig:qa}) ensure that the data conform to
+the CMIP6 Data Request specifications, conform to all naming
+conventions and CVs, and follow the mandated structure for
+organization into a common directory structure. As noted in
+Section~\ref{sec:dreq}, many modeling centers have chosen to embed
+these steps directly in their workflows to ensure conformance with the
+CMIP6 as the models are being run and their output processed.
 
-At this point, as noted in Figure~\ref{fig:qa}, control is ceded to the ESGF
-system, where designated QA nodes perform further QA checks. A
-critical step is the assignment of PIDs (Section~\ref{sec:pid}, the D2 stage of
-Figure~\ref{fig:pidflow}), which is more controlled than in CMIP5 and
-guarantees that across the data lifecycle, the PIDs will be reliably
-useful as unique labels of datasets.
+At this point, as noted in Figure~\ref{fig:qa}, control is ceded to
+the ESGF system, where designated QA nodes
+\pllabel{RC1-51}
+(ESGF data nodes where additional services are turned on, to certify
+for the data for citation and long-term archival) perform further QA
+checks. A critical step is the assignment of PIDs
+(Section~\ref{sec:pid}, the D2 stage of Figure~\ref{fig:pidflow}),
+which is more controlled than in CMIP5 and guarantees that across the
+data lifecycle, the PIDs will be reliably useful as unique labels of
+datasets.
 
 Beyond this, further stages of QA will be handled within the ESGF
 system following procedures outlined in the
-\urlref{https://goo.gl/eEr8bS}{CMIP6 Quality Assurance} position paper.
-As described before, once data have been published, the data will be
-scrutinized by researchers in what can be considered an ongoing period
-of community-wide scientific QA of the data. During this period,
-modeling centers may correct errors and provide new versions of
-datasets. In the final stage, the data pass into long term archival
-(LTA) status, described as the ``bibliometric'' phase in Figure~\ref{fig:qa}.
-Just prior to LTA, the system will verify minimum standards of
-provenance documentation. This is described in the next section.
+\urlref{https://goo.gl/eEr8bS}{CMIP6 Quality Assurance} position
+paper. As described before, once data have been published, the data
+will be scrutinized by researchers in what can be considered an
+ongoing period of community-wide scientific QA of the data. During
+this period, modeling centers may correct errors and provide new
+versions of datasets. In the final stage, the data pass into long term
+archival (LTA) status, described as the ``bibliometric'' phase in
+Figure~\ref{fig:qa}. Just prior to LTA, the system will verify minimum
+standards of provenance documentation. This is described in the next
+section.
 
 \subsection{Documentation of provenance}
 \label{sec:doc}
 
-As noted earlier in Section~\ref{sec:dreq}, for data to become a first-class
-scientific resource, the methods of their production must be
-documented to the fullest extent possible. For CMIP6, this includes
+As noted earlier in Section~\ref{sec:dreq}, for data to become a
+first-class scientific resource, the methods of their production must
+be documented to the fullest extent possible. For CMIP6, this includes
 documenting both the models and the experiments. While traditionally
 this is done through peer-reviewed literature, which remains
 essential, we note that to facilitate various aspects of search,
@@ -1299,11 +1365,11 @@ In CMIP6, the documentation of \emph{experiments}, \emph{models} and
 \emph{simulations} is done through the Earth System Documentation
 \citep[\urlref{https://goo.gl/WNwKD9}{ES-DOC},][]{ref:guilyardietal2013}
 Project. The various aspects of model documentation are shown in
-Figure~\ref{fig:esdoc}, and in greater detail in the WIP position paper on
-\urlref{https://goo.gl/S3vVxE}{ES-DOC}. The CMIP6 experimental design
-has been translated into structured text documents, already available
-from ES-DOC. ES-DOC has constructed CVs for the description of the
-CMIP6 standard model realms
+Figure~\ref{fig:esdoc}, and in greater detail in the WIP position
+paper on \urlref{https://goo.gl/S3vVxE}{ES-DOC}. The CMIP6
+experimental design has been translated into structured text
+documents, already available from ES-DOC. ES-DOC has constructed CVs
+for the description of the CMIP6 standard model realms
 \pllabel{RC1-52}
 CMIP terminology for climate subsystems, such as ``ocean'' or
 ``atmosphere''), including a set of short tables
@@ -1514,6 +1580,35 @@ ensuring:
 \item that the CDNOT is the recognized body to manage the operational
   replication strategy for CMIP6.
 \end{itemize}
+
+\pllabel{RC1-57}
+We note that the the ESGF PID registration service is part of the ESGF
+data publication implementation, and not exclusive to CMIP6. The PID
+registration service works for all NetCDF-CF files which carry a PID
+as \texttt{tracking\_id} field. This is agreed for all CMIP6 data
+files. However, the ESGF PID registration service is not exclusively
+applicable for CMIP6 model data file but can also be used for new data
+sets, subsets, averages and so forth providing the data are in
+NetCDF-CF format with a PID from the Handle service in the
+\texttt{tracking\_id}. Once the data files passed the ESGF PID
+registration service these files may easily be matter of overvalue
+services like building collections in the PID hierarchy as given in
+Figure~\ref{fig:pidarch}. In general all files as digital objects can
+be assigned a PID and registered in the CNRI Handle server. Vice
+versa, these objects (files) can be uniquely resolved by the Handle
+server providing the PID is known. That means the PID service allows
+for stable and transparent data access independently from the actual
+storage location. The storage location is part of the PID meta data
+which are integrated in the in the Handle server. The PID metadata
+generation and registration is part of the ESGF registration service
+for NetCDF-CF files but in general the PID architecture is not
+restricted to them. It is open for all digital objetcs.
+
+Thus, CMIP6 is the first implementation of the PID service in a larger
+data project and ESGF provides in parallel the classical data access
+via the Data Reference Syntax outlined in the
+\urlref{https://goo.gl/mSe4rf}{CMIP6 Global Attributes, DRS,
+  Filenames, Directory Structure, and CVs} position paper.
 
 \section{Versioning}
 \label{sec:version}
@@ -1941,6 +2036,16 @@ of the Pangeo Project (https://pangeo-data.github.io/)
   earlier projects such as the G8-funded ExArch project). Many
   of use share Pangeo's vision and look forward to seeing their
   efforts come to fruition.
+
+  We agree also about the point about wasteful duplication of data,
+  and the potential for cloud storage and computing to alleviate this
+  problem. However, by the ``embracing the dark repository'' approach,
+  we hope (as shown in Figure~\ref{fig:dark}), we hope to chart a path
+  forward where user communities, at large institutions or consortia
+  around particular scientific interests, can build their own shared
+  repositories, which can be thought of as private clouds. The most
+  wasteful use is for individual scientists in neighboring offices to
+  download the same data onto their separate private stores.
 \end{answer}
 
 \pagebreak
@@ -1978,6 +2083,14 @@ Overview
   Finally, references are also needed to support the statements made
   in the paper. My specific comments below highlights many of the
   missing references.
+
+  \begin{answer}
+    We thank the reviewer for a thorough and knowledgeable reading of
+    the paper. In the revised text, we have addressed explicitly the
+    question of intended audience, \plref{RC1-Overview-1} Re the point
+    about references, see below the answer to RC1-15. Several
+    additional citations have been added as well.
+  \end{answer}
 \item Lastly, Section 3.4 needs rewritten. It is very confusing. There
   are lots of recommendations. In places, the language reads like
   these are a requirement. In other places, the prose basically say
@@ -2215,6 +2328,27 @@ Specific Comments
   time in this scheme? Many centers make their data public after a
   period of time. It seems that the data files will need to be
   rewritten to change the license agreement. Is this the plan?
+
+  \begin{answer}
+    It is not possible to know when someone is using, let alone
+    misusing, data, until someone notices and informs the data
+    provider. We assume here the reviewer means by ``misuse'', a
+    contravention of the license terms. If ``misuse'' is intended to
+    mean mis-interpretation, we rely on the journal peer review
+    process to prevent that.
+
+    Even if such tracking technologies were available, they would be
+    quite intrusive, and quite surely involve privacy violations.
+    However, when data is properly cited following the findings
+    outlined in Section~\ref{sec:cite}, data providers will be able to
+    assess the utility of their data. We believe this will be a
+    substantial advance over current practice.
+
+    As regards a center changing the terms of their license after the
+    data has been published, that will require the issuance of a fresh
+    PID. The terms of use require the user to adhere to the license
+    associated with the PID used.
+  \end{answer}
 \item 35. Page 14, line 1 -- Reference needed (location) of the . .
   ..4.0 International License.
 
@@ -2251,10 +2385,20 @@ Specific Comments
 \item 41. Page 15, line 27 -- collections are static -- How will groups
   correct errors found after the DOI is set? How will corrected data
   be made available? How will users know there are corrections?
+
+  \begin{answer}
+    We have clarified the treatment of errors, \plref{RC1-41}. Users
+    can discover if the data (PIDs) they are using are superseded
+    using the errata service, Section~\ref{sec:errata}.
+  \end{answer}
 \item 42. Page 16, figure 3 caption -- PID architecture . . . - PID is
   not found in the figure. How/What things in figure gets a PID? The
-  current figure caption should read “A cartoon of data generation. .
-  ..”
+  current figure caption should read ``A cartoon of data generation. .
+  ..''
+
+  \begin{answer}
+    Caption to Figure~\ref{fig:pidarch} updated.
+  \end{answer}
 \item 43. Page 16, line 5 -- global Handle registry -- Reference, web
   site needed.
 
@@ -2262,7 +2406,7 @@ Specific Comments
     Added above, \plref{RC1-37}
   \end{answer}
 \item 44. Page 16, line 9 -- CMIP6 Handle service -- Reference, web site
-  location needed.
+  location needed
 
   \begin{answer}
     Added above, \plref{RC1-37}
@@ -2313,6 +2457,10 @@ Specific Comments
   \end{answer}
 \item 51. Page 18, line 4 -- QA nodes -- I assume this is software. As
   written seems like hardware. More is needed.
+
+  \begin{answer}
+    It is indeed hardware. Text updated, \plref{RC1-51}.
+  \end{answer}
 \item 52. Page 19, line 6 -- realms -- Define.
 
   \begin{answer}
@@ -2348,6 +2496,11 @@ Specific Comments
   sites serving them, preprocess the model data -- generating new data
   sets, subsets, averages and so forth. These new data sets should not
   have model PIDs, but their own.
+
+  \begin{answer}
+    This is an excellent point, and we have added clarifying text,
+    \plref{RC1-57}
+  \end{answer}
 \item 58. Page 21, line 4 -- This statement implies that there are some
   CMIP data sets NOT accessible across ESGF. Is this true? More needed
   here. It is not clear what is meant.
@@ -2588,11 +2741,21 @@ General comments
 \item 8 15 The data request concept is not properly introduced. Please
   clarify what it is and what purpose it is intended to serve before
   providing implementation details.
+
+  \begin{answer}
+    Context provided, \plref{RC2-18}
+  \end{answer}
 \item 8 16 I feel that the level of details given on Data Requests far
   exceeds that of other sections. Who are the intended users? Data
   managers or analysts? Is the level of detail really relevant to this
   paper? Frankly, I read it a couple of times and I still don’t
   understand the role it plays.
+
+  \begin{answer}
+    We have rewritten Section~\ref{sec:data-request} at an appropriate
+    level of detail, and hope, with the added context, its key role is
+    now readily understood.
+  \end{answer}
 \item 11 3 If I understand correctly, the single most important factor
   in the growth of data volume between CMIP3 and 5 is the number of
   variables that are archived. Yet, this issue does not appear to be
@@ -2756,6 +2919,14 @@ addressed as the paper gets rewritten:
   rewriting the paper begins. Once it is clear, the goal should be
   stated in the introduction.
 
+  \begin{answer}
+    This is a good point raised by RC1 as well, and we have provided
+    some context, \plref{RC1-Overview-1}. The text and conclusions
+    have been modified as well to make clear the audience and intent.
+    A new section on Historical Context has been added,
+    Section~\ref{sec:history}.
+  \end{answer}
+
   More minor but often typical issues in chronological ordere
 \item Page 2 Line 17 - The statement that by the FAR of the IPCC
   modelling inter comparisons were formalised is untrue. The first
@@ -2786,18 +2957,42 @@ addressed as the paper gets rewritten:
   line: What is the “DREQ” tool. This is an example for the frequent
   jargon with no explanation. Please be more careful as not every
   reader will already know these acronyms.
+
+  \begin{answer}
+    Good point, and we have added context, \plref{RC2-18}. Some
+    unneeded jargon removed.
+  \end{answer}
 \item Page 8, Line 28 - The sentence about the database allowing MIPs
   to do things is another example for jargon. It means nothing to
   someone who doesn’t already know all this. Please explain it better.
   For instance, highlight that different MIPs will request different
   variables, but some will be common. You can’t assume the reader to
   be a CMIP expert and if you do, why write this paper?
+
+  \begin{answer}
+    Section~\ref{sec:data-request} has now been rewritten at what we
+    hope is an appropriate level of detail and context.
+  \end{answer}
 \item Page 9, lines 1-3 - This list is very confusing and requires
   more context.
+
+  \begin{answer}
+    Addressed in the revised Section~\ref{sec:data-request}, bulleted
+    lists removed.
+  \end{answer}
 \item Page 9, lines 16-20: A single paragraph does not deserve it’s own
   subsection. Please correct. The last sentence is another example for
   a sentence from a report that makes little to no sense to an
   independent reader. Please remove those as you rewrite the paper.
+
+  \begin{answer}
+    While this section is indeed quite short, the input4MIPs and
+    obs4MIPs efforts, and their coherence with the overall data
+    design, is an important element and we believe this point will be
+    lost if it is buried in a paragraph somewhere. This point is
+    highlighted and the language on versioning clarified,
+    \plref{RC3-9}
+  \end{answer}
 \item Page 10, Line 6 - The statement on increasing data volumes
   overstates the case if its is not put into context. The Large Hadron
   Collider produces vastly larger data volumes than any set of climate
@@ -2806,8 +3001,16 @@ addressed as the paper gets rewritten:
   one place with all the resources needed ran all the CMIP runs from
   all the models, archiving them would be simple! Distributing them
   might still be challenign though!
+
+  \begin{answer}
+    Context added, \plref{RC3-10}
+  \end{answer}
 \item Page 10, lines 28-29 - What do you mean with “appear to have
   grown”. Has it or not?
+
+  \begin{answer}
+    \plref{RC3-11}
+  \end{answer}
 \item Page 11, line 11 - What is the “CMIP6 Output grid guidance
   document”? If you use it, you need to provide a reference/link to
   it.
