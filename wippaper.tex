@@ -263,10 +263,19 @@ two-way: providing input both to the provisioning of infrastructure
 appropriate to the experimental design, and informing the scientific
 design of the technical (and financial) limits of that infrastructure.
 
-This paper provides a summary of the requirements identified by the
-WIP in the first three years of activity since its formation in 2014,
-and the consequential recommendations -- in the context of existing
-organisational and funding constraints.
+This paper provides a summary of the
+\pllabel{RC1-Overview-1}
+findings by the WIP in the first three years of activity since its
+formation in 2014, and the consequent recommendations -- in the
+context of existing organisational and funding constraints. In the
+text below, we refer to \emph{findings}, \emph{requirements}, and
+\emph{recommendations}. Findings refer to observations about the state
+of affairs: technologies, resource constraints, and the like, based
+upon our analysis. Requirements are design goals that have been shared
+with those building the infrastructure, such as the ESGF software
+stack. Recommendations are our guidance to the community: experiment
+designers, modeling centres, and the users of climate data.
+
 \pllabel{RC1-Overview-1}
 The intended audience for the paper is primarily the scientific
 community around CMIP6. In particular, we aim to show how the
@@ -275,8 +284,11 @@ translates into infrastructural requirements. We hope this will be
 instructive to creators of multi-model experiments as to the resource
 implications of their experimental design, and for data providers
 (modeling centres), explain the sometimes opaque requirements imposed
-upon them as a requisite for participation. Finally, we hope this will
-be of interest to general readers of the journal from other geoscience
+upon them as a requisite for participation. We believe an explanation
+may also be useful who find data acquisition and analysis a technical
+challenge, to understand the design of infrastructure in a
+resource-constrained environment. Finally, we hope this will be of
+interest to general readers of the journal from other geoscience
 fields, illuminating the particular character of global data
 infrastructure for climate data, where the community of users far
 outstrip in numbers and diversity, the Earth system modeling community
@@ -306,7 +318,7 @@ the ``vast machine'' for weather and climate computation and data.
 
 This section lays out some of the the principles and constraints which
 have resulted from the evolution of infrastructure requirements since
-the first CMIP experiment - beginning with the historical context.
+the first CMIP experiment -- beginning with the historical context.
 
 \subsection{Historical Context}
 \label{sec:history}
@@ -347,20 +359,22 @@ for the fledgling international federation, and even after the end of
 CMIP5 proper, the ongoing ESGF has been sustained primarily by small
 amounts of funding at a handful of the ESGF sites. Most ESGF sites
 have had little or no formal operational support. Many of the known
-limitations of the CMIP5 ESGF - both in terms of functionality and
-performance - were a direct consequence of this heritage.
+limitations of the CMIP5 ESGF -- both in terms of functionality and
+performance -- were a direct consequence of this heritage.
 
 With the advent of CMIP6, it was clear that
 \pllabel{RC2-14}
-a fundamental reassessment of requirements would be needed to address
-the evolving scientific and operational requirements. That clarity led
-to the establishment of the WIP, but it has yet to lead to any formal
-joint funding arrangement - the ESGF and the data nodes within it
-remain funded (if at all, many data nodes are marginal activities
-supported on best efforts) by national agencies with disparate
-timescales and objectives. For that reason, the WIP has been able to
-clarify requirements, but has needed to cast the consequences as
-``recommendations''.
+a fundamental reassessment would be needed to address the evolving
+scientific and operational requirements. That clarity led to the
+establishment of the WIP, but it has yet to lead to any formal joint
+funding arrangement -- the ESGF and the data nodes within it remain
+funded (if at all, many data nodes are marginal activities supported
+on best efforts) by national agencies with disparate timescales and
+objectives. Several critical software elements also are being
+developed on volunteer efforts and shoestring budgets. This finding
+has been noted in the US National Academies Report on ``A National
+Strategy for Advancing Climate Modeling'' \citep{ref:nasem2012}, which
+warned of the consequences of inadequate infrastructure funding.
 
 \subsection{Infrastructural Principles}
 \label{sec:infra-principles}
@@ -1463,6 +1477,7 @@ Figure~\ref{fig:qa}.
 \section{Replication}
 \label{sec:replica}
 
+\pllabel{RC3-21}
 The replication strategy is covered in the
 \urlref{https://goo.gl/Bs4Qou}{CMIP6 Replication and Versioning}
 position paper. The recommendations therein are based on the following
@@ -1909,7 +1924,7 @@ of the Pangeo Project (https://pangeo-data.github.io/)
   and ensemble members. To obtain these results, scientists must run
   analysis on significant fractions of the multi-petabyte CMIP
   archives. As anyone who performs such calculations knows, they
-  rarely work on the first try–interactive exploration and
+  rarely work on the first try--interactive exploration and
   visualization of the data is a crucial part of the scientific
   process. However, the computing systems deployed for the analysis of
   CMIP data generally fall far short of producing interactive speeds;
@@ -2016,7 +2031,7 @@ of the Pangeo Project (https://pangeo-data.github.io/)
   scientific payoff from co-locating CMIP data with distributed
   computing resources would be immense, both accelerating
   reproducibility and driving innovation in data analysis
-  methodologies–including new machine learning and artificial
+  methodologies--including new machine learning and artificial
   intelligence techniques. But leveraging full advantage of
   distributed systems for analyzing climate data requires more than
   raw hardware; it also requires software which allows climate
@@ -2106,10 +2121,17 @@ Overview
   these are a requirement. In other places, the prose basically say
   that the recommendations can be ignored. There needs to be some
   priority applied to the discussion. The readers need to know at the
-  beginning of the section what is coming – requirements,
+  beginning of the section what is coming -- requirements,
   recommendations, best practices or what. Each item discussed needs
-  to be clearly defined in one of the bins – requirements,
+  to be clearly defined in one of the bins -- requirements,
   recommendations, etc. Some parts may be able to be deleted.
+
+  \begin{answer}
+    The distinction between findings, requirements, and
+    recommendations is made clear now in the introduction,
+    \plref{RC1-Overview-2}. The section has been considerably edited
+    in response to this comment, and comments below, RC1-20--24.
+  \end{answer}
 \end{enumerate}
 
 Specific Comments
@@ -2401,7 +2423,7 @@ Specific Comments
     can discover if the data (PIDs) they are using are superseded
     using the errata service, Section~\ref{sec:errata}.
   \end{answer}
-\item 42. Page 16, figure 3 caption -- PID architecture . . . - PID is
+\item 42. Page 16, figure 3 caption -- PID architecture . . . -- PID is
   not found in the figure. How/What things in figure gets a PID? The
   current figure caption should read ``A cartoon of data generation. .
   ..''
@@ -2960,7 +2982,7 @@ addressed as the paper gets rewritten:
   \end{answer}
 
   More minor but often typical issues in chronological ordere
-\item Page 2 Line 17 - The statement that by the FAR of the IPCC
+\item Page 2 Line 17 -- The statement that by the FAR of the IPCC
   modelling inter comparisons were formalised is untrue. The first
   formal model inter comparison was AMIP and was reported in 1992.
   (Gates, W. L., 1992: AMIP: The Atmospheric Model Intercomparison
@@ -2971,20 +2993,20 @@ addressed as the paper gets rewritten:
   \begin{answer}
     Agreed, reference added, \plref{RC1-6}.
   \end{answer}
-\item Page 2, Line 18 - Please cite the appropriate paper when
+\item Page 2, Line 18 -- Please cite the appropriate paper when
   referring to the DECK
 
   \begin{answer}
     Citation added, \plref{RC2-7}
   \end{answer}
-\item Page 4, Figure 1 - Most dots on this figure are in the city the
+\item Page 4, Figure 1 -- Most dots on this figure are in the city the
   node is located. The one in Australia is in the middle of the
   desert. Canberra is not. Please correct.
 
   \begin{answer}
     See reply to RC2-12.
   \end{answer}
-\item Page 8, Line 17 - What is “The data request”. This needs an
+\item Page 8, Line 17 -- What is “The data request”. This needs an
   introductory sentence as only people in the know will know. Same
   line: What is the “DREQ” tool. This is an example for the frequent
   jargon with no explanation. Please be more careful as not every
@@ -2994,7 +3016,7 @@ addressed as the paper gets rewritten:
     Good point, and we have added context, \plref{RC2-18}. Some
     unneeded jargon removed.
   \end{answer}
-\item Page 8, Line 28 - The sentence about the database allowing MIPs
+\item Page 8, Line 28 -- The sentence about the database allowing MIPs
   to do things is another example for jargon. It means nothing to
   someone who doesn’t already know all this. Please explain it better.
   For instance, highlight that different MIPs will request different
@@ -3005,7 +3027,7 @@ addressed as the paper gets rewritten:
     Section~\ref{sec:data-request} has now been rewritten at what we
     hope is an appropriate level of detail and context.
   \end{answer}
-\item Page 9, lines 1-3 - This list is very confusing and requires
+\item Page 9, lines 1-3 -- This list is very confusing and requires
   more context.
 
   \begin{answer}
@@ -3025,7 +3047,7 @@ addressed as the paper gets rewritten:
     highlighted and the language on versioning clarified,
     \plref{RC3-9}
   \end{answer}
-\item Page 10, Line 6 - The statement on increasing data volumes
+\item Page 10, Line 6 -- The statement on increasing data volumes
   overstates the case if its is not put into context. The Large Hadron
   Collider produces vastly larger data volumes than any set of climate
   models ever will! It is important to clarify that the challenge is
@@ -3037,20 +3059,20 @@ addressed as the paper gets rewritten:
   \begin{answer}
     Context added, \plref{RC3-10}
   \end{answer}
-\item Page 10, lines 28-29 - What do you mean with “appear to have
+\item Page 10, lines 28-29 -- What do you mean with “appear to have
   grown”. Has it or not?
 
   \begin{answer}
     \plref{RC3-11}
   \end{answer}
-\item Page 11, line 11 - What is the “CMIP6 Output grid guidance
+\item Page 11, line 11 -- What is the “CMIP6 Output grid guidance
   document”? If you use it, you need to provide a reference/link to
   it.
 
   \begin{answer}
     References visible now, see answer to RC1-15.
   \end{answer}
-\item Page 11, line 16-18 - To an outsider to the climate community
+\item Page 11, line 16-18 -- To an outsider to the climate community
   this appears insane! There is only one real calendar and it has to
   do with the Earth going around the sun in a certain unit of time. It
   would be worth commenting on the future of this, as it implies a
@@ -3061,7 +3083,7 @@ addressed as the paper gets rewritten:
     Good point :-). An explanation of the calendar issue for
     ``outsiders'' has been added, \plref{RC3-13}.
   \end{answer}
-\item Page 11, line 23-24 - Again, to an outsider this sounds strange.
+\item Page 11, line 23-24 -- Again, to an outsider this sounds strange.
   How can infrastructure that does relatively straightforward analysis
   be overburdened? Isn’t that because the way this is funded is
   inadequate. If you agree, isn’t important to point this out in this
@@ -3073,56 +3095,57 @@ addressed as the paper gets rewritten:
     \plref{RC3-14}. We have added a discussion in the Conclusion
     section about the funding constraints.
   \end{answer}
-\item Page 11, line 25 - By now I had now idea that there were two
+\item Page 11, line 25 -- By now I had now idea that there were two
   issues. Please remove this first and second bit. The first issue was
   several already!
 
   \begin{answer}
     The numbering has been removed, \plref{RC2-21}.
   \end{answer}
-\item Page 12, line 5 - If the results are public, please cite where
+\item Page 12, line 5 -- If the results are public, please cite where
   and how the reader can access them.
 
   \begin{answer}
     References visible now, see answer to RC1-15.
   \end{answer}
-\item Page 12, line 14 - Where is the WIP website? Please add a link.
+\item Page 12, line 14 -- Where is the WIP website? Please add a link.
 
   \begin{answer}
     References visible now, see answer to RC1-15.
   \end{answer}
-\item Page 12, line 29-30 - Jargon. We don’t know what a Tier1 node
+\item Page 12, line 29-30 -- Jargon. We don’t know what a Tier1 node
   is, let alone that it has a manager. Explain or remove!
 
   \begin{answer}
     \plref{RC3-18}
   \end{answer}
-\item Page 14, line 2 - PCMDI website - please cite properly by adding
+\item Page 14, line 2 -- PCMDI website -- please cite properly by adding
   the link.
 
   \begin{answer}
     References visible now, see answer to RC1-15.
   \end{answer}
-\item Page 14, line 20 - O(10ˆ6), 10ˆ6 what? Add units.
+\item Page 14, line 20 -- O(10ˆ6), 10ˆ6 what? Add units.
 
   \begin{answer}
     It is a dataset count as stated, no units.
   \end{answer}
-\item Page 20, line 26 - A good example of overdoing the WIP(ping).
+\item Page 20, line 26 -- A good example of overdoing the WIP(ping).
   The reader does not care where the replication strategy is covered.
   They want to know what there authors of this paper have to say about
   replication.
 
   \begin{answer}
-    Much less WIPping in the new draft, see answer to RC3-1.
+    \plref{RC3-21}. In general there is much less WIPping in the new
+    draft, see answer to RC3-1.
   \end{answer}
-\item Page 21, line 21 - Jargon. What is the CDNOT group? Please
+\item Page 21, line 21 -- Jargon. What is the CDNOT group? Please
   explain.
 
   \begin{answer}
     The CDNOT was introduced above, \plref{RC3-22}.
   \end{answer}
-\item Page 23, line 21 - There seems to be only one subsection, so why
+\item Page 23, line 21 -- There seems to be only one subsection, so why
   have it? Please remove the heading.
 
   \begin{answer}
@@ -3130,7 +3153,7 @@ addressed as the paper gets rewritten:
     independent piece, deserving of its own section, in our
     estimation.
   \end{answer}
-\item Section 8 - I was disappointed by this section, as I was
+\item Section 8 -- I was disappointed by this section, as I was
   expecting a summary of the main challenges and recommendations for
   solutions. I feel some of the challenges need to be spelled out
   here. For instance, funding for the activities described here is
@@ -3139,12 +3162,12 @@ addressed as the paper gets rewritten:
   Can the world continue to scramble its way through this? Thoughts?
   Other big issues: Doing more and more in CMIP (more models, more
   experiments, more users) cannot be sustained unless investment into
-  the enterprise gets better coordinated - any role for international
+  the enterprise gets better coordinated -- any role for international
   organisations to help with this? Many of the issues are discussed
   are the result of accepting the status quo in distributed climate
   modelling. Should we? Are there more sensible alternatives?
-\item Appendix A - Might be nice to add links to each of these reports
-  (or the main page where they can all be found).
+\item Appendix A -- Might be nice to add links to each of these
+  reports (or the main page where they can all be found).
 
   \begin{answer}
     References visible now, see answer to RC1-15.
