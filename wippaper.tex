@@ -1290,17 +1290,17 @@ list of all PIDs referenced).
 The implementation plan describes methods for generating and
 registering Handles using an asynchronous messaging system known as
 RabbitMQ. This system, designed in collaboration with ESGF developers
-and shown in Figure~\ref{fig:pidflow}, guarantees, for example, that PIDs are
-correctly generated in accordance with the versioning guidelines. The
-CMIP6 handle system builds on the idea of tracking-ids used in CMIP5,
-but with a more rigorous quality control to ensure that new PIDs are
-generated when data are modified. The dataset and file Handles are
-also associated with basic metadata, called PID Kernel information
-\citep{ref:zhouetal2018}, which facilitate the recording of basic
-provenance information. Datasets and files point to each other to bind
-the granularities together. In addition, dataset kernel information
-refers to previous and later versions, errata information and
-replicas, explained in more detail in the position paper.
+and shown in Figure~\ref{fig:pidflow}, guarantees, for example, that
+PIDs are correctly generated in accordance with the versioning
+guidelines. The CMIP6 handle system builds on the idea of tracking-ids
+used in CMIP5, but with a more rigorous quality control to ensure that
+new PIDs are generated when data are modified. The dataset and file
+Handles are also associated with basic metadata, called PID Kernel
+information \citep{ref:zhouetal2018}, which facilitate the recording
+of basic provenance information. Datasets and files point to each
+other to bind the granularities together. In addition, dataset kernel
+information refers to previous and later versions, errata information
+and replicas, explained in more detail in the position paper.
 
 \subsection{Quality Assurance}
 \label{sec:qa}
@@ -1402,7 +1402,7 @@ experimental design has been translated into structured text
 documents, already available from ES-DOC. ES-DOC has constructed CVs
 for the description of the CMIP6 standard model realms
 \pllabel{RC1-52}
-CMIP terminology for climate subsystems, such as ``ocean'' or
+(CMIP terminology for climate subsystems, such as ``ocean'' or
 ``atmosphere''), including a set of short tables
 (\emph{specialisations}, in ES-DOC terminology) for each realm.
 \pllabel{RC1-53}
@@ -1465,14 +1465,15 @@ the scientific process.
 In keeping with the ``dataset-centric rather than system-centric''
 approach (Item~\ref{snap} in Section~\ref{sec:principles}), a user
 will be directly linked to documentation from each dataset. This is
-done in CMIP6 by \pllabel{RC1-55} adding a required global attribute
-\texttt{further\_info\_url} in file headers pointing to the associated
-CIM document, which will serve as the landing page for documentation
-from which further exploration (by humans or software) will take
-place. The form of this URL is standard and can be software-generated:
-CMOR, for instance, will automatically add it. The existence and
-functioning of the landing page is assured in Stage~M3 of
-Figure~\ref{fig:qa}.
+done in CMIP6 by
+\pllabel{RC1-55}
+adding a required global attribute \texttt{further\_info\_url} in file
+headers pointing to the associated CIM document, which will serve as
+the landing page for documentation from which further exploration (by
+humans or software) will take place. The form of this URL is standard
+and can be software-generated: CMOR, for instance, will automatically
+add it. The existence and functioning of the landing page is assured
+in Stage~M3 of Figure~\ref{fig:qa}.
 
 \section{Replication}
 \label{sec:replica}
