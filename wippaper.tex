@@ -6,8 +6,7 @@
 % page/line labeling and referencing
 % from http://goo.gl/HvS9BK
 \newcommand{\pllabel}[1]{\label{p-#1}\linelabel{l-#1}}
-\newcommand{\plref}[1]{\mbox{see page \pageref{p-#1}, line
-    \lineref{l-#1}.}}
+\newcommand{\plref}[1]{see page~\pageref{p-#1}, line~\lineref{l-#1}.}
 % answer environment for reviewer responses
 \newenvironment{answer}{\color{blue}}{}
 \usepackage{enumitem}
@@ -263,18 +262,18 @@ two-way: providing input both to the provisioning of infrastructure
 appropriate to the experimental design, and informing the scientific
 design of the technical (and financial) limits of that infrastructure.
 
-This paper provides a summary of the
-\pllabel{RC1-Overview-1}
-findings by the WIP in the first three years of activity since its
-formation in 2014, and the consequent recommendations -- in the
-context of existing organisational and funding constraints. In the
-text below, we refer to \emph{findings}, \emph{requirements}, and
-\emph{recommendations}. Findings refer to observations about the state
-of affairs: technologies, resource constraints, and the like, based
-upon our analysis. Requirements are design goals that have been shared
-with those building the infrastructure, such as the ESGF software
-stack. Recommendations are our guidance to the community: experiment
-designers, modeling centres, and the users of climate data.
+This paper provides a summary of the findings by the WIP in the first
+three years of activity since its formation in 2014, and the
+consequent recommendations -- in the context of existing
+organisational and funding constraints.
+\pllabel{RC1-Overview-2}
+In the text below, we refer to \emph{findings}, \emph{requirements},
+and \emph{recommendations}. Findings refer to observations about the
+state of affairs: technologies, resource constraints, and the like,
+based upon our analysis. Requirements are design goals that have been
+shared with those building the infrastructure, such as the ESGF
+software stack. Recommendations are our guidance to the community:
+experiment designers, modeling centres, and the users of climate data.
 
 \pllabel{RC1-Overview-1}
 The intended audience for the paper is primarily the scientific
@@ -864,29 +863,36 @@ $1^\circ\times 1^\circ$ grid), with extended discussion of the
 benefits and losses due to regridding
 \citep[see][]{ref:griffiesetal2014,ref:griffiesetal2016}.
 \pllabel{RC3-14}
-
 Regridding is burdensome on many grounds: first, it requires
 considerable expertise to choose appropriate algorithms for particular
 variables, for instance, we may need ones that guarantee exact
 conservation for scalars or preservation of streamlines for vector
 fields may be a requirement. Second, it can be expensive in terms of
-computation and storage. Regridding remains a contentious topic, and
-owing to a lack of consensus, the recommendations on regridding remain
-in flux. The \urlref{https://goo.gl/wVtm5t}{CMIP6 Output Grid Guidance
-  document} outlines a number of possible recommendations, including
-the provision of ``weights'' to a target grid. Many of the
-considerations around regridding, particularly for ocean data in
-CMIP6, are discussed at length in \cite{ref:griffiesetal2016}. There
-is a similar lack of consensus around common \emph{calendar} for
-particular experiments.
-\pllabel{RC3-13}
-In cases such as a long-running control simulation where all years are
-equivalent and of no historical significance, it is customary in this
-community to use simplified calendars -- such as a Julian, a
-``noleap'' (365-day) or ``equal-month'' (360-day) calendar -- rather
-than the Gregorian, which can vastly simplify analysis. However,
-comparison across datasets using incommensurate calendars can be a
-frustrating burden on the end-user. There is no consensus at this
+computation and storage. Finally, regridding is irreversible (thus
+amounting to ``lossy'' compression) and non-commutative with certain
+basic arithmetic operations such as multiplication (i.e., the product
+of regridded variables does not in general equal the regridded output
+of the product on the native grid). The same, it may be noted, is true
+of time-averaging and other operations long used in the field: much
+analysis of CMIP output is performed on monthly-averaged data, which
+is ``lossy'' compression along the time axis relative to the model's
+time resolution.
+
+Regridding remains a contentious topic, and owing to a lack of
+consensus, the recommendations on regridding remain in flux. The
+\urlref{https://goo.gl/wVtm5t}{CMIP6 Output Grid Guidance document}
+outlines a number of possible recommendations, including the provision
+of ``weights'' to a target grid. Many of the considerations around
+regridding, particularly for ocean data in CMIP6, are discussed at
+length in \cite{ref:griffiesetal2016}. There is a similar lack of
+consensus around common \emph{calendar} for particular experiments.
+\pllabel{RC3-13} In cases such as a long-running control simulation
+where all years are equivalent and of no historical significance, it
+is customary in this community to use simplified calendars -- such as
+a Julian, a ``noleap'' (365-day) or ``equal-month'' (360-day) calendar
+-- rather than the Gregorian, which can vastly simplify analysis.
+However, comparison across datasets using incommensurate calendars can
+be a frustrating burden on the end-user. There is no consensus at this
 point on this issue.
 
 As outlined below in Section~\ref{sec:replica}, both ESGF data nodes
@@ -902,7 +908,8 @@ expressed a preference of standard grid data for their analysis, as
 regridding from disparate grids increases the complexity of their
 already overburdened infrastructure.
 
-The second is the issue of data compression. netCDF4, which is the
+A second method of data reduction for the purposes of storage and
+transmission, is the issue of data compression. netCDF4, which is the
 recommended for CMIP6 data, includes an option for lossless
 compression or deflation \citep{ref:zivlempel1977} that relies on the
 same technique used in standard tools such as \texttt{gzip}. In
@@ -922,20 +929,22 @@ temporal coherence.
 
 Some in the community argue for the use of more aggressive
 \emph{lossy} compression methods \citep{ref:bakeretal2016}, but the
-WIP, after consideration, believes the loss of precision entailed by
-such methods, and the consequences for scientific results, require
-considerably more evaluation by the community before such methods can
-be accepted as common practice.
+community, after consideration, believes the loss of precision
+entailed by such methods, and the consequences for scientific results,
+require considerably more evaluation by the community before such
+methods can be accepted as common practice. As noted above, some
+methods of lossy compression such as time-averaging, have long been
+common practice.
 
 Given the options above, we undertook a systematic study of the
 behavior of typical model output files under lossless compression, the
-results of which are \urlref{https://goo.gl/qkdDnn}{publicly
-  available}. The study indicates that standard \texttt{zlib}
-compression in the netCDF4 library with the settings of
-\texttt{deflate=2} (relatively modest, and computationally
-inexpensive), and \texttt{shuffle} (which ensures better
-spatiotemporal homogeneity) ensures the best compromise between
-increased computational cost and reduced data volume. For an ESM,
+results of which are \href{https://goo.gl/qkdDnn}{publicly available}.
+The study indicates that standard \texttt{zlib} compression in the
+netCDF4 library with the settings of \texttt{deflate=2} (relatively
+modest, and computationally inexpensive), and \texttt{shuffle} (which
+ensures better spatiotemporal homogeneity) ensures the best compromise
+between increased computational cost and reduced data volume. For an
+ESM,
 \pllabel{RC1-25}
 we expect a total savings of about 50\%, with ocean, ice, land realms
 getting the most savings (owing to large areas of the globe that are
@@ -943,11 +952,11 @@ masked), and atmospheric data the least. This 50\% estimate has been
 verified with sample output from some models preparing for CMIP6.
 
 The \urlref{https://goo.gl/iNBQ9m}{DREQ} alluded to above in
-Section~\ref{sec:dreq} allows us to make a systematic assessment of these
-considerations. The tool expects one to input a model's resolution
-along with the experiments that will be performed and the data one
-intends to save (using DREQ's \emph{priority} attribute). With this
-information
+Section~\ref{sec:dreq} allows us to make a systematic assessment of
+these considerations. The tool expects one to input a model's
+resolution along with the experiments that will be performed and the
+data one intends to save (using DREQ's \emph{priority} attribute).
+With this information
 % We are actually capturing this information in the registered content
 % for the model source_id entries - see http://rawgit.com/WCRP-CMIP/CMIP6_CVs/master/src/CMIP6_source_id.html
 % The json entry contains resolutions for each active model realm
@@ -961,30 +970,26 @@ information
 %  (2.1 petabytes if only high-priority variables were reported), not too 
 % far from the actual volume.  I'll send you the analysis if you like.
 % The modeling groups had access to this information.
-\urlref{https://goo.gl/Ezz5v3}{dreqDataVol.py}, which is a tool 
-built atop DREQ available from the WIP website calculates the
-data volume that will be produced. While similar
-analyses were undertaken at PCMDI for CMIP5, this tool puts this
-capability in the hands of the modeling centers themselves.
-\pllabel{RC1-26}
-In particular, the cross-MIP data requests (variables requested by one
-MIP from another MIP, or the DECK) require a sophisticated
-understanding of the experimental protocols. The experience in many
-modeling centers currently is that data volume estimates are only
-available when the production runs have begun. Reliable estimates
-\emph{ahead of time} based on nothing more than the experimental
-protocols and model resolutions will be of use for planning and
-acquisitions.
+\pllabel{RC2-23}
+one may calculate the data volume that will be produced. For instance,
+analyses available
+\href{http://clipc-services.ceda.ac.uk/dreq/tab01_3_3.html}{DREQ site}
+indicate that if a center were to undertake every single experiment
+(all tiers) and save every single variable requested (all priorities)
+at a ``typical'' resolution, it would generate 650~TB of data, using
+the guidelines above. Given 75 participating models, this translates
+to an upper bound of 50~PB for the entire CMIP6 archive. This assumes
+an overall 50\% compression rate, which has been approximately
+verified for at least one CMIP6 model, and whose compression rates
+should be quite typical.
 
-To make a preliminary estimate of total data volume, the WIP carried
-out a survey of modeling centers in 2016, asking them for their
-expected model resolutions, and intentions of participating in various
-experiments. Based on that survey, we initially have forecast a
+The WIP carried out a survey of modeling centers in 2016, asking them
+for their expected model resolutions, and intentions of participating
+in various experiments. Based on that survey, we initially have
+forecast a
 \pllabel{RC1-27}
-compressed data volume of 18~PB for CMIP6. This assumes an overall
-50\% compression rate, which has been approximately verified for at
-least one CMIP6 model, and whose compression rates should be quite
-typical. This number, 18~PB, is about 6 times the CMIP
+compressed data volume of 18~PB for CMIP6. This number, 18~PB, is
+about 6 times the CMIP
 \pllabel{RC1-28}
 (including all CMIPs, but the dominant component is CMIP5) archive
 size, and can be explained in terms of the compounding of modest
@@ -995,6 +1000,19 @@ were noted above. There is no comparable jump between CMIP5 and CMIP6.
 CMIP6's innovative DECK/endorsed-MIP structure should thus be seen as
 an extension and an attempt to impose a rational order on CMIP5,
 rather than a qualitative leap.
+
+Similar analyses were undertaken at PCMDI for CMIP5. For CMIP6, tools
+have been made available that put this capability in the hands of the
+modeling centers themselves.
+\pllabel{RC1-26}
+In particular, the cross-MIP data requests (variables requested by one
+MIP from another MIP, or the DECK) require a sophisticated
+understanding of the experimental protocols. The experience in many
+modeling centers currently is that data volume estimates are only
+available when the production runs have begun. Reliable estimates
+\emph{ahead of time} based on nothing more than the experimental
+protocols and model resolutions will be of use for planning and
+acquisitions.
 
 % if you want to discuss different grids, perhaps here is a better place for
 % that.
@@ -1705,86 +1723,124 @@ position paper.
 The WIP was formed in response to the explosive growth of CMIP between
 CMIP3 and CMIP5, and charged with studying and making recommendations
 about the global data infrastructure needed to support CMIP6 and the
-future evolution of intercomparison projects. Our findings reflect 
-the fact that CMIP is no longer a cottage industry, and a more formal 
-approach is needed. The resulting recommendations stop well short of 
-any sort of global governance of this ``vast machine'', but list many 
-areas where, with a relatively light touch, beneficial order and 
-control result. We emphasize here again some of the key aspects of 
-the design:
+future evolution of intercomparison projects. Our findings reflect the
+fact that CMIP is no longer a cottage industry, and a more formal
+approach is needed. Several of the findings have been translated into
+requirements on the design of the underlying software infrastructure
+for data production and distribution. We have separated infrastructure
+development into requirements, implementation and operations phases,
+and provided recommendations on the most efficient use of scarce
+resources. The resulting recommendations stop well short of any sort
+of global governance of this ``vast machine'', but list many areas
+where, with a relatively light touch, beneficial order and control,
+and resource efficiencies result.
 
-\begin{itemize}
-\item The design is now dataset-centric rather than system-centric:
-  see for example the discussion of licensing
-  (Section~\ref{sec:licensing}) and dataset tracking
-  (Section~\ref{sec:pid}). This relieves a considerable design burden
-  from the ESGF software stack, and further, recognizes that the data
-  ecosystem extends well beyond the reach of any software system and
-  that data will be used and reused in myriad ways outside anyone's
-  control.
-\item Standards, conventions, and vocabularies are now stored in
-  machine-readable structured text formats like XML and JSON, thereby
-  enabling software to automate aspects of the process. We believe
-  this meets an existing urgent need, with some modeling centers
-  already exploiting this structured information to mitigate against
-  the overwhelming complexity of experimental protocols. Moreover, we
-  believe this will also enable and encourage unanticipated future use
-  of the information in developing new software tools for exploiting
-  it as technologies evolve. Our ability to predict (whether correctly
-  or not remains to be seen) the expected CMIP6 data volume is one
-  such unexpected outcome.
-\item The infrastructure allows user communities to assess the costs
-  of participation as well as the benefits. For example, we believe
-  the new PID-based methods of dataset tracking will allow centers to
-  measure which data has value downstream. The importance of citations
-  and fair credit for data providers is recognized, with a design that
-  facilitates and encourages proper citation practices.
-\end{itemize}
+One key finding that informs everything is that that universally, it
+appears that the critical importance of such infrastructure is
+under-appreciated. Building infrastructure using research funds puts
+the system in an untenable position, with a fundamental contradiction
+at its heart: infrastructure by its nature should be reliable, robust,
+based on what is proven to work, and invisible, whereas scientific
+research is hypothesis-driven, risky and novel, and its details widely
+broadcast. While recommendations have been made at the highest level
+\citep[e.g.,][]{ref:nasem2012}, there is little progress on this front
+to report. Several of the key pieces of infrastructure software
+described here are built and tested by volunteers, or short-term
+project staff.
+
+The central theme of this paper is the inversion of the design of
+federated data distribution, to make it \emph{dataset-centric rather
+  than system-centric}. We believe that this one aspect of the design
+considerably reduces systemic risk, and allows the size of the system
+to scale up and down as resource constraints allow. Individual
+scientists, or institutions, or consortia, will be able to pool
+resources and share data at will, with relatively light requirements
+related to licensing (Section~\ref{sec:licensing}) and dataset
+tracking (Section~\ref{sec:pid}). This relieves a considerable design
+burden from the ESGF software stack, and further, recognizes that the
+data ecosystem extends well beyond the reach of any software system
+and that data will be used and reused in myriad ways outside anyone's
+control.
+
+A second key element of the design is the insistence on
+\emph{machine-readable experimental protocols}. Standards,
+conventions, and vocabularies are now stored in machine-readable
+structured text formats like XML and JSON, thereby enabling software
+to automate aspects of the process. This meets an existing urgent
+need, with some modeling centers already exploiting this structured
+information to mitigate against the overwhelming complexity of
+experimental protocols. Moreover, this will also enable and encourage
+unanticipated future use of the information in developing new software
+tools for exploiting it as technologies evolve. Our ability to predict
+(whether correctly or not remains to be seen) the expected CMIP6 data
+volume is one such unexpected outcome.
+
+Finally, the infrastructure allows user communities to assess the
+\emph{costs of participation} as well as the benefits. For example, we
+believe the new PID-based methods of dataset tracking will allow
+centers to measure which data has value downstream. The importance of
+citations and fair credit for data providers is recognized, with a
+design that facilitates and encourages proper citation practices.
+Tools have been added and made available that allow centers, and the
+CMIP itself, to estimate data requirements of each experimental
+protocol. Ancillary activities such as CPMIP add to this an accounting
+of the computational burden of CMIP6.
 
 Certainly not all issues are resolved, and the validation of some of
-our findings will have to await the outcome of CMIP6. Nevertheless, we
-believe the discussion in this article provides a sound basis for
-beginning to think about the future.
+our findings will have to await the outcome of CMIP6. There is no
+community consensus on some proposed design elements, such as standard
+grids. Some features long promised, such as server-side analytics
+(``bringing analysis to the data'') are yet to mature, although many
+exciting efforts are underway, for instance using cloud technologies.
+Nevertheless, the discussion in this article provides a sound basis
+for beginning to think about the future.
 
-\begin{itemize}
-\item There is an increasing blurring of the boundary between weather
-  and climate as time and space scales merge \citep{ref:hoskins2013}.
-  This will increasingly entrain new communities into
-  \pllabel{RC1-64}
-  climate data ecosystems, each with their own modeling and analysis
-  practices, standards and conventions, and other issues. The
-  establishment of the WIP was a crucial step in enhancing the
-  capabilities, standards, protocols and policies around the CMIP
-  enterprise. Earlier discussions on the scope of the WIP also
-  suggested a broader scope for the panel on the longer-term, to
-  coordinate not only the CMIP data aspects (including for example,
-  the CORDEX project \citep{ref:lakeetal2017}, which also relies upon
-  ESGF for data dissemination, see Figure~\ref{fig:esgf}) but also the
-  climate prediction (seasonal to decadal) issues and corresponding
-  observational and reanalysis aspects.We would recommend a closer
-  engagement between these communities in planning the future of
-  global data infrastructure.
-\item As we have noted, the nature of publication is changing
-  \citep[see e.g][]{ref:davidetal2016}. In the future, datasets and
-  software with provenance information will be first-class entities of
-  scientific publication, alongside the traditional peer-reviewed
-  article. In fact it is likely that those will increasingly feature
-  % I don't understand what is being said in this next bit.  Can it
-  % be reworded/clarified somehow?
-  in the grey literature and scientific social media: one can imagine
-  blog posts and direct annotations on the published literature using
-  analysis directly performed on datasets using their PIDs. Data
-  analytics at large scale is increasingly moving toward machine
-  learning and other directly data-driven methods of analysis, which
-  will also be dependent on data with provenance tracking. We believe
-  our community needs to pay increasing heed to the status of their
-  data and software.
-\end{itemize}
+The future brings with it new challenges. First among these is an
+expansion of the data ecosystem. There is an increasing blurring of
+the boundary between weather and climate as time and space scales
+merge \citep{ref:hoskins2013}. This will increasingly entrain new
+communities into \pllabel{RC1-64} climate data ecosystems, each with
+their own modeling and analysis practices, standards and conventions,
+and other issues. The establishment of the WIP was a crucial step in
+enhancing the capabilities, standards, protocols and policies around
+the CMIP enterprise. Earlier discussions on the scope of the WIP also
+suggested a broader scope for the panel on the longer-term, to
+coordinate not only the CMIP data aspects (including for example, the
+CORDEX project \citep{ref:lakeetal2017}, which also relies upon ESGF
+for data dissemination) but also the climate prediction (seasonal to
+decadal) issues and corresponding observational and reanalysis
+aspects.We would recommend a closer engagement between these
+communities in planning the future of a seamless global data
+infrastructure.
 
-% not sure we want to promise this.  We risk not being able to take
-% care of the the MIPs properly if we expand.
-The WIP is well-positioned to extend its activities as these
-developments continue.
+A further challenge the WIP, and the community must grapple with is
+the evolution of scientific publication in the digital age, beyond the
+peer-reviewed paper. We have noted above that the nature of
+publication is changing \citep[see e.g][]{ref:davidetal2016}. Journals
+and academies increasingly insist upon transparency with respect to
+code and data to ensure reproducibility. In the future, datasets and
+software with provenance information will be first-class entities of
+scientific publication, alongside the traditional peer-reviewed
+article. In fact it is likely that those will increasingly feature in
+the grey literature and scientific social media: one can imagine blog
+posts and direct annotations on the published literature around CMIP6
+using analysis directly performed on datasets using their PIDs. Data
+analytics at large scale is increasingly moving toward machine
+learning and other directly data-driven methods of analysis, which
+will also be dependent on data labeled with machine-readable metadata.
+Our community needs to pay increasing heed to the status of their
+data, metadata, and software in the light of these developments.
+
+Future development of the WIP's activities beyond the delivery of
+CMIP6 will include an analysis of how the infrastructure design
+performed during CMIP6. That analysis, combined with our assessment of
+technological change and emerging novel applications, will inform
+future design of infrastructure software, as well as recommendations
+to the designers of experiments on how best to fit their protocols
+within resource limitations. The vision, as always, is for an open
+infrastructure that is reliable and invisible, and allows Earth system
+scientists to be nimble in the design of collaborative experiments,
+creative in their analysis, and rapid in the delivery of the results.
 
 \appendix
 
@@ -1844,7 +1900,8 @@ developments continue.
   available at \url{https://goo.gl/qkdDnn}, courtesy Garrett Wright.
 \item The software and data used for the prediction of data volumes
   are available at \url{https://goo.gl/Ezz5v3}, courtesy Nalanda
-  Sharadjaya.
+  Sharadjaya. Much of this functionality has now been absorbed into
+  DREQ itself.
 \end{itemize}
 
 Most of the software referenced here for which the WIP is providing
@@ -2066,7 +2123,7 @@ of the Pangeo Project (https://pangeo-data.github.io/)
   We agree also about the point about wasteful duplication of data,
   and the potential for cloud storage and computing to alleviate this
   problem. However, by the ``embracing the dark repository'' approach,
-  we hope (as shown in Figure~\ref{fig:dark}), we hope to chart a path
+  we hope (as shown in Figure~\ref{fig:dark}) to chart a path
   forward where user communities, at large institutions or consortia
   around particular scientific interests, can build their own shared
   repositories, which can be thought of as private clouds. The most
@@ -2277,21 +2334,55 @@ Specific Comments
   conflict with line 11 and page 12, line 32. As I note in my general
   comments section, this section is not well written or thought out.
   What message do the authors want to convey to the readers? Rewrite.
+
+  \begin{answer}
+    We have considerably rewritten Section~\ref{sec:dvol} for clarity,
+    following this reviewer's and others' recommendation.
+  \end{answer}
 \item 21. Page 11, lines 4-24 -- Regridding -- I understand the Griffies
   papers have a long discussion of the advantages and disadvantages of
   regridding, but a summary of those papers need to be presented here.
   The whole discussion of the disadvantages of regridding is missing
   here.
+
+  \begin{answer}
+    Discussion added, \plref{RC3-14}.
+  \end{answer}
 \item 22. Page 11, lines 4-24 -- Common grid -- So what are the authors
   recommendations for a common grid or regridding? If there are none,
   then delete this discussion to just a summary of the Griffies
   papers.
+
+  \begin{answer}
+    The distinction between findings, requirements, and
+    recommendations was made explicit in the introduction,
+    \plref{RC1-Overview-2}. Furthermore, we have made explicit that
+    where there is no consensus, we can but present arguments for and
+    against, as this reviewer has requested. We have duly represented
+    here the debate around regridding, calendars, and data deflation,
+    and noted the lack of consensus. The debate needs to continue, in
+    the literature and in other forums of experimental design, until a
+    compromise is achieved. We have also described, in
+    Section~\ref{sec:pid}, a tracking mechanism to provide data for
+    this debate, in terms of what user preferences are with respect to
+    these issues.
+  \end{answer}
 \item 23. Page 11, lines 32-33 -- Again, what is the recommendation? If
   none, what is the justification for keeping the text?
+
+  \begin{answer}
+    See above.
+  \end{answer}
 \item 24. Page 12, lines 4-10 -- What is the recommendation? If any, it
   needs highlighted. Has the WIP surveyed CMIP users in regard to
   these recommendations? I am worried that many users will not be able
   to handle compressed files or shuffled data files.
+
+  \begin{answer}
+    See answer above. There has been no explicit survey of users in
+    this regard. Shuffling and reinflation are automatic and
+    transparent to the user if using netCDF4 libraries.
+  \end{answer}
 \item 25. Page 12, line 8 -- coupled model -- Define. There are many
   types coupled models in climate. I assume AOGCM and ESMs are in
   view.
@@ -2461,7 +2552,7 @@ Specific Comments
 
   \begin{answer}
     Indeed, a list of PIDs could be very long. In general, journals
-    (including even leading ones such as \emph{Science} do not count
+    (including even leading ones such as \emph{Science}) do not count
     supplementary material against page count limits or costs, nor do
     they include them in print versions, so the length should not be
     an issue.
@@ -2646,6 +2737,30 @@ General comments
   frustrating experience some have had with CMIP5 data access in the
   past.
 
+  \begin{answer}
+    The reviewer raises several excellent points, and addressing those
+    has considerably clarified the text. To begin with, we have
+    (hopefully) addressed some of the stylistic issues, such as the
+    ``abuse'' of bullets, point well taken. Second, we hope the text
+    makes clear that the WIP has indeed taken the temperature of many
+    of the players in this arena (through in-depth consultations, not
+    mass email): we note in particular that data \emph{users} alone
+    are not the target of this temperature-taking: data providers,
+    managers of repositories (official and dark), and users have all
+    been taken into account, and indeed are represented on the WIP
+    itself. We have restructured the document to provide more context,
+    including historical; and considerably rewritten the conclusions
+    with more ``love'', we hope.
+
+    Also, as the reviewer notes, the findings here can be challenged
+    if they are technically incorrect, but if they reflect the current
+    community consensus (or lack thereof), we can but report that in
+    this article, which we have done. The distinction between
+    findings, requirements, and recommendations is made explicit,
+    \plref{RC1-Overview-2} We have strictly followed that nomenclature
+    in the subsequent text.
+  \end{answer}
+
   Detailed comments
 
   Page | Line | Comment
@@ -2659,12 +2774,11 @@ General comments
   to be user-centric?
 
   \begin{answer}
-    Of course, the intent is always to be ``user-centric'' -- that's a
-    ``motherhood'' statement. In practice however, we believe we
-    cannot anticipate all possible user needs, as the users of climate
-    data are very diverse, and the science continues to evolve. This
-    is why we have tried to introduce the notion of a data ecosystem,
-    \plref{RC2-2}.
+    Of course, the intent is always to be ``user-centric''. In
+    practice however, we believe we cannot anticipate all possible
+    user needs, as the users of climate data are very diverse, and the
+    science continues to evolve. This is why we have tried to
+    introduce the notion of a data ecosystem, \plref{RC2-2}.
 
     The distinction we are trying to make here is that there is no
     giant software infrastructure that is itself a single point of
@@ -2732,7 +2846,9 @@ General comments
 
   \begin{answer}
     A more appropriate figure has been substituted, see
-    Figure~\ref{fig:esgf} and \plref{RC2-12}.
+    Figure~\ref{fig:esgf} and \plref{RC2-12}. Here the nodes are
+    mapped to their geographic locations rather than relative to
+    national boundaries.
   \end{answer}
 \item 5 6 It’s not clear to what "which are summarized here" make
   reference to, "fundamental changes" or the "evolving scientific and
@@ -2819,9 +2935,19 @@ General comments
   \end{answer}
 \item 11 4 Please start the paragraph with the recommendation itself.
   Same suggestion applies to second recommendation.
+
+  \begin{answer}
+    Section~\ref{sec:dvol} has been considerably rewritten, and the
+    recommendations restated at the end of the section.
+  \end{answer}
 \item 11 13 Is the reference to the name of the actual python file
   really necessary? I suggest putting links to tools and software in
   appendix B.
+
+  \begin{answer}
+    We have removed the excess detail in the rewrite of
+    Section~\ref{sec:dvol}, \plref{RC2-23}.
+  \end{answer}
 \item 12 20 CMIP archive size. Are you referring to CMIP5? Please
   clarify.
 
@@ -2907,10 +3033,19 @@ General comments
   \end{answer}
 \item 24 24 Bullet list with no proper introduction. Please write a
   proper conclusion.
+
+  \begin{answer}
+    Section~\ref{sec:summary} has been rewritten following reviewer's
+    suggestion.
+  \end{answer}
 \item 25 8 Is that really the message you want to end with? I suggest
   ending with an invitation to the climate science commnuity to
   provide feedback and suggestions, and generally get involved in the
   WIP’s activities.
+
+  \begin{answer}
+    See answer above.
+  \end{answer}
 \end{enumerate}
 
 \pagebreak
@@ -3167,6 +3302,16 @@ addressed as the paper gets rewritten:
   organisations to help with this? Many of the issues are discussed
   are the result of accepting the status quo in distributed climate
   modelling. Should we? Are there more sensible alternatives?
+
+  \begin{answer}
+    Section~\ref{sec:summary} has been considerably rewritten. In it
+    we have mentioned that prior panels including at the US National
+    Academies level, have indeed made this case, but so far to no
+    avail. We have explained how the new dataset-centric design is
+    indeed intended to reduce systemic risk due to infrastructure
+    failure, and allows for a scalable system that is sized at a level
+    appropriate to available resources.
+  \end{answer}
 \item Appendix A -- Might be nice to add links to each of these
   reports (or the main page where they can all be found).
 
