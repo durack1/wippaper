@@ -854,37 +854,44 @@ temporal resolution in the data request. Cross-model analyses already
 cast all data to a common grid in order to evaluate it as an ensemble,
 typically at fairly low resolution. The studies of Knutti and
 colleagues (e.g., \cite{ref:knuttietal2017}) are typically performed
-on relatively coarse grids. We recommend that for most purposes
+on relatively coarse grids. Accordingly for most purposes
 atmospheric data on the ERA-40 grid ($2^\circ\times 2.5^\circ$) would
 suffice, with of course exceptions for experiments like those called
 for by HighResMIP \citep{ref:haarsmaetal2016}. A similar
-recommendation is made for ocean data (the World Ocean Atlas
+conclusion applies for ocean data (the World Ocean Atlas
 $1^\circ\times 1^\circ$ grid), with extended discussion of the
 benefits and losses due to regridding
 \citep[see][]{ref:griffiesetal2014,ref:griffiesetal2016}.
 \pllabel{RC3-14}
-Regridding is burdensome on many grounds: first, it requires
+
+These proposals have not been implemented for CMIP6 for a number
+of reasons. Firstly, regridding is burdensome on many grounds: 
+It requires
 considerable expertise to choose appropriate algorithms for particular
 variables, for instance, we may need ones that guarantee exact
 conservation for scalars or preservation of streamlines for vector
-fields may be a requirement. Second, it can be expensive in terms of
-computation and storage. Finally, regridding is irreversible (thus
+fields may be a requirement; and it can be expensive in terms of
+computation and storage. 
+Secondly, regridding is irreversible (thus
 amounting to ``lossy'' compression) and non-commutative with certain
 basic arithmetic operations such as multiplication (i.e., the product
 of regridded variables does not in general equal the regridded output
-of the product on the native grid). The same, it may be noted, is true
-of time-averaging and other operations long used in the field: much
+of the product on the native grid). This can be problematic for
+budget studies. However, the same issues would apply for 
+time-averaging and other operations long used in the field: much
 analysis of CMIP output is performed on monthly-averaged data, which
 is ``lossy'' compression along the time axis relative to the model's
 time resolution.
 
-Regridding remains a contentious topic, and owing to a lack of
-consensus, the recommendations on regridding remain in flux. The
+These issues have contributed to a lack of consensus in moving forward,
+and the recommendations on regridding remain in flux. The
 \urlref{https://goo.gl/wVtm5t}{CMIP6 Output Grid Guidance document}
 outlines a number of possible recommendations, including the provision
 of ``weights'' to a target grid. Many of the considerations around
 regridding, particularly for ocean data in CMIP6, are discussed at
-length in \cite{ref:griffiesetal2016}. There is a similar lack of
+length in \cite{ref:griffiesetal2016}. 
+
+There is a similar lack of
 consensus around common \emph{calendar} for particular experiments.
 \pllabel{RC3-13} In cases such as a long-running control simulation
 where all years are equivalent and of no historical significance, it
