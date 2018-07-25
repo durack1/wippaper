@@ -38,22 +38,22 @@
 \Author[1,2]{Venkatramani}{Balaji}
 \Author[3]{Karl E.}{Taylor}
 \Author[4]{Martin}{Juckes}
-\Author[5]{Michael}{Lautenschlager}
-\Author[6,2]{Chris}{Blanton}
-\Author[7]{Luca}{Cinquini}
-\Author[8]{S\'ebastien}{Denvil}
+\Author[5,4]{Bryan N.}{Lawrence}
+\Author[6]{Michael}{Lautenschlager}
+\Author[7,2]{Chris}{Blanton}
+\Author[8]{Luca}{Cinquini}
+\Author[9]{S\'ebastien}{Denvil}
 \Author[3]{Paul J.}{Durack}
-\Author[9]{Mark}{Elkington}
-\Author[8]{Francesca}{Guglielmo}
-\Author[8,10]{Eric}{Guilyardi}
-\Author[10]{David}{Hassell}
+\Author[10]{Mark}{Elkington}
+\Author[9]{Francesca}{Guglielmo}
+\Author[9,4]{Eric}{Guilyardi}
+\Author[4]{David}{Hassell}
 \Author[11]{Slava}{Kharin}
-\Author[5]{Stefan}{Kindermann}
-\Author[10,4]{Bryan N.}{Lawrence}
+\Author[6]{Stefan}{Kindermann}
 \Author[1,2]{Sergey}{Nikonov}
-\Author[6,2]{Aparna}{Radhakrishnan}
-\Author[5]{Martina}{Stockhause}
-\Author[5]{Tobias}{Weigel}
+\Author[7,2]{Aparna}{Radhakrishnan}
+\Author[6]{Martina}{Stockhause}
+\Author[6]{Tobias}{Weigel}
 \Author[3]{Dean}{Williams}
 
 
@@ -63,14 +63,14 @@
   USA}
 \affil[3]{PCMDI, Lawrence Livermore National Laboratory, Livermore, CA, USA}
 \affil[4]{Science and Technology Facilities Council, Abingdon, UK}
-\affil[5]{Deutsches KlimaRechenZentrum GmbH, Hamburg, Germany}
-\affil[6]{Engility Inc., NJ, USA}
-\affil[7]{Jet Propulsion Laboratory (JPL), 4800 Oak Grove Drive,
-Pasadena, CA 91109, USA}
-\affil[8]{Institut Pierre-Simon Laplace, CNRS/UPMC, Paris, France}
-\affil[9]{Met Office, FitzRoy Road, Exeter, EX1 3PB, UK}
-\affil[10]{National Center for Atmospheric Science and University of
+\affil[5]{National Center for Atmospheric Science and University of
   Reading, UK}
+\affil[6]{Deutsches KlimaRechenZentrum GmbH, Hamburg, Germany}
+\affil[7]{Engility Inc., NJ, USA}
+\affil[8]{Jet Propulsion Laboratory (JPL), 4800 Oak Grove Drive,
+Pasadena, CA 91109, USA}
+\affil[9]{Institut Pierre-Simon Laplace, CNRS/UPMC, Paris, France}
+\affil[10]{Met Office, FitzRoy Road, Exeter, EX1 3PB, UK}
 \affil[11]{Canadian Centre for Climate Modelling and Analysis, Atmospheric Environment Service, University of Victoria, BC, Canada}
 % \affil[10]{NCAR}
 
@@ -866,20 +866,18 @@ benefits and losses due to regridding
 \citep[see][]{ref:griffiesetal2014,ref:griffiesetal2016}.
 \pllabel{RC3-14}
 
-These proposals have not been implemented for CMIP6 for a number
-of reasons. Firstly, regridding is burdensome on many grounds: 
-It requires
-considerable expertise to choose appropriate algorithms for particular
-variables, for instance, we may need ones that guarantee exact
-conservation for scalars or preservation of streamlines for vector
-fields may be a requirement; and it can be expensive in terms of
-computation and storage. 
-Secondly, regridding is irreversible (thus
-amounting to ``lossy'' compression) and non-commutative with certain
-basic arithmetic operations such as multiplication (i.e., the product
-of regridded variables does not in general equal the regridded output
-of the product on the native grid). This can be problematic for
-budget studies. However, the same issues would apply for 
+This has not been mandated for CMIP6 for a number of reasons. Firstly,
+regridding is burdensome on many grounds: It requires considerable
+expertise to choose appropriate algorithms for particular variables,
+for instance, we may need ones that guarantee exact conservation for
+scalars or preservation of streamlines for vector fields may be a
+requirement; and it can be expensive in terms of computation and
+storage. Secondly, regridding is irreversible (thus amounting to
+``lossy'' data reduction) and non-commutative with certain basic
+arithmetic operations such as multiplication (i.e., the product of
+regridded variables does not in general equal the regridded output of
+the product computed on the native grid). This can be problematic for
+budget studies. However, the same issues would apply for
 time-averaging and other operations long used in the field: much
 analysis of CMIP output is performed on monthly-averaged data, which
 is ``lossy'' compression along the time axis relative to the model's
@@ -893,15 +891,16 @@ of ``weights'' to a target grid. Many of the considerations around
 regridding, particularly for ocean data in CMIP6, are discussed at
 length in \cite{ref:griffiesetal2016}. 
 
-There is a similar lack of
-consensus around common \emph{calendar} for particular experiments.
-\pllabel{RC3-13} In cases such as a long-running control simulation
-where all years are equivalent and of no historical significance, it
-is customary in this community to use simplified calendars -- such as
-a Julian, a ``noleap'' (365-day) or ``equal-month'' (360-day) calendar
--- rather than the Gregorian, which can vastly simplify analysis.
-However, comparison across datasets using incommensurate calendars can
-be a frustrating burden on the end-user. There is no consensus at this
+There is a similar lack of consensus around common \emph{calendar} for
+particular experiments.
+\pllabel{RC3-13}
+In cases such as a long-running control simulation where all years are
+equivalent and of no historical significance, it is customary in this
+community to use simplified calendars -- such as a Julian, a
+``noleap'' (365-day) or ``equal-month'' (360-day) calendar -- rather
+than the Gregorian, which can vastly simplify analysis. However,
+comparison across datasets using incommensurate calendars can be a
+frustrating burden on the end-user. There is no consensus at this
 point on this issue.
 
 As outlined below in Section~\ref{sec:replica}, both ESGF data nodes
