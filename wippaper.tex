@@ -488,11 +488,12 @@ warned of the consequences of inadequate infrastructure funding.
   a service \citep{ref:balajietal2011,ref:schnaseetal2017}. This
   follows the principle of placing analysis close to the data. Some
   centres plan to add resources that combine archival and analysis
-  capabilities (e.g., NCAR's \urlref{https://goo.gl/sYTxC2}{CMIP
-    Analysis Platform}). There are also new efforts to bring climate
-  data storage and analysis to the cloud era
+  capabilities, e.g., NCAR's \urlref{https://goo.gl/sYTxC2}{CMIP
+    Analysis Platform}, or the UK's JASMIN
+  \citep{ref:lawrenceetal2013}.. There are also new efforts to bring
+  climate data storage and analysis to the cloud era
   \citep[e.g][]{ref:duffyetal2015}. Platforms such as
-  \href{http://pangeo-data.org/}{Pangeo} show much promise in this
+  \urlref{http://pangeo-data.org/}{Pangeo} show much promise in this
   realm, and widespread experimentation and adoption is encouraged.
 \item As the experimental design of CMIP has grown in complexity,
   costs both in time and money have become a matter of great concern,
@@ -933,13 +934,13 @@ Some in the community argue for the use of more aggressive
 community, after consideration, believes the loss of precision
 entailed by such methods, and the consequences for scientific results,
 require considerably more evaluation by the community before such
-methods can be accepted as common practice. As noted above, some
-methods of lossy compression such as time-averaging, have long been
-common practice.
+methods can be accepted as common practice. However, as noted above,
+some lossy methods of data reduction such as time-averaging, have long
+been common practice.
 
 Given the options above, we undertook a systematic study of the
 behavior of typical model output files under lossless compression, the
-results of which are \href{https://goo.gl/qkdDnn}{publicly available}.
+results of which are \urlref{https://goo.gl/qkdDnn}{publicly available}.
 The study indicates that standard \texttt{zlib} compression in the
 netCDF4 library with the settings of \texttt{deflate=2} (relatively
 modest, and computationally inexpensive), and \texttt{shuffle} (which
@@ -974,20 +975,19 @@ With this information
 \pllabel{RC2-23}
 one may calculate the data volume that will be produced. For instance,
 analyses available
-\href{http://clipc-services.ceda.ac.uk/dreq/tab01_3_3.html}{DREQ site}
-indicate that if a center were to undertake every single experiment
-(all tiers) and save every single variable requested (all priorities)
-at a ``typical'' resolution, it would generate 650~TB of data, using
-the guidelines above. Given 75 participating models, this translates
-to an upper bound of 50~PB for the entire CMIP6 archive. This assumes
-an overall 50\% compression rate, which has been approximately
-verified for at least one CMIP6 model, and whose compression rates
-should be quite typical.
-
-The WIP carried out a survey of modeling centers in 2016, asking them
-for their expected model resolutions, and intentions of participating
-in various experiments. Based on that survey, we initially have
-forecast a
+\urlref{http://clipc-services.ceda.ac.uk/dreq/tab01_3_3.html}{DREQ
+  site} indicate that if a center were to undertake every single
+experiment (all tiers) and save every single variable requested (all
+priorities) at a ``typical'' resolution, it would generate about
+800~TB of data, using the guidelines above. Given 75 participating
+models, this translates to an upper bound of 60~PB for the entire
+CMIP6 archive, though in practice most centers are planning to perform
+a subset of experiments, and save a subset of variables, based on
+their scientific priorities and available computational and storage
+resources. The WIP carried out a survey of modeling centers in 2016,
+asking them for their expected model resolutions, and intentions of
+participating in various experiments. Based on that survey, we
+initially have forecast a
 \pllabel{RC1-27}
 compressed data volume of 18~PB for CMIP6. This number, 18~PB, is
 about 6 times the CMIP
